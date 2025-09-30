@@ -127,47 +127,47 @@ const HomePage = () => {
     alignItems: "center",
     color: colors.text.primary,
     textAlign: "center",
-    padding: "0 20px",
+    padding: "0 1.25rem", // 20px
   };
 
   const heroTitleStyle: CSSProperties = {
-    fontSize: "64px",
+    fontSize: "4rem", // 64px
     fontWeight: 700,
-    marginBottom: "20px",
-    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+    marginBottom: "1.25rem", // 20px
+    textShadow: "0.125rem 0.125rem 0.25rem rgba(0,0,0,0.5)", // 2px 2px 4px
   };
 
   const heroSubtitleStyle: CSSProperties = {
-    fontSize: "24px",
-    marginBottom: "40px",
+    fontSize: "1.5rem", // 24px
+    marginBottom: "2.5rem", // 40px
     opacity: 0.9,
-    maxWidth: "700px",
+    maxWidth: "43.75rem", // 700px
   };
 
   const caseStudiesSectionStyle: CSSProperties = {
-    padding: "80px 60px",
+    padding: "5rem 3.75rem", // 80px 60px
     background: colors.dark,
   };
 
   const sectionTitleStyle: CSSProperties = {
-    fontSize: "42px",
+    fontSize: "2.625rem", // 42px
     fontWeight: 700,
     color: colors.text.primary,
-    marginBottom: "50px",
+    marginBottom: "3.125rem", // 50px
     textAlign: "center",
   };
 
   const caseStudiesGridStyle: CSSProperties = {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
-    gap: "30px",
-    maxWidth: "1400px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(21.875rem, 1fr))", // 350px
+    gap: "1.875rem", // 30px
+    maxWidth: "87.5rem", // 1400px
     margin: "0 auto",
   };
 
   const caseStudyCardStyle: CSSProperties = {
     background: colors.background.light,
-    borderRadius: "12px",
+    borderRadius: "0.75rem", // 12px
     overflow: "hidden",
     cursor: "pointer",
     transition: "transform 0.3s ease",
@@ -175,23 +175,23 @@ const HomePage = () => {
 
   const caseStudyImageStyle: CSSProperties = {
     width: "100%",
-    height: "250px",
+    height: "15.625rem", // 250px
     objectFit: "cover",
   };
 
   const caseStudyContentStyle: CSSProperties = {
-    padding: "25px",
+    padding: "1.5625rem", // 25px
   };
 
   const caseStudyTitleStyle: CSSProperties = {
-    fontSize: "22px",
+    fontSize: "1.375rem", // 22px
     fontWeight: 600,
     color: colors.text.dark,
-    marginBottom: "12px",
+    marginBottom: "0.75rem", // 12px
   };
 
   const caseStudyDescStyle: CSSProperties = {
-    fontSize: "16px",
+    fontSize: "1rem", // 16px
     color: colors.text.dark,
     opacity: 0.7,
     lineHeight: "1.6",

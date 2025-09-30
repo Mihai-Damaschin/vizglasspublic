@@ -36,67 +36,67 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
   };
 
   const containerStyle: CSSProperties = {
-    padding: "80px 60px",
+    padding: "5rem 3.75rem", // 80px 60px
     background: colors.background.light,
   };
 
   const titleStyle: CSSProperties = {
-    fontSize: "42px",
+    fontSize: "2.625rem", // 42px
     fontWeight: 700,
     color: colors.text.dark,
-    marginBottom: "50px",
+    marginBottom: "3.125rem", // 50px
     textAlign: "center",
   };
 
   const carouselContainerStyle: CSSProperties = {
     position: "relative",
-    maxWidth: "1400px",
+    maxWidth: "87.5rem", // 1400px
     margin: "0 auto",
   };
 
   const scrollContainerStyle: CSSProperties = {
     display: "flex",
-    gap: "20px",
+    gap: "1.25rem", // 20px
     overflowX: "auto",
     scrollbarWidth: "none",
     msOverflowStyle: "none",
-    padding: "10px 0 30px 0",
+    padding: "0.625rem 0 1.875rem 0", // 10px 0 30px 0
   };
 
   const cardStyle: CSSProperties = {
     background: colors.light,
-    borderRadius: "12px",
+    borderRadius: "0.75rem", // 12px
     overflow: "hidden",
-    boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+    boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
     cursor: "pointer",
-    minWidth: "350px",
-    maxWidth: "350px",
+    minWidth: "21.875rem", // 350px
+    maxWidth: "21.875rem", // 350px
     flexShrink: 0,
   };
 
   const imageStyle: CSSProperties = {
     width: "100%",
-    height: "300px",
+    height: "18.75rem", // 300px
     objectFit: "cover",
   };
 
   const contentStyle: CSSProperties = {
-    padding: "30px",
+    padding: "1.875rem", // 30px
   };
 
   const productTitleStyle: CSSProperties = {
-    fontSize: "24px",
+    fontSize: "1.5rem", // 24px
     fontWeight: 600,
     color: colors.text.dark,
-    marginBottom: "15px",
+    marginBottom: "0.9375rem", // 15px
   };
 
   const descriptionStyle: CSSProperties = {
-    fontSize: "16px",
+    fontSize: "1rem", // 16px
     color: colors.text.dark,
     opacity: 0.7,
-    marginBottom: "20px",
+    marginBottom: "1.25rem", // 20px
     lineHeight: "1.6",
   };
 
@@ -108,15 +108,15 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
     background: colors.primary,
     border: "none",
     borderRadius: "50%",
-    width: "50px",
-    height: "50px",
+    width: "3.125rem", // 50px
+    height: "3.125rem", // 50px
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
     color: colors.light,
-    fontSize: "20px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+    fontSize: "1.25rem", // 20px
+    boxShadow: "0 0.125rem 0.625rem rgba(0,0,0,0.2)", // 0 2px 10px
   };
 
   return (
@@ -124,7 +124,7 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
       <h2 style={titleStyle}>{title}</h2>
       <div style={carouselContainerStyle}>
         <button
-          style={{ ...buttonStyle, left: "-75px" }}
+          style={{ ...buttonStyle, left: "-4.6875rem" }}
           onClick={() => scroll("left")}
         >
           <ArrowLeftOutlined />
@@ -140,14 +140,14 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
               <div
                 style={cardStyle}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-10px)";
+                  e.currentTarget.style.transform = "translateY(-0.625rem)";
                   e.currentTarget.style.boxShadow =
-                    "0 8px 30px rgba(0,0,0,0.15)";
+                    "0 0.5rem 1.875rem rgba(0,0,0,0.15)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow =
-                    "0 4px 20px rgba(0,0,0,0.1)";
+                    "0 0.25rem 1.25rem rgba(0,0,0,0.1)";
                 }}
               >
                 <img
@@ -165,6 +165,9 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
                       background: colors.primary,
                       borderColor: colors.primary,
                       fontWeight: 600,
+                      fontSize: "1rem", // scales with root font size
+                      padding: "0.75rem 1.5rem", // top/bottom 0.75rem, left/right 1.5rem
+                      height: '2.5rem',
                     }}
                   >
                     View Details
@@ -176,7 +179,7 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
         </div>
 
         <button
-          style={{ ...buttonStyle, right: "-75px" }}
+          style={{ ...buttonStyle, right: "-4.6875rem" }}
           onClick={() => scroll("right")}
         >
           <ArrowRightOutlined />
