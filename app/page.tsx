@@ -1,103 +1,276 @@
-import Image from "next/image";
+import { colors } from "@/lib/colors";
+import { Button } from "antd";
+import ProductCarousel from "@/components/ProductCarousel";
+import { CSSProperties } from "react";
+import Link from "next/link";
 
-export default function Home() {
+const HomePage = () => {
+  const pvcProducts = [
+    {
+      id: "smart",
+      name: "Smart Windows",
+      description:
+        "Energy-efficient PVC windows with smart home integration and automated control systems.",
+      image:
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+    },
+    {
+      id: "premium",
+      name: "Premium Windows",
+      description:
+        "Luxury PVC windows with superior insulation and elegant design for modern homes.",
+      image:
+        "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800",
+    },
+    {
+      id: "optim",
+      name: "Optim Windows",
+      description:
+        "Cost-effective PVC windows without compromising on quality and durability.",
+      image:
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
+    },
+    {
+      id: "classic",
+      name: "Classic Windows",
+      description:
+        "Traditional PVC windows with timeless design and modern performance.",
+      image:
+        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800",
+    },
+  ];
+
+  const aluminiumProducts = [
+    {
+      id: "alu-classic",
+      name: "Classic Aluminium",
+      description:
+        "Durable aluminium windows with sleek profiles and excellent weather resistance.",
+      image:
+        "https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=800",
+    },
+    {
+      id: "alu-modern",
+      name: "Modern Aluminium",
+      description:
+        "Contemporary aluminium windows with minimalist design and maximum glass area.",
+      image: "/fereastra-al.jpg",
+    },
+    {
+      id: "alu-premium",
+      name: "Premium Aluminium",
+      description:
+        "High-end aluminium windows with advanced thermal break insulation technology.",
+      image:
+        "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?w=800",
+    },
+  ];
+
+  const caseStudies = [
+    {
+      id: "modern-villa",
+      title: "Modern Villa Transformation",
+      description:
+        "Complete window renovation with Smart PVC windows for a luxury villa.",
+      image:
+        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800",
+    },
+    {
+      id: "office-building",
+      title: "Office Building Upgrade",
+      description:
+        "Aluminium window installation for a commercial office complex.",
+      image:
+        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800",
+    },
+    {
+      id: "residential-complex",
+      title: "Residential Complex",
+      description:
+        "Large-scale Optim Windows installation for affordable housing project.",
+      image:
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+    },
+  ];
+
+  const heroStyle: CSSProperties = {
+    position: "relative",
+    height: "100vh",
+    overflow: "hidden",
+  };
+
+  const videoStyle: CSSProperties = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  };
+
+  const overlayStyle: CSSProperties = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "rgba(26, 26, 26, 0.3)",
+  };
+
+  const heroContentStyle: CSSProperties = {
+    position: "relative",
+    zIndex: 1,
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    color: colors.text.primary,
+    textAlign: "center",
+    padding: "0 20px",
+  };
+
+  const heroTitleStyle: CSSProperties = {
+    fontSize: "64px",
+    fontWeight: 700,
+    marginBottom: "20px",
+    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+  };
+
+  const heroSubtitleStyle: CSSProperties = {
+    fontSize: "24px",
+    marginBottom: "40px",
+    opacity: 0.9,
+    maxWidth: "700px",
+  };
+
+  const caseStudiesSectionStyle: CSSProperties = {
+    padding: "80px 60px",
+    background: colors.dark,
+  };
+
+  const sectionTitleStyle: CSSProperties = {
+    fontSize: "42px",
+    fontWeight: 700,
+    color: colors.text.primary,
+    marginBottom: "50px",
+    textAlign: "center",
+  };
+
+  const caseStudiesGridStyle: CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+    gap: "30px",
+    maxWidth: "1400px",
+    margin: "0 auto",
+  };
+
+  const caseStudyCardStyle: CSSProperties = {
+    background: colors.background.light,
+    borderRadius: "12px",
+    overflow: "hidden",
+    cursor: "pointer",
+    transition: "transform 0.3s ease",
+  };
+
+  const caseStudyImageStyle: CSSProperties = {
+    width: "100%",
+    height: "250px",
+    objectFit: "cover",
+  };
+
+  const caseStudyContentStyle: CSSProperties = {
+    padding: "25px",
+  };
+
+  const caseStudyTitleStyle: CSSProperties = {
+    fontSize: "22px",
+    fontWeight: 600,
+    color: colors.text.dark,
+    marginBottom: "12px",
+  };
+
+  const caseStudyDescStyle: CSSProperties = {
+    fontSize: "16px",
+    color: colors.text.dark,
+    opacity: 0.7,
+    lineHeight: "1.6",
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      {/* Hero Section */}
+      <section style={heroStyle}>
+        <video autoPlay loop muted playsInline style={videoStyle}>
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div style={overlayStyle}></div>
+        {/*<div style={heroContentStyle}>*/}
+        {/*  <h1 style={heroTitleStyle}>Premium Windows & Doors</h1>*/}
+        {/*  <p style={heroSubtitleStyle}>*/}
+        {/*    Transform your space with VIZ GLASS - Where innovation meets*/}
+        {/*    elegance in every window*/}
+        {/*  </p>*/}
+        {/*  <Link href="/contact">*/}
+        {/*    <Button*/}
+        {/*      type="primary"*/}
+        {/*      size="large"*/}
+        {/*      style={{*/}
+        {/*        height: "55px",*/}
+        {/*        fontSize: "18px",*/}
+        {/*        padding: "0 50px",*/}
+        {/*        background: colors.primary,*/}
+        {/*        borderColor: colors.primary,*/}
+        {/*        fontWeight: 600,*/}
+        {/*      }}*/}
+        {/*    >*/}
+        {/*      Get a Quote*/}
+        {/*    </Button>*/}
+        {/*  </Link>*/}
+        {/*</div>*/}
+      </section>
+
+      {/* PVC Windows Section */}
+      <ProductCarousel products={pvcProducts} title="PVC Windows Collection" />
+
+      {/* Case Studies Preview */}
+      <section style={caseStudiesSectionStyle}>
+        <h2 style={sectionTitleStyle}>Featured Case Studies</h2>
+        <div style={caseStudiesGridStyle}>
+          {caseStudies.map((study) => (
+            <Link href={`/case-studies/${study.id}`} key={study.id}>
+              <div
+                style={caseStudyCardStyle}
+                // onMouseEnter={(e) => {
+                //   e.currentTarget.style.transform = "translateY(-10px)";
+                // }}
+                // onMouseLeave={(e) => {
+                //   e.currentTarget.style.transform = "translateY(0)";
+                // }}
+              >
+                <img
+                  src={study.image}
+                  alt={study.title}
+                  style={caseStudyImageStyle}
+                />
+                <div style={caseStudyContentStyle}>
+                  <h3 style={caseStudyTitleStyle}>{study.title}</h3>
+                  <p style={caseStudyDescStyle}>{study.description}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Aluminium Windows Section */}
+      <ProductCarousel
+        products={aluminiumProducts}
+        title="Aluminium Windows Collection"
+      />
+    </>
   );
-}
+};
+
+export default HomePage;
