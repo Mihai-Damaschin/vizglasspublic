@@ -23,6 +23,22 @@ a {
     text-decoration: none;
 }
 
+.gallery .ant-image {
+    width: 100%;
+    height: 100%;
+}
+
+.vcard {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(0);
+}
+
+.vcard:hover {
+    transform: translateY(-0.625rem);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
 @media screen and (max-width: 1600px) {
     html {
         font-size: 1vw;

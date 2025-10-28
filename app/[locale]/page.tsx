@@ -55,7 +55,6 @@ const HomePage = async () => {
   const productsData = await strapiFetch("products", {
     populate: "*",
     sort: "order:asc",
-    locale: "ro"
   });
 
   const caseStudiesData = await strapiFetch("case-studies", {

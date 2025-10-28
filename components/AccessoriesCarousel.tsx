@@ -3,7 +3,6 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { CSSProperties, useRef } from "react";
 import { colors } from "@/lib/colors";
-import Link from "next/link";
 import Image from "next/image";
 
 interface Product {
@@ -13,19 +12,22 @@ interface Product {
   image: string;
 }
 
-interface ProductCarouselProps {
-  products: Product[];
+interface IAccessoriesCarousel {
+  accessories: Product[];
   title: string;
 }
 
-const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
-  if (!products?.length) return null;
+export const AccessoriesCarousel = ({
+  accessories,
+  title,
+}: IAccessoriesCarousel) => {
+  if (!accessories?.length) return null;
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 352;
+      const scrollAmount = 400;
       const newScrollPosition =
         scrollContainerRef.current.scrollLeft +
         (direction === "left" ? -scrollAmount : scrollAmount);
@@ -57,11 +59,11 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
 
   const scrollContainerStyle: CSSProperties = {
     display: "flex",
-    gap: "1.25rem", // 20px
+    gap: "1.25rem",
     overflowX: "auto",
     scrollbarWidth: "none",
     msOverflowStyle: "none",
-    padding: "0.625rem 1rem 1.875rem 1rem", // 10px 0 30px 0
+    padding: "0.625rem 1rem 1.875rem 1rem",
     transform: "translate(-1rem)",
     width: "calc(100% + 1rem)",
   };
@@ -101,55 +103,55 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
           style={scrollContainerStyle}
           className="hide-scrollbar"
         >
-          {products.map((product) => (
-            <Link href={`/app/%5Blocale%5D/product/${product.slug}`} key={product.id}>
+          {accessories.map((accessory) => (
+            <div
+              style={{
+                background: colors.light,
+                borderRadius: "0.75rem", // 12px
+                overflow: "hidden",
+                boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                cursor: "pointer",
+                flexShrink: 0,
+                position: "relative",
+                width: "20rem",
+                height: "20rem",
+              }}
+              key={accessory.id}
+              className="vcard"
+            >
+              <Image
+                src={
+                  accessory.cover_photo?.url
+                    ? process.env.NEXT_PUBLIC_STRAPI_URL +
+                      accessory.cover_photo?.url
+                    : "/viz-glass-logo.png"
+                }
+                alt={accessory.name}
+                style={{
+                  width: "100%",
+                  height: "100%", // 300px
+                  objectFit: "cover",
+                }}
+                width={350}
+                height={300}
+              />
+
               <div
                 style={{
-                  background: colors.light,
-                  borderRadius: "0.75rem", // 12px
-                  overflow: "hidden",
-                  boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  cursor: "pointer",
-                  flexShrink: 0,
-                  position: "relative",
-                  width: "22rem",
-                  height: "22rem",
+                  padding: "0.5rem", // 30px
+                  position: "absolute",
+                  top: "0.5rem",
+                  right: "0.5rem",
+                  backgroundColor: colors.primary,
+                  borderRadius: "0.75rem",
+                  color: colors.light,
+                  fontWeight: "bold",
                 }}
-                className="vcard"
               >
-                <Image
-                  src={
-                    product.cover_image?.url
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL + product.cover_image?.url
-                      : "/viz-glass-logo.png"
-                  }
-                  alt={product.name}
-                  style={{
-                    width: "100%",
-                    height: "100%", // 300px
-                    objectFit: "cover",
-                  }}
-                  width={350}
-                  height={300}
-                />
-
-                <div
-                  style={{
-                    padding: "0.5rem", // 30px
-                    position: "absolute",
-                    top: "0.5rem",
-                    right: "0.5rem",
-                    backgroundColor: colors.primary,
-                    borderRadius: "0.75rem",
-                    color: colors.light,
-                    fontWeight: "bold",
-                  }}
-                >
-                  {product.name}
-                </div>
+                {accessory.name}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
 
@@ -163,5 +165,3 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
     </div>
   );
 };
-
-export default ProductCarousel;

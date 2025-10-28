@@ -1,56 +1,40 @@
 "use client";
 
-import { useState, useEffect, CSSProperties } from "react";
-import { Dropdown } from "antd";
-import type { MenuProps } from "antd";
+import { CSSProperties } from "react";
+import { Dropdown, MenuProps } from "antd";
 import { colors } from "@/lib/colors";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { strapiQueries } from "@/services/strapi";
+import Image from "next/image";
+import { locales } from "@/lib/constants";
 
 const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { locale = "en" } = useParams();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { data: headerData } = useQuery(
+    strapiQueries.getAllProductTypes({
+      populate: {
+        product_categories: {
+          populate: {
+            header_brands: {
+              populate: {
+                products: {
+                  fields: ["name", "slug"],
+                },
+                brand: { fields: ["name", "slug"] },
+              },
+            },
+          },
+        },
+      },
+      locale: locale,
+    }),
+  );
 
-  const pvcWindowsMenu: MenuProps["items"] = [
-    { key: "smart", label: <Link href="/product/smart">Smart Windows</Link> },
-    {
-      key: "premium",
-      label: <Link href="/product/premium">Premium Windows</Link>,
-    },
-    { key: "optim", label: <Link href="/product/optim">Optim Windows</Link> },
-  ];
-
-  const aluminiumWindowsMenu: MenuProps["items"] = [
-    {
-      key: "alu-classic",
-      label: <Link href="/product/alu-classic">Classic Aluminium</Link>,
-    },
-    {
-      key: "alu-modern",
-      label: <Link href="/product/alu-modern">Modern Aluminium</Link>,
-    },
-  ];
-
-  const productsMenu: MenuProps["items"] = [
-    {
-      key: "pvc",
-      label: "PVC Windows",
-      children: pvcWindowsMenu,
-    },
-    {
-      key: "aluminium",
-      label: "Aluminium Windows",
-      children: aluminiumWindowsMenu,
-    },
-  ];
+  console.log(headerData, locale, "headerData");
 
   const headerStyle: CSSProperties = {
     position: "fixed",
@@ -93,13 +77,60 @@ const Header = () => {
     color: colors.primary,
   };
 
+  const productsMenu: MenuProps["items"] = headerData?.data?.map(
+    (productType) => ({
+      key: productType.id,
+      label: productType.name,
+      children:
+        productType.product_categories?.map((product_category) => ({
+          key: "" + productType.id + product_category.id,
+          label: product_category.name,
+          children: product_category.header_brands.length
+            ? product_category.header_brands.map((brand) => ({
+                key: "" + productType.id + product_category.id + brand.id,
+                label: (
+                  <Link href={`/${locale}/brand/${brand.brand?.slug}`}>
+                    {brand.name}
+                  </Link>
+                ),
+                children: brand.products.map((product) => ({
+                  key:
+                    "" +
+                    productType.id +
+                    product_category.id +
+                    brand.id +
+                    product.id,
+                  label: (
+                    <Link href={`/${locale}/product/${product.slug}`}>
+                      {product.name}
+                    </Link>
+                  ),
+                })),
+              }))
+            : undefined,
+        })) || null,
+    }),
+  );
+
   return (
     <header style={headerStyle}>
       <Link href="/">
-        <img src="/viz-glass-logo.png" alt="VIZ GLASS" style={logoStyle} />
+        <Image
+          src="/viz-glass-logo.png"
+          alt="VIZ GLASS"
+          style={logoStyle}
+          width={50}
+          height={50}
+        />
       </Link>
 
       <nav style={navStyle}>
+        <Link
+          href={`${locale}/about-us`}
+          style={pathname === "/about-us" ? activeLinkStyle : linkStyle}
+        >
+          Abouts Us
+        </Link>
         <Dropdown
           menu={{ items: productsMenu }}
           trigger={["hover"]}
@@ -113,18 +144,50 @@ const Header = () => {
           </span>
         </Dropdown>
         <Link
-          href="/case-studies"
+          href={`${locale}/case-studies`}
           style={pathname === "/case-studies" ? activeLinkStyle : linkStyle}
         >
           Case Studies
         </Link>
         <Link
-          href="/contact"
+          href={`${locale}/contact`}
           style={pathname === "/contact" ? activeLinkStyle : linkStyle}
         >
           Contact
         </Link>
       </nav>
+
+      <div style={{ cursor: "pointer" }}>
+        <Dropdown
+          menu={{
+            items: locales.map((i) => ({
+              label: (
+                <Link href={`/${i}`}>
+                  <Image
+                    src={`https://flagcdn.com/h40/${i}.webp`}
+                    alt="flag"
+                    width={30}
+                    height={30}
+                    style={{ borderRadius: "100%" }}
+                  />
+                </Link>
+              ),
+              key: i,
+            })),
+          }}
+          placement="bottomRight"
+        >
+          <div>
+            <Image
+              src={`https://flagcdn.com/h40/${locale}.webp`}
+              alt="flag"
+              width={30}
+              height={30}
+              style={{ borderRadius: "100%" }}
+            />{" "}
+          </div>
+        </Dropdown>
+      </div>
     </header>
   );
 };
