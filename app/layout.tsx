@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
+import { Providers } from "@/app/providers";
 
 import "@ant-design/v5-patch-for-react-19";
 
@@ -15,5 +16,9 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  return <>{children}</>;
+  return (
+    <>
+      <Providers>{children}</Providers>
+    </>
+  );
 }
