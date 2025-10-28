@@ -34,8 +34,6 @@ const Header = () => {
     }),
   );
 
-  console.log(headerData, locale, "headerData");
-
   const headerStyle: CSSProperties = {
     position: "fixed",
     top: 0,
@@ -160,26 +158,28 @@ const Header = () => {
       <div style={{ cursor: "pointer" }}>
         <Dropdown
           menu={{
-            items: locales.map((i) => ({
-              label: (
-                <Link href={`/${i}`}>
-                  <Image
-                    src={`https://flagcdn.com/h40/${i}.webp`}
-                    alt="flag"
-                    width={30}
-                    height={30}
-                    style={{ borderRadius: "100%" }}
-                  />
-                </Link>
-              ),
-              key: i,
-            })),
+            items: locales
+              .filter((i) => i !== locale)
+              .map((i) => ({
+                label: (
+                  <Link href={`/${i}`}>
+                    <Image
+                      src={`https://flagcdn.com/h40/${i === "en" ? "us" : i}.webp`}
+                      alt="flag"
+                      width={30}
+                      height={30}
+                      style={{ borderRadius: "100%" }}
+                    />
+                  </Link>
+                ),
+                key: i,
+              })),
           }}
           placement="bottomRight"
         >
           <div>
             <Image
-              src={`https://flagcdn.com/h40/${locale}.webp`}
+              src={`https://flagcdn.com/h40/${locale === "en" ? "us" : locale}.webp`}
               alt="flag"
               width={30}
               height={30}

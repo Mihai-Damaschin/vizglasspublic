@@ -14,7 +14,7 @@ function getLocaleFromHeader(request: NextRequest) {
     if (matched) return matched;
   }
 
-  return "us";
+  return "en";
 }
 
 export function middleware(request: NextRequest) {
