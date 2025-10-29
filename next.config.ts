@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "viz-glass.netlify.app",
+        hostname: "viz-cms.netlify.app",
       },
     ],
   },
