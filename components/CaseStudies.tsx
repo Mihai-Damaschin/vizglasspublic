@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getStrapiImageLink } from "@/lib/links";
 import { colors } from "@/lib/colors";
+import { useParams } from "next/navigation";
 
 interface ICaseStudies {
   caseStudies: any[];
@@ -19,6 +20,8 @@ export const CaseStudies = ({
   description,
   titleColor = colors.text.primary,
 }: ICaseStudies) => {
+  const { locale } = useParams()
+
   const sectionTitleStyle: CSSProperties = {
     fontSize: "2.625rem",
     fontWeight: 700,
@@ -89,7 +92,7 @@ export const CaseStudies = ({
 
       <div style={caseStudiesGridStyle}>
         {caseStudies?.map((caseStudy) => (
-          <Link href={`/app/%5Blocale%5D/case-studies/${caseStudy.slug}`} key={caseStudy.id}>
+          <Link href={`/${locale}/case-studies/${caseStudy.slug}`} key={caseStudy.id}>
             <div style={caseStudyCardStyle} className="vcard">
               <Image
                 src={getStrapiImageLink(caseStudy.cover_image?.url)}

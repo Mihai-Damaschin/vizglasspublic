@@ -5,6 +5,8 @@ import { CSSProperties, useRef } from "react";
 import { colors } from "@/lib/colors";
 import Link from "next/link";
 import Image from "next/image";
+import { getStrapiImageLink } from "@/lib/links";
+import { useParams } from "next/navigation";
 
 interface Product {
   id: string;
@@ -19,9 +21,11 @@ interface ProductCarouselProps {
 }
 
 const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
-  if (!products?.length) return null;
+  const { locale } = useParams<{ locale: string }>();
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  if (!products?.length) return null;
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -102,7 +106,7 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
           className="hide-scrollbar"
         >
           {products.map((product) => (
-            <Link href={`/app/%5Blocale%5D/product/${product.slug}`} key={product.id}>
+            <Link href={`/${locale}/product/${product.slug}`} key={product.id}>
               <div
                 style={{
                   background: colors.light,
@@ -119,11 +123,7 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
                 className="vcard"
               >
                 <Image
-                  src={
-                    product.cover_image?.url
-                      ? process.env.NEXT_PUBLIC_STRAPI_URL + product.cover_image?.url
-                      : "/viz-glass-logo.png"
-                  }
+                  src={getStrapiImageLink(product.cover_image?.url)}
                   alt={product.name}
                   style={{
                     width: "100%",
