@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "viz-cms.netlify.app",
+        hostname: "viz-cms.build-time.md",
       },
     ],
   },
