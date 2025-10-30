@@ -63,7 +63,7 @@ export const ProductHero = ({ product }: IProductHero) => {
         <Image
           src={getStrapiImageLink(product.media?.[0]?.url)}
           alt="test"
-          style={{ position: "absolute", top: 0, left: 0, opacity: 0.2 }}
+          style={{ position: "absolute", top: 0, left: 0, opacity: 0.1 }}
           width={1920}
           height={900}
         />

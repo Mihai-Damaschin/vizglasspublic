@@ -4,12 +4,19 @@ import { CSSProperties } from "react";
 import { Image } from "antd";
 import { getStrapiImageLink } from "@/lib/links";
 import { colors } from "@/lib/colors";
+import { Property } from "csstype";
+
+import TextAlign = Property.TextAlign;
 
 interface IGallery {
   media: any[];
+  titleTextAlign?: TextAlign;
 }
 
-export const Gallery = ({ media = [] }: IGallery) => {
+export const Gallery = ({
+  media = [],
+  titleTextAlign = "center",
+}: IGallery) => {
   if (!media) return null;
 
   // Gallery Styles
@@ -40,7 +47,7 @@ export const Gallery = ({ media = [] }: IGallery) => {
     fontWeight: 700,
     color: colors.text.dark,
     marginBottom: "20px",
-    textAlign: "center",
+    textAlign: titleTextAlign,
   };
 
   return (

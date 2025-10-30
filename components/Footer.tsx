@@ -1,6 +1,7 @@
 import { CSSProperties } from "react";
 import { colors } from "@/lib/colors";
 import Image from "next/image";
+import { EnvironmentOutlined, PhoneOutlined } from "@ant-design/icons";
 
 const Footer = () => {
   const footerStyle: CSSProperties = {
@@ -37,17 +38,68 @@ const Footer = () => {
     opacity: 0.7,
   };
 
+  const iconStyle: CSSProperties = {
+    fontSize: "20px",
+    color: colors.primary,
+    marginTop: "2px",
+  };
+
   return (
     <footer style={footerStyle}>
       <div style={contentStyle}>
         <div>
-          <img src="/viz-glass-logo.png" alt="VIZ GLASS" style={logoStyle} />
+          <Image
+            src="/viz-glass-logo.png"
+            alt="VIZ GLASS"
+            style={logoStyle}
+            width={150}
+            height={150}
+          />
         </div>
 
         <div style={infoStyle}>
-          <p style={{ margin: 0, fontSize: "16px" }}>Premium Windows & Doors</p>
-          <p style={{ margin: 0, opacity: 0.8 }}>Email: info@vizglass.com</p>
-          <p style={{ margin: 0, opacity: 0.8 }}>Phone: +1 (555) 123-4567</p>
+          <p style={{ margin: 0, fontSize: "16px" }}>Moldova</p>
+          <p style={{ margin: 0, opacity: 0.8 }}>
+            <EnvironmentOutlined style={iconStyle} /> Strada Codrilor 16,
+            Chișinău
+          </p>
+          <p style={{ margin: 0, opacity: 0.8 }}>
+            <PhoneOutlined style={iconStyle} />{" "}
+            <a
+              href="tel:+37379977227"
+              style={{
+                color: colors.text.primary,
+              }}
+            >
+              +373 79 977 227
+            </a>
+          </p>
+          <p style={{ margin: 0, opacity: 0.8 }}>
+            <PhoneOutlined style={iconStyle} />{" "}
+            <a
+              href="tel:+37369916008"
+              style={{
+                color: colors.text.primary,
+              }}
+            >
+              +373 69 916 008
+            </a>
+          </p>
+        </div>
+
+        <div style={infoStyle}>
+          <p style={{ margin: 0, fontSize: "16px" }}>Italy</p>
+          <p style={{ margin: 0, opacity: 0.8 }}>
+            <PhoneOutlined style={iconStyle} />{" "}
+            <a
+              href="tel:+393899188936"
+              style={{
+                color: colors.text.primary,
+              }}
+            >
+              +39 38 991 88 936
+            </a>
+          </p>
         </div>
 
         <div style={infoStyle}>
@@ -80,6 +132,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
       <div style={copyrightStyle}>
         © {new Date().getFullYear()} VIZ GLASS. All rights reserved.
       </div>

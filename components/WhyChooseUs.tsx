@@ -10,6 +10,7 @@ import {
   ToolOutlined,
 } from "@ant-design/icons";
 import { Card } from "antd";
+import { wrap } from "node:module";
 
 const features = [
   {
@@ -70,7 +71,7 @@ export const WhyChooseUs = () => {
         backgroundColor: "#f9fafb",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1rem" }}>
+      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}>
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <h2
             style={{
@@ -97,8 +98,8 @@ export const WhyChooseUs = () => {
 
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            display: "flex",
+            flexWrap: "wrap",
             gap: "1.5rem",
           }}
         >
@@ -118,6 +119,7 @@ export const WhyChooseUs = () => {
                   transition: "all 0.3s ease",
                   backgroundColor: "#fff",
                   padding: "1.5rem",
+                  width: "calc(33.3% - 1rem)"
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}

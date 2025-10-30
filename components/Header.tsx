@@ -30,7 +30,7 @@ const Header = () => {
           },
         },
       },
-      locale: locale,
+      locale,
     }),
   );
 
@@ -124,7 +124,7 @@ const Header = () => {
 
       <nav style={navStyle}>
         <Link
-          href={`${locale}/about-us`}
+          href={`/${locale}/about-us`}
           style={pathname === "/about-us" ? activeLinkStyle : linkStyle}
         >
           Abouts Us
@@ -142,13 +142,13 @@ const Header = () => {
           </span>
         </Dropdown>
         <Link
-          href={`${locale}/case-studies`}
+          href={`/${locale}/case-studies`}
           style={pathname === "/case-studies" ? activeLinkStyle : linkStyle}
         >
           Case Studies
         </Link>
         <Link
-          href={`${locale}/contact`}
+          href={`/${locale}/contact`}
           style={pathname === "/contact" ? activeLinkStyle : linkStyle}
         >
           Contact

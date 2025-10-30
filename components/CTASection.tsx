@@ -1,17 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "antd";
 import { CSSProperties } from "react";
 import { colors } from "@/lib/colors";
+import { useParams } from "next/navigation";
 
 interface ICTASection {
-  product: any;
+  product?: any;
+  styles?: { borderRadius: string };
 }
 
-export const CTASection = ({ product }: ICTASection) => {
+export const CTASection = ({ product, styles }: ICTASection) => {
+  const { locale } = useParams();
+
   const ctaSectionStyle: CSSProperties = {
     background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
     padding: "80px 60px",
-    borderRadius: "20px",
+    borderRadius: styles?.borderRadius || "20px",
     textAlign: "center",
     color: colors.light,
     boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
@@ -64,18 +70,19 @@ export const CTASection = ({ product }: ICTASection) => {
     <div style={ctaSectionStyle}>
       <h2 style={ctaTitleStyle}>Ready to Transform Your Home?</h2>
       <p style={ctaDescStyle}>
-        Get a free consultation and quote for your {product.name}. Our experts
-        are ready to help you make the best choice.
+        Get a free consultation and quote{" "}
+        {product?.name ? `for your ${product.name}` : ""}. Our experts are ready
+        to help you make the best choice.
       </p>
 
       <div style={ctaButtonsStyle}>
-        <Link href="/contact">
+        <Link href={`/${locale}/contact`}>
           <Button size="large" style={primaryCtaButtonStyle}>
             Contact Us
           </Button>
         </Link>
 
-        <Link href="/case-studies">
+        <Link href={`/${locale}/case-studies`}>
           <Button size="large" style={secondaryCtaButtonStyle}>
             View Case Studies
           </Button>

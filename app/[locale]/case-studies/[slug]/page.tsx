@@ -7,9 +7,9 @@ import { Gallery } from "@/components/Gallery";
 const CaseStudyPage = async ({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) => {
-  const { slug } = await params;
+  const { slug, locale } = await params;
 
   const caseStudyData = await strapiFetch("case-studies", {
     populate: "*",
@@ -18,16 +18,16 @@ const CaseStudyPage = async ({
         $eq: slug,
       },
     },
-    pageSize: 6
+    locale,
   });
+
+  console.log(caseStudyData, "product");
 
   const caseStudy = caseStudyData?.data?.[0];
 
   if (!caseStudy) {
     notFound();
   }
-
-  console.log(caseStudy, "product");
 
   const containerStyle: CSSProperties = {
     minHeight: "100vh",
@@ -38,7 +38,7 @@ const CaseStudyPage = async ({
   const contentStyle: CSSProperties = {
     maxWidth: "1400px",
     margin: "0 auto",
-    padding: "60px 60px 100px",
+    padding: "60px 0 100px",
   };
 
   const titleStyle: CSSProperties = {
@@ -110,9 +110,9 @@ const CaseStudyPage = async ({
 
           <p style={descriptionStyle}>{caseStudy.description}</p>
 
-          <Gallery media={caseStudy.before_media} />
+          <Gallery media={caseStudy.before_media} titleTextAlign="left" />
 
-          <Gallery media={caseStudy.after_media} />
+          <Gallery media={caseStudy.after_media} titleTextAlign="left" />
         </div>
       </div>
     </>
