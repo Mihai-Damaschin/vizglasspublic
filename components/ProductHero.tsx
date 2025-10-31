@@ -30,7 +30,7 @@ export const ProductHero = ({ product }: IProductHero) => {
     zIndex: 2,
     textAlign: "center",
     color: colors.light,
-    // maxWidth: "800px",
+    maxWidth: "70%",
     padding: "0 40px",
   };
 
