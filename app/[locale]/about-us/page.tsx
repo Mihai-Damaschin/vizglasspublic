@@ -1,11 +1,19 @@
-import { Card } from "antd";
-import { StarFilled } from "@ant-design/icons";
 import { colors } from "@/lib/colors";
 import { Testimonials } from "@/components/Testimonials";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { CTASection } from "@/components/CTASection";
+import { TLocales } from "@/lib/constants";
+import { getDictionary } from "@/app/[locale]/dictionaries";
 
-const AboutUsPage = () => {
+const AboutUsPage = async ({
+  params,
+}: {
+  params: Promise<{ locale: TLocales }>;
+}) => {
+  const { locale } = await params;
+
+  const dict = await getDictionary(locale);
+
   return (
     <>
       <section
@@ -32,7 +40,7 @@ const AboutUsPage = () => {
           >
             <img
               src="/images/logo.png"
-              alt="VizGlass Moldova Logo"
+              alt={dict.about.logoAlt}
               style={{
                 width: "8rem",
                 height: "8rem",
@@ -40,7 +48,6 @@ const AboutUsPage = () => {
                 animation: "fade-in 1s ease-in-out",
               }}
             />
-
             <h1
               style={{
                 fontSize: "2.5rem",
@@ -50,9 +57,8 @@ const AboutUsPage = () => {
                 animation: "fade-in 1s ease-in-out",
               }}
             >
-              Despre VizGlass
+              {dict.about.title}
             </h1>
-
             <p
               style={{
                 fontSize: "1.375rem",
@@ -62,9 +68,8 @@ const AboutUsPage = () => {
                 animation: "fade-in 1s ease-in-out",
               }}
             >
-              Specialiștii tăi în uși și ferestre PVC din Moldova
+              {dict.about.subtitle}
             </p>
-
             <p
               style={{
                 fontSize: "1.125rem",
@@ -73,11 +78,7 @@ const AboutUsPage = () => {
                 animation: "fade-in 1s ease-in-out",
               }}
             >
-              VizGlass este o companie din Republica Moldova specializată în
-              producția și instalarea de uși și ferestre din PVC și aluminiu. Cu
-              o experiență de peste 10 ani în domeniu, oferim soluții moderne,
-              eficiente energetic și durabile pentru locuințe, birouri și spații
-              comerciale.
+              {dict.about.description}
             </p>
           </div>
         </div>
@@ -112,12 +113,11 @@ const AboutUsPage = () => {
         />
       </section>
 
-      <WhyChooseUs />
+      <WhyChooseUs dict={dict} />
 
-      {/* TESTIMONIALS SECTION */}
-      <Testimonials />
+      <Testimonials dict={dict} />
 
-      <CTASection styles={{ borderRadius: "0" }} />
+      <CTASection styles={{ borderRadius: "0" }} dict={dict} />
     </>
   );
 };

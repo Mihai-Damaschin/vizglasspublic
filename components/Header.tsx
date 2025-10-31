@@ -10,7 +10,11 @@ import { strapiQueries } from "@/services/strapi";
 import Image from "next/image";
 import { locales } from "@/lib/constants";
 
-const Header = () => {
+interface IHeader {
+  dict: any;
+}
+
+const Header = ({ dict }: IHeader) => {
   const pathname = usePathname();
   const { locale = "en" } = useParams();
 
@@ -112,7 +116,7 @@ const Header = () => {
 
   return (
     <header style={headerStyle}>
-      <Link href="/">
+      <Link href={`/${locale}`}>
         <Image
           src="/viz-glass-logo.png"
           alt="VIZ GLASS"
@@ -127,7 +131,7 @@ const Header = () => {
           href={`/${locale}/about-us`}
           style={pathname === "/about-us" ? activeLinkStyle : linkStyle}
         >
-          Abouts Us
+          {dict.navigation.aboutUs}
         </Link>
         <Dropdown
           menu={{ items: productsMenu }}
@@ -138,20 +142,20 @@ const Header = () => {
           <span
             style={pathname.includes("/product") ? activeLinkStyle : linkStyle}
           >
-            Products
+            {dict.navigation.products}
           </span>
         </Dropdown>
         <Link
           href={`/${locale}/case-studies`}
           style={pathname === "/case-studies" ? activeLinkStyle : linkStyle}
         >
-          Case Studies
+          {dict.navigation.caseStudies}
         </Link>
         <Link
           href={`/${locale}/contact`}
           style={pathname === "/contact" ? activeLinkStyle : linkStyle}
         >
-          Contact
+          {dict.navigation.contact}
         </Link>
       </nav>
 
@@ -184,7 +188,7 @@ const Header = () => {
               width={30}
               height={30}
               style={{ borderRadius: "100%" }}
-            />{" "}
+            />
           </div>
         </Dropdown>
       </div>

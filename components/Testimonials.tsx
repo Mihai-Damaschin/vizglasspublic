@@ -2,7 +2,11 @@ import { Card } from "antd";
 import { colors } from "@/lib/colors";
 import { StarFilled } from "@ant-design/icons";
 
-export const Testimonials = () => {
+interface ITestimonials {
+  dict: any;
+}
+
+export const Testimonials = ({ dict }: ITestimonials) => {
   return (
     <section
       style={{
@@ -22,7 +26,7 @@ export const Testimonials = () => {
                 marginBottom: "1rem",
               }}
             >
-              Ce spun clienții noștri
+              {dict.testimonials.title}
             </h2>
             <p
               style={{
@@ -31,7 +35,7 @@ export const Testimonials = () => {
                 opacity: 0.8,
               }}
             >
-              Feedback autentic de la clienți mulțumiți
+              {dict.testimonials.subtitle}
             </p>
           </div>
 
@@ -41,7 +45,7 @@ export const Testimonials = () => {
               gap: "1.5rem",
             }}
           >
-            {testimonials.map((testimonial, index) => (
+            {dict.testimonials.items.map((testimonial, index) => (
               <Card
                 key={index}
                 style={{
@@ -51,6 +55,7 @@ export const Testimonials = () => {
                   position: "relative",
                   transition: "box-shadow 0.3s, transform 0.3s",
                   fontSize: "1rem",
+                  flex: 1,
                 }}
               >
                 <svg
@@ -131,24 +136,3 @@ export const Testimonials = () => {
     </section>
   );
 };
-
-const testimonials = [
-  {
-    name: "Ana Popescu",
-    location: "Chișinău",
-    rating: 5,
-    text: "Am instalat ferestrele VizGlass anul trecut — izolația este excelentă, iar echipa a lucrat rapid și curat. Sunt foarte mulțumită de rezultat și de profesionalismul lor!",
-  },
-  {
-    name: "Vasile Ionescu",
-    location: "Bălți",
-    rating: 5,
-    text: "Calitate superioară și prețuri corecte. Am apelat la VizGlass pentru întreaga casă și nu regret nicio clipă. Recomand cu încredere!",
-  },
-  {
-    name: "Maria Ciobanu",
-    location: "Cahul",
-    rating: 5,
-    text: "Echipă profesionistă și produse de top. Ferestrele noi au făcut o diferență uriașă în confortul termic al casei. Mulțumim VizGlass!",
-  },
-];

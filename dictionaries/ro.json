@@ -1,0 +1,109 @@
+{
+  "navigation": {
+    "aboutUs": "Despre noi",
+    "products": "Produse",
+    "caseStudies": "Studii de caz",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Ferestre și Uși Premium",
+    "subtitle": "Transformă-ți spațiul cu VIZ GLASS - Unde inovația întâlnește eleganța în fiecare fereastră",
+    "alt": "Imagine hero VIZ GLASS"
+  },
+  "whyChooseUs": {
+    "title": "De ce să alegi VizGlass?",
+    "subtitle": "Oferim soluții complete pentru uși și ferestre, cu accent pe calitate, durabilitate și satisfacția clientului",
+    "items": {
+      "production": {
+        "title": "Producție proprie",
+        "description": "Materiale certificate și control al calității în toate etapele producției"
+      },
+      "professionalInstallation": {
+        "title": "Montaj profesionist",
+        "description": "Echipă calificată și garanție reală pentru toate lucrările efectuate"
+      },
+      "energyEfficiency": {
+        "title": "Eficiență energetică",
+        "description": "Profiluri moderne, geam termopan și izolare fonică superioară"
+      },
+      "experiencedTeam": {
+        "title": "Echipă cu experiență",
+        "description": "Personal instruit continuu și dedicat excelenței în servicii"
+      },
+      "fastDelivery": {
+        "title": "Livrare rapidă",
+        "description": "Respectăm termenele promise și comunicăm transparent"
+      },
+      "afterSalesSupport": {
+        "title": "Asistență post-vânzare",
+        "description": "Service garantat și suport continuu pentru toți clienții noștri"
+      }
+    }
+  },
+  "pvcWindowsProductCarouselTitle": "Colecția de ferestre",
+  "pvcDoorsProductCarouselTitle": "Colecția de uși",
+  "caseStudies": "Studii de caz",
+  "caseStudiesDescription": "",
+  "about": {
+    "logoAlt": "Logo VizGlass Moldova",
+    "title": "Despre VizGlass",
+    "subtitle": "Specialiștii tăi în uși și ferestre PVC din Moldova",
+    "description": "VizGlass este o companie din Republica Moldova specializată în producția și instalarea de uși și ferestre din PVC și aluminiu. Cu o experiență de peste 10 ani în domeniu, oferim soluții moderne, eficiente energetic și durabile pentru locuințe, birouri și spații comerciale."
+  },
+  "testimonials": {
+    "title": "Ce spun clienții noștri",
+    "subtitle": "Feedback autentic de la clienți mulțumiți",
+    "items": [
+      {
+        "name": "Ana Popescu",
+        "location": "Chișinău",
+        "rating": 5,
+        "text": "Am instalat ferestrele VizGlass anul trecut — izolația este excelentă, iar echipa a lucrat rapid și curat. Sunt foarte mulțumită de rezultat și de profesionalismul lor!"
+      },
+      {
+        "name": "Vasile Ionescu",
+        "location": "Bălți",
+        "rating": 5,
+        "text": "Calitate superioară și prețuri corecte. Am apelat la VizGlass pentru întreaga casă și nu regret nicio clipă. Recomand cu încredere!"
+      },
+      {
+        "name": "Maria Ciobanu",
+        "location": "Cahul",
+        "rating": 5,
+        "text": "Echipă profesionistă și produse de top. Ferestrele noi au făcut o diferență uriașă în confortul termic al casei. Mulțumim VizGlass!"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ești gata să-ți transformi casa?",
+    "descPrefix": "Obține o consultație și o ofertă gratuite",
+    "forYour": "pentru",
+    "forYourSuffix": "ul tău",
+    "descSuffix": "Experții noștri sunt pregătiți să te ajute să faci cea mai bună alegere.",
+    "contactUs": "Contactează-ne",
+    "viewCaseStudies": "Vezi studii de caz"
+  },
+  "locations": {
+    "countries": {
+      "moldova": {
+        "name": "Moldova",
+        "address": "Strada Codrilor 16, Chișinău",
+        "phones": ["+373 79 977 227", "+373 69 916 008"]
+      },
+      "italy": {
+        "name": "Italia",
+        "addressPiatraNeamt": "Strada Dimitrie Leonida 113C, Piatra Neamț 610183",
+        "addressMilano": "Via Roma 45, 20121 Milano",
+        "phones": ["+39 38 991 88 936"]
+      }
+    },
+    "hours": {
+      "weekdays_9_18": "Luni - Vineri: 9:00 - 18:00",
+      "weekdays_8_17": "Luni - Vineri: 8:00 - 17:00"
+    }
+  },
+  "contact": {
+    "title": "Contactează-ne",
+    "subtitle": "Suntem aici pentru a te ajuta în mai multe locații"
+  }
+}

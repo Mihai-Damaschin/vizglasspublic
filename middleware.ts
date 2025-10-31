@@ -14,7 +14,7 @@ function getLocaleFromHeader(request: NextRequest) {
     if (matched) return matched;
   }
 
-  return "en";
+  return "ro";
 }
 
 export function middleware(request: NextRequest) {
@@ -26,7 +26,10 @@ export function middleware(request: NextRequest) {
 
   if (pathnameHasLocale) return null;
 
-  const locale = getLocaleFromHeader(request);
+  const cookieLocale = request.cookies.get("locale")?.value;
+  const locale = locales.includes(cookieLocale || "")
+    ? cookieLocale
+    : getLocaleFromHeader(request);
 
   const redirectUrl = new URL(`/${locale}${pathname}`, request.url);
   return NextResponse.redirect(redirectUrl);

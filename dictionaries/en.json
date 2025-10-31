@@ -1,0 +1,109 @@
+{
+  "navigation": {
+    "aboutUs": "About Us",
+    "products": "Products",
+    "caseStudies": "Case Studies",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Premium Windows & Doors",
+    "subtitle": "Transform your space with VIZ GLASS - Where innovation meets elegance in every window",
+    "alt": "VIZ GLASS hero image"
+  },
+  "whyChooseUs": {
+    "title": "Why choose VizGlass?",
+    "subtitle": "We offer complete solutions for doors and windows, focusing on quality, durability, and customer satisfaction",
+    "items": {
+      "production": {
+        "title": "In-house production",
+        "description": "Certified materials and quality control at every stage of production"
+      },
+      "professionalInstallation": {
+        "title": "Professional installation",
+        "description": "Qualified team and a genuine warranty for all completed work"
+      },
+      "energyEfficiency": {
+        "title": "Energy efficiency",
+        "description": "Modern profiles, insulated glazing (double glazing), and superior sound insulation"
+      },
+      "experiencedTeam": {
+        "title": "Experienced team",
+        "description": "Continuously trained staff dedicated to service excellence"
+      },
+      "fastDelivery": {
+        "title": "Fast delivery",
+        "description": "We meet promised deadlines and communicate transparently"
+      },
+      "afterSalesSupport": {
+        "title": "After-sales support",
+        "description": "Guaranteed service and ongoing support for all our customers"
+      }
+    }
+  },
+  "pvcWindowsProductCarouselTitle": "Windows Collection",
+  "pvcDoorsProductCarouselTitle": "Doors Collection",
+  "caseStudies": "Case Studies",
+  "caseStudiesDescription": "Explore our portfolio of successful window installations and transformations",
+  "about": {
+    "logoAlt": "VizGlass Moldova Logo",
+    "title": "About VizGlass",
+    "subtitle": "Your specialists in PVC doors and windows in Moldova",
+    "description": "VizGlass is a company from the Republic of Moldova specializing in the production and installation of PVC and aluminum doors and windows. With over 10 years of experience in the field, we offer modern, energy-efficient, and durable solutions for homes, offices, and commercial spaces."
+  },
+  "testimonials": {
+    "title": "What our customers say",
+    "subtitle": "Authentic feedback from satisfied clients",
+    "items": [
+      {
+        "name": "Ana Popescu",
+        "location": "Chișinău",
+        "rating": 5,
+        "text": "I had VizGlass windows installed last year — the insulation is excellent, and the team worked quickly and neatly. I’m very pleased with the result and their professionalism!"
+      },
+      {
+        "name": "Vasile Ionescu",
+        "location": "Bălți",
+        "rating": 5,
+        "text": "Top quality and fair prices. I chose VizGlass for the entire house and I don’t regret it for a moment. Highly recommended!"
+      },
+      {
+        "name": "Maria Ciobanu",
+        "location": "Cahul",
+        "rating": 5,
+        "text": "Professional team and top-tier products. The new windows made a huge difference in the home’s thermal comfort. Thank you, VizGlass!"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Transform Your Home?",
+    "descPrefix": "Get a free consultation and quote",
+    "forYour": "for your",
+    "forYourSuffix": "",
+    "descSuffix": "Our experts are ready to help you make the best choice.",
+    "contactUs": "Contact Us",
+    "viewCaseStudies": "View Case Studies"
+  },
+  "locations": {
+    "countries": {
+      "moldova": {
+        "name": "Moldova",
+        "address": "Strada Codrilor 16, Chișinău",
+        "phones": ["+373 79 977 227", "+373 69 916 008"]
+      },
+      "italy": {
+        "name": "Italy",
+        "addressPiatraNeamt": "Strada Dimitrie Leonida 113C, Piatra Neamț 610183",
+        "addressMilano": "Via Roma 45, 20121 Milano",
+        "phones": ["+39 38 991 88 936"]
+      }
+    },
+    "hours": {
+      "weekdays_9_18": "Monday - Friday: 9:00 AM - 6:00 PM",
+      "weekdays_8_17": "Monday - Friday: 8:00 AM - 5:00 PM"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help across multiple locations"
+  }
+}

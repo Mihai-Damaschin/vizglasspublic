@@ -1,0 +1,109 @@
+{
+  "navigation": {
+    "aboutUs": "About Us",
+    "products": "Products",
+    "caseStudies": "Case Studies",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Finestre e Porte Premium",
+    "subtitle": "Trasforma il tuo spazio con VIZ GLASS - Dove l'innovazione incontra l'eleganza in ogni finestra",
+    "alt": "Immagine hero di VIZ GLASS"
+  },
+  "whyChooseUs": {
+    "title": "Perché scegliere VizGlass?",
+    "subtitle": "Offriamo soluzioni complete per porte e finestre, con attenzione a qualità, durata e soddisfazione del cliente",
+    "items": {
+      "production": {
+        "title": "Produzione propria",
+        "description": "Materiali certificati e controllo qualità in tutte le fasi della produzione"
+      },
+      "professionalInstallation": {
+        "title": "Montaggio professionale",
+        "description": "Team qualificato e garanzia reale per tutti i lavori eseguiti"
+      },
+      "energyEfficiency": {
+        "title": "Efficienza energetica",
+        "description": "Profili moderni, vetrocamera (doppio vetro) e isolamento acustico superiore"
+      },
+      "experiencedTeam": {
+        "title": "Team esperto",
+        "description": "Personale costantemente formato e dedicato all'eccellenza del servizio"
+      },
+      "fastDelivery": {
+        "title": "Consegna rapida",
+        "description": "Rispettiamo le scadenze promesse e comunichiamo in modo trasparente"
+      },
+      "afterSalesSupport": {
+        "title": "Assistenza post-vendita",
+        "description": "Assistenza garantita e supporto continuo per tutti i nostri clienti"
+      }
+    }
+  },
+  "pvcWindowsProductCarouselTitle": "Collezione di finestre",
+  "pvcDoorsProductCarouselTitle": "Collezione di porte",
+  "caseStudies": "Casi studio",
+  "caseStudiesDescription": "",
+  "about": {
+    "logoAlt": "Logo VizGlass Moldova",
+    "title": "Informazioni su VizGlass",
+    "subtitle": "I tuoi specialisti in porte e finestre in PVC in Moldova",
+    "description": "VizGlass è un'azienda della Repubblica di Moldova specializzata nella produzione e installazione di porte e finestre in PVC e alluminio. Con oltre 10 anni di esperienza nel settore, offriamo soluzioni moderne, efficienti dal punto di vista energetico e durevoli per abitazioni, uffici e spazi commerciali."
+  },
+  "testimonials": {
+    "title": "Cosa dicono i nostri clienti",
+    "subtitle": "Feedback autentico da clienti soddisfatti",
+    "items": [
+      {
+        "name": "Ana Popescu",
+        "location": "Chișinău",
+        "rating": 5,
+        "text": "Ho installato le finestre VizGlass l’anno scorso — l’isolamento è eccellente e il team ha lavorato in modo rapido e pulito. Sono molto soddisfatta del risultato e della loro professionalità!"
+      },
+      {
+        "name": "Vasile Ionescu",
+        "location": "Bălți",
+        "rating": 5,
+        "text": "Qualità superiore e prezzi onesti. Mi sono rivolto a VizGlass per tutta la casa e non me ne sono pentito nemmeno per un momento. Consigliatissimo!"
+      },
+      {
+        "name": "Maria Ciobanu",
+        "location": "Cahul",
+        "rating": 5,
+        "text": "Team professionale e prodotti di alto livello. Le nuove finestre hanno fatto una grande differenza nel comfort termico della casa. Grazie, VizGlass!"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Pronto a trasformare la tua casa?",
+    "descPrefix": "Ottieni una consulenza e un preventivo gratuiti",
+    "forYour": "per il tuo",
+    "forYourSuffix": "",
+    "descSuffix": "I nostri esperti sono pronti ad aiutarti a fare la scelta migliore.",
+    "contactUs": "Contattaci",
+    "viewCaseStudies": "Vedi casi di studio"
+  },
+  "locations": {
+    "countries": {
+      "moldova": {
+        "name": "Moldova",
+        "address": "Strada Codrilor 16, Chișinău",
+        "phones": ["+373 79 977 227", "+373 69 916 008"]
+      },
+      "italy": {
+        "name": "Italia",
+        "addressPiatraNeamt": "Strada Dimitrie Leonida 113C, Piatra Neamț 610183",
+        "addressMilano": "Via Roma 45, 20121 Milano",
+        "phones": ["+39 38 991 88 936"]
+      }
+    },
+    "hours": {
+      "weekdays_9_18": "Lunedì - Venerdì: 9:00 - 18:00",
+      "weekdays_8_17": "Lunedì - Venerdì: 8:00 - 17:00"
+    }
+  },
+  "contact": {
+    "title": "Contattaci",
+    "subtitle": "Siamo qui per aiutarti in diverse sedi"
+  }
+}

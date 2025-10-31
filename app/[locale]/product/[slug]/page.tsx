@@ -8,13 +8,17 @@ import { CTASection } from "@/components/CTASection";
 import { ProductHero } from "@/components/ProductHero";
 import { Colors } from "@/components/Colors";
 import { AccessoriesCarousel } from "@/components/AccessoriesCarousel";
+import { getDictionary } from "@/app/[locale]/dictionaries";
+import { TLocales } from "@/lib/constants";
 
 const ProductPage = async ({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: TLocales }>;
 }) => {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+
+  const dict = await getDictionary(locale);
 
   const productData = await strapiFetch("products", {
     populate: {
@@ -64,7 +68,7 @@ const ProductPage = async ({
           title="Accesories"
         />
 
-        <CTASection product={product} />
+        <CTASection product={product} dict={dict} />
       </div>
     </>
   );

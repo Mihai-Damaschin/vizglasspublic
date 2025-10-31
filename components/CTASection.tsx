@@ -7,11 +7,12 @@ import { colors } from "@/lib/colors";
 import { useParams } from "next/navigation";
 
 interface ICTASection {
+  dict: any;
   product?: any;
   styles?: { borderRadius: string };
 }
 
-export const CTASection = ({ product, styles }: ICTASection) => {
+export const CTASection = ({ dict, product, styles }: ICTASection) => {
   const { locale } = useParams();
 
   const ctaSectionStyle: CSSProperties = {
@@ -68,23 +69,23 @@ export const CTASection = ({ product, styles }: ICTASection) => {
 
   return (
     <div style={ctaSectionStyle}>
-      <h2 style={ctaTitleStyle}>Ready to Transform Your Home?</h2>
+      <h2 style={ctaTitleStyle}>{dict.cta.title}</h2>
       <p style={ctaDescStyle}>
-        Get a free consultation and quote{" "}
-        {product?.name ? `for your ${product.name}` : ""}. Our experts are ready
-        to help you make the best choice.
+        {dict.cta.descPrefix}
+        {product?.name
+          ? `${dict.cta.forYour} ${product.name}${dict.cta.forYourSuffix ? " " + dict.cta.forYourSuffix : ""}`
+          : ""}
+        . {dict.cta.descSuffix}
       </p>
-
       <div style={ctaButtonsStyle}>
         <Link href={`/${locale}/contact`}>
           <Button size="large" style={primaryCtaButtonStyle}>
-            Contact Us
+            {dict.cta.contactUs}
           </Button>
         </Link>
-
         <Link href={`/${locale}/case-studies`}>
           <Button size="large" style={secondaryCtaButtonStyle}>
-            View Case Studies
+            {dict.cta.viewCaseStudies}
           </Button>
         </Link>
       </div>

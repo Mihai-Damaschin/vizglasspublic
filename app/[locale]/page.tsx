@@ -5,8 +5,14 @@ import ProductCarousel from "@/components/ProductCarousel";
 import { strapiFetch } from "@/lib/requests";
 import { CaseStudies } from "@/components/CaseStudies";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
+import { getDictionary } from "@/app/[locale]/dictionaries";
+import { TLocales } from "@/lib/constants";
 
-const HomePage = async () => {
+const HomePage = async ({
+  params,
+}: {
+  params: Promise<{ locale: TLocales }>;
+}) => {
   const heroStyle: CSSProperties = {
     position: "relative",
     height: "100vh",
@@ -65,6 +71,10 @@ const HomePage = async () => {
     },
   });
 
+  const { locale } = await params;
+
+  const dict = await getDictionary(locale);
+
   return (
     <>
       <section style={heroStyle}>
@@ -72,26 +82,23 @@ const HomePage = async () => {
           src="/viz-glass-hero.jpg"
           width={1920}
           height={1000}
-          alt="hero_img"
+          alt={dict.hero.alt}
           sizes="(max-width: 768px) 100vw"
         />
 
         <div style={overlayStyle}></div>
         <div style={heroContentStyle}>
-          <h1 style={heroTitleStyle}>Premium Windows & Doors</h1>
-          <p style={heroSubtitleStyle}>
-            Transform your space with VIZ GLASS - Where innovation meets
-            elegance in every window
-          </p>
+          <h1 style={heroTitleStyle}>{dict.hero.title}</h1>
+          <p style={heroSubtitleStyle}>{dict.hero.subtitle}</p>
         </div>
       </section>
 
       <ProductCarousel
         products={productsData?.data}
-        title="PVC Windows Collection"
+        title={dict.pvcWindowsProductCarouselTitle}
       />
 
-      <WhyChooseUs />
+      <WhyChooseUs dict={dict} />
 
       <section
         style={{
@@ -125,13 +132,16 @@ const HomePage = async () => {
             textAlign: "center",
           }}
         >
-          <CaseStudies caseStudies={caseStudiesData?.data} title="Featured Case Studies" />
+          <CaseStudies
+            caseStudies={caseStudiesData?.data}
+            title={dict.caseStudies}
+          />
         </div>
       </section>
 
       <ProductCarousel
         products={productsData?.data}
-        title="Aluminium Windows Collection"
+        title={dict.pvcDoorsProductCarouselTitle}
       />
     </>
   );
