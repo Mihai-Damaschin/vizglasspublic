@@ -34,9 +34,12 @@ const Header = ({ dict }: IHeader) => {
           },
         },
       },
+      sort: "createdAt:asc",
       locale,
     }),
   );
+
+  console.log(headerData, "headerData");
 
   const headerStyle: CSSProperties = {
     position: "fixed",
@@ -79,38 +82,53 @@ const Header = ({ dict }: IHeader) => {
     color: colors.primary,
   };
 
+  const getLinkIfExists = (link: string, name: string, slug?: string) => {
+    if (!slug) return name;
+
+    return <Link href={link}>{name}</Link>;
+  };
+
   const productsMenu: MenuProps["items"] = headerData?.data?.map(
     (productType) => ({
       key: productType.id,
-      label: productType.name,
-      children:
-        productType.product_categories?.map((product_category) => ({
-          key: "" + productType.id + product_category.id,
-          label: product_category.name,
-          children: product_category.header_brands.length
-            ? product_category.header_brands.map((brand) => ({
-                key: "" + productType.id + product_category.id + brand.id,
-                label: (
-                  <Link href={`/${locale}/brand/${brand.brand?.slug}`}>
-                    {brand.name}
-                  </Link>
-                ),
-                children: brand.products.map((product) => ({
-                  key:
-                    "" +
-                    productType.id +
-                    product_category.id +
-                    brand.id +
-                    product.id,
-                  label: (
-                    <Link href={`/${locale}/product/${product.slug}`}>
-                      {product.name}
-                    </Link>
+      label: getLinkIfExists(
+        `/${locale}/${productType?.slug}`,
+        productType.name,
+        productType.slug,
+      ),
+      children: productType.product_categories.length
+        ? productType.product_categories?.map((product_category) => ({
+            key: "" + productType.id + product_category.id,
+            label: getLinkIfExists(
+              `/${locale}/${product_category?.slug}`,
+              product_category.name,
+              product_category.slug,
+            ),
+            children: product_category.header_brands.length
+              ? product_category.header_brands.map((brand) => ({
+                  key: "" + productType.id + product_category.id + brand.id,
+                  label: getLinkIfExists(
+                    `/${locale}/${brand?.slug}`,
+                    brand.name,
+                    brand.slug,
                   ),
-                })),
-              }))
-            : undefined,
-        })) || null,
+                  children: brand.products.map((product) => ({
+                    key:
+                      "" +
+                      productType.id +
+                      product_category.id +
+                      brand.id +
+                      product.id,
+                    label: getLinkIfExists(
+                      `/${locale}/${product?.slug}`,
+                      product.name,
+                      product.slug,
+                    ),
+                  })),
+                }))
+              : undefined,
+          }))
+        : undefined,
     }),
   );
 
@@ -150,6 +168,12 @@ const Header = ({ dict }: IHeader) => {
           style={pathname === "/case-studies" ? activeLinkStyle : linkStyle}
         >
           {dict.navigation.caseStudies}
+        </Link>
+        <Link
+          href={`/${locale}/gallery`}
+          style={pathname === "/gallery" ? activeLinkStyle : linkStyle}
+        >
+          {dict.gallery}
         </Link>
         <Link
           href={`/${locale}/contact`}

@@ -1,4 +1,5 @@
 import "server-only";
+
 import { TLocales } from "@/lib/constants";
 
 const dictionaries = {
@@ -12,4 +13,8 @@ const dictionaries = {
     import("../../dictionaries/ru.json").then((module) => module.default),
 };
 
-export const getDictionary = async (locale: TLocales) => dictionaries[locale]();
+export const getDictionary = async (locale: TLocales = "en") => {
+  const dictLoader = dictionaries[locale] ?? dictionaries["en"];
+
+  return dictLoader();
+};

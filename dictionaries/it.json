@@ -2,7 +2,7 @@
   "navigation": {
     "aboutUs": "About Us",
     "products": "Products",
-    "caseStudies": "Case Studies",
+    "caseStudies": "Lavori finiti",
     "contact": "Contact"
   },
   "hero": {
@@ -43,6 +43,7 @@
   "pvcWindowsProductCarouselTitle": "Collezione di finestre",
   "pvcDoorsProductCarouselTitle": "Collezione di porte",
   "caseStudies": "Casi studio",
+  "gallery": "Galleria",
   "caseStudiesDescription": "",
   "about": {
     "logoAlt": "Logo VizGlass Moldova",

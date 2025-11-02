@@ -1,5 +1,5 @@
 // Media formats (thumbnail, large, medium, small, etc.)
-export type MediaFormat = {
+export type TMediaFormat = {
   name: string;
   hash: string;
   ext: string;
@@ -13,7 +13,7 @@ export type MediaFormat = {
 };
 
 // Generic Strapi Media object
-export type Media = {
+export type TMedia = {
   id: number;
   documentId: string;
   name: string;
@@ -22,10 +22,10 @@ export type Media = {
   width: number | null;
   height: number | null;
   formats: {
-    thumbnail?: MediaFormat;
-    large?: MediaFormat;
-    medium?: MediaFormat;
-    small?: MediaFormat;
+    thumbnail?: TMediaFormat;
+    large?: TMediaFormat;
+    medium?: TMediaFormat;
+    small?: TMediaFormat;
   } | null;
   hash: string;
   ext: string;
@@ -67,9 +67,9 @@ export type Project = {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  cover_photo: Media;
+  cover_photo: TMedia;
   key_features: KeyFeature[];
-  pdf: Media;
+  pdf: TMedia;
   technologies: Technology[];
 };
 

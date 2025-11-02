@@ -13,6 +13,10 @@ const HomePage = async ({
 }: {
   params: Promise<{ locale: TLocales }>;
 }) => {
+  const { locale } = await params;
+
+  const dict = await getDictionary(locale);
+
   const heroStyle: CSSProperties = {
     position: "relative",
     height: "100vh",
@@ -58,9 +62,20 @@ const HomePage = async ({
     maxWidth: "43.75rem", // 700px
   };
 
-  const productsData = await strapiFetch("products", {
+  const windowProductsData = await strapiFetch("products", {
     populate: "*",
     sort: "order:asc",
+    filters: {
+      type: "window",
+    },
+  });
+
+  const doorProductsData = await strapiFetch("products", {
+    populate: "*",
+    sort: "order:asc",
+    filters: {
+      type: "door",
+    },
   });
 
   const caseStudiesData = await strapiFetch("case-studies", {
@@ -70,10 +85,6 @@ const HomePage = async ({
       show_on_home: true,
     },
   });
-
-  const { locale } = await params;
-
-  const dict = await getDictionary(locale);
 
   return (
     <>
@@ -94,7 +105,7 @@ const HomePage = async ({
       </section>
 
       <ProductCarousel
-        products={productsData?.data}
+        products={windowProductsData?.data}
         title={dict.pvcWindowsProductCarouselTitle}
       />
 
@@ -140,7 +151,7 @@ const HomePage = async ({
       </section>
 
       <ProductCarousel
-        products={productsData?.data}
+        products={doorProductsData?.data}
         title={dict.pvcDoorsProductCarouselTitle}
       />
     </>

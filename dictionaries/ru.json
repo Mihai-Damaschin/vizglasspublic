@@ -2,7 +2,7 @@
   "navigation": {
     "aboutUs": "О нас",
     "products": "Продукция",
-    "caseStudies": "Кейсы",
+    "caseStudies": "Готовые работы",
     "contact": "Контакты"
   },
   "hero": {
@@ -43,6 +43,7 @@
   "pvcWindowsProductCarouselTitle": "Коллекция окон",
   "pvcDoorsProductCarouselTitle": "Коллекция дверей",
   "caseStudies": "Избранные кейсы",
+  "gallery": "Галерея",
   "caseStudiesDescription": "",
   "about": {
     "logoAlt": "Логотип VizGlass Молдова",

@@ -110,9 +110,7 @@ const CaseStudyPage = async ({
 
           <p style={descriptionStyle}>{caseStudy.description}</p>
 
-          <Gallery media={caseStudy.before_media} titleTextAlign="left" />
-
-          <Gallery media={caseStudy.after_media} titleTextAlign="left" />
+          <Gallery media={caseStudy.media} titleTextAlign="left" />
         </div>
       </div>
     </>
