@@ -3,9 +3,10 @@ import { colors } from "@/lib/colors";
 
 interface ISpecifications {
   specifications: any[];
+  dict: any;
 }
 
-export const Specifications = ({ specifications = [] }: ISpecifications) => {
+export const Specifications = ({ specifications = [], dict }: ISpecifications) => {
   const sectionTitleStyle: CSSProperties = {
     fontSize: "40px",
     fontWeight: 700,
@@ -47,7 +48,7 @@ export const Specifications = ({ specifications = [] }: ISpecifications) => {
 
   return (
     <div>
-      <h2 style={sectionTitleStyle}>Technical Specifications</h2>
+      <h2 style={sectionTitleStyle}>{dict.specifications}</h2>
       <div style={specsGridStyle}>
         {specifications?.map((spec: any, idx: number) => (
           <div key={idx} style={specItemStyle}>

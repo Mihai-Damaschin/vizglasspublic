@@ -34,6 +34,7 @@ const ProductPage = async ({
         $eq: slug,
       },
     },
+    locale
   });
 
   const product = productData?.data?.[0];
@@ -55,17 +56,17 @@ const ProductPage = async ({
       <ProductHero product={product} />
 
       <div style={contentStyle} id="product-details">
-        <Features features={product.features} />
+        <Features features={product.features} dict={dict} />
 
-        <Gallery media={product.media} />
+        <Gallery media={product.media} dict={dict} />
 
-        <Specifications specifications={product.specifications} />
+        <Specifications specifications={product.specifications} dict={dict} />
 
-        <Colors colors={product.colors} />
+        <Colors colors={product.colors} dict={dict} />
 
         <AccessoriesCarousel
           accessories={product.accessories}
-          title="Accesories"
+          title={dict.accessories}
         />
 
         <CTASection product={product} dict={dict} />

@@ -13,11 +13,13 @@ import { TMedia } from "@/services/strapi.types";
 interface IGallery {
   media: TMedia[];
   titleTextAlign?: TextAlign;
+  dict: any;
 }
 
 export const Gallery = ({
   media = [],
   titleTextAlign = "center",
+  dict
 }: IGallery) => {
   const [currentVisible, setCurrentVisible] = useState<number>();
 
@@ -55,7 +57,7 @@ export const Gallery = ({
 
   return (
     <div>
-      <h2 style={sectionTitleStyle}>Gallery</h2>
+      <h2 style={sectionTitleStyle}>{dict.gallery}</h2>
 
       <Image.PreviewGroup
         preview={{

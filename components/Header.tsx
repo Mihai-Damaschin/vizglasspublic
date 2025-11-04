@@ -108,7 +108,7 @@ const Header = ({ dict }: IHeader) => {
               ? product_category.header_brands.map((brand) => ({
                   key: "" + productType.id + product_category.id + brand.id,
                   label: getLinkIfExists(
-                    `/${locale}/${brand?.slug}`,
+                    `/${locale}/brand/${brand?.slug}`,
                     brand.name,
                     brand.slug,
                   ),
@@ -120,7 +120,7 @@ const Header = ({ dict }: IHeader) => {
                       brand.id +
                       product.id,
                     label: getLinkIfExists(
-                      `/${locale}/${product?.slug}`,
+                      `/${locale}/product/${product?.slug}`,
                       product.name,
                       product.slug,
                     ),

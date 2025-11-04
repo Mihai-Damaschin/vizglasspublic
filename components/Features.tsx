@@ -3,9 +3,10 @@ import { colors } from "@/lib/colors";
 
 interface IFeatures {
   features: any[];
+  dict: any;
 }
 
-export const Features = ({ features = [] }: IFeatures) => {
+export const Features = ({ features = [], dict }: IFeatures) => {
   const sectionTitleStyle: CSSProperties = {
     fontSize: "40px",
     fontWeight: 700,
@@ -52,7 +53,7 @@ export const Features = ({ features = [] }: IFeatures) => {
 
   return (
     <div>
-      <h2 style={sectionTitleStyle}>Key Features</h2>
+      <h2 style={sectionTitleStyle}>{dict.keyFeatures}</h2>
       <div style={featuresGridStyle}>
         {features?.map((feature: any, index: number) => (
           <div

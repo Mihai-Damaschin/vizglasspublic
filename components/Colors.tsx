@@ -4,9 +4,10 @@ import Image from "next/image";
 
 interface IColors {
   colors: any[];
+  dict: any;
 }
 
-export const Colors = ({ colors }: IColors) => {
+export const Colors = ({ colors, dict }: IColors) => {
   const titleStyle: CSSProperties = {
     fontSize: "2.625rem", // 42px
     fontWeight: 700,
@@ -17,7 +18,7 @@ export const Colors = ({ colors }: IColors) => {
 
   return (
     <div>
-      <h2 style={titleStyle}>Colors</h2>
+      <h2 style={titleStyle}>{dict.colors}</h2>
 
       <div style={{ display: "flex", gap: "1rem" }}>
         {colors.map((color) => (
