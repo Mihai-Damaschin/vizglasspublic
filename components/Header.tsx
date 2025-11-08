@@ -120,7 +120,7 @@ const Header = ({ dict }: IHeader) => {
   const hamburgerBarBaseStyle: CSSProperties = {
     position: "absolute",
     left: 0,
-    height: 1.25,
+    height: 1.50,
     width: "100%",
     borderRadius: 4,
     background: "#ffffff", // gray-800
@@ -316,7 +316,7 @@ const Header = ({ dict }: IHeader) => {
               <span
                 style={{
                   ...hamburgerBarBaseStyle,
-                  top: isOpenMobileMenu ? 9 : 4,
+                  top: isOpenMobileMenu ? 9 : 3,
                   transform: isOpenMobileMenu ? "rotate(135deg)" : "rotate(0)",
                 }}
               />
@@ -331,7 +331,7 @@ const Header = ({ dict }: IHeader) => {
               <span
                 style={{
                   ...hamburgerBarBaseStyle,
-                  top: isOpenMobileMenu ? 9 : 14,
+                  top: isOpenMobileMenu ? 9 : 15,
                   transform: isOpenMobileMenu ? "rotate(-135deg)" : "rotate(0)",
                 }}
               />
