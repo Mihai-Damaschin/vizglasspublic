@@ -9,10 +9,13 @@ import {
   ThunderboltOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
-import { Card } from "antd";
+import { Card, Grid } from "antd";
+
+const { useBreakpoint } = Grid;
 
 export const WhyChooseUs = ({ dict }) => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const screens = useBreakpoint();
 
   const features = [
     {
@@ -113,7 +116,11 @@ export const WhyChooseUs = ({ dict }) => {
                   transition: "all 0.3s ease",
                   backgroundColor: "#fff",
                   padding: "1.5rem",
-                  width: "calc(33.3% - 1rem)",
+                  width: !screens.md
+                    ? "100%"
+                    : !screens.lg
+                      ? "calc(50% - 1rem)"
+                      : "calc(33.3% - 1rem)",
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}

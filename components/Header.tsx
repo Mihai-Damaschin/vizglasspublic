@@ -58,8 +58,6 @@ const Header = ({ dict }: IHeader) => {
     }
   }, [isOpenMobileMenu]);
 
-  console.log(headerData, "headerData");
-
   const headerStyle: CSSProperties = {
     position: "fixed",
     top: 0,
@@ -120,7 +118,7 @@ const Header = ({ dict }: IHeader) => {
   const hamburgerBarBaseStyle: CSSProperties = {
     position: "absolute",
     left: 0,
-    height: 1.50,
+    height: 1.5,
     width: "100%",
     borderRadius: 4,
     background: "#ffffff", // gray-800

@@ -7,6 +7,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { getStrapiImageLink } from "@/lib/links";
 import { useParams } from "next/navigation";
+import { Grid } from "antd";
+
+const { useBreakpoint } = Grid;
 
 interface Product {
   id: string;
@@ -22,6 +25,8 @@ interface ProductCarouselProps {
 
 const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
   const { locale } = useParams<{ locale: string }>();
+  const screens = useBreakpoint();
+  const isMobile = !screens.md;
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -87,6 +92,9 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
     color: colors.light,
     fontSize: "1.25rem", // 20px
     boxShadow: "0 0.125rem 0.625rem rgba(0,0,0,0.2)", // 0 2px 10px
+    ...(isMobile
+      ? { bottom: "0.75rem" }
+      : { top: "50%", transform: "translateY(-50%)" }),
   };
 
   return (
@@ -94,7 +102,7 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
       <h2 style={titleStyle}>{title}</h2>
       <div style={carouselContainerStyle}>
         <button
-          style={{ ...buttonStyle, left: "-3.8rem" }}
+          style={{ ...buttonStyle, left: isMobile ? "0.75rem" : "-3.8rem" }}
           onClick={() => scroll("left")}
         >
           <ArrowLeftOutlined />
@@ -154,7 +162,7 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
         </div>
 
         <button
-          style={{ ...buttonStyle, right: "-3.8rem" }}
+          style={{ ...buttonStyle, right: isMobile ? "0.75rem" : "-3.8rem" }}
           onClick={() => scroll("right")}
         >
           <ArrowRightOutlined />
