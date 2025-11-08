@@ -57,7 +57,7 @@ export const Gallery = ({
 
   return (
     <div>
-      <h2 style={sectionTitleStyle}>{dict.gallery}</h2>
+      <h2 style={sectionTitleStyle}>{dict?.gallery}</h2>
 
       <Image.PreviewGroup
         preview={{
