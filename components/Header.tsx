@@ -21,12 +21,14 @@ const Header = ({ dict }: IHeader) => {
   const pathname = usePathname();
   const { locale = "en" } = useParams();
   const screens = useBreakpoint();
-  const isMobile = !screens.md;
 
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
   const handleCloseMobileMenu = () => setIsOpenMobileMenu(false);
 
+  useEffect(() => {
+    console.log("28 ", !!Object.keys(screens).length);
+  }, [screens]);
   const { data: headerData } = useQuery(
     strapiQueries.getAllProductTypes({
       populate: {
@@ -68,7 +70,7 @@ const Header = ({ dict }: IHeader) => {
     backdropFilter: "blur(10px)",
     boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
     transition: "all 0.3s ease",
-    padding: `20px ${isMobile ? 20 : 60}px`,
+    padding: `20px ${!!Object.keys(screens).length && !screens.md ? 20 : 60}px`,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -227,7 +229,7 @@ const Header = ({ dict }: IHeader) => {
         />
       </Link>
 
-      {!isMobile && (
+      {!!Object.keys(screens).length && !!screens.md && (
         <nav style={navStyle}>
           <Link
             href={`/${locale}/about-us`}
@@ -305,7 +307,7 @@ const Header = ({ dict }: IHeader) => {
           </Dropdown>
         </div>
 
-        {isMobile && (
+        {!!Object.keys(screens).length && !screens.md && (
           <div
             style={hamburgerContainerStyle}
             onClick={() => setIsOpenMobileMenu((prev) => !prev)}
@@ -338,7 +340,7 @@ const Header = ({ dict }: IHeader) => {
         )}
       </div>
 
-      {isMobile && (
+      {!!Object.keys(screens).length && !screens.md && (
         <Drawer
           open={isOpenMobileMenu}
           onClose={handleCloseMobileMenu}

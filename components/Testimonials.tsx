@@ -1,12 +1,18 @@
-import { Card } from "antd";
+"use client";
+
+import { Card, Grid } from "antd";
 import { colors } from "@/lib/colors";
 import { StarFilled } from "@ant-design/icons";
+
+const { useBreakpoint } = Grid;
 
 interface ITestimonials {
   dict: any;
 }
 
 export const Testimonials = ({ dict }: ITestimonials) => {
+  const screens = useBreakpoint();
+
   return (
     <section
       style={{
@@ -42,6 +48,7 @@ export const Testimonials = ({ dict }: ITestimonials) => {
           <div
             style={{
               display: "flex",
+              flexDirection: !screens.md ? "column" : "row",
               gap: "1.5rem",
             }}
           >
