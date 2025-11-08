@@ -6,7 +6,10 @@ import {
   EnvironmentOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
+import { Grid } from "antd";
 import { colors } from "@/lib/colors";
+
+const { useBreakpoint } = Grid;
 
 interface IContactContent {
   dict: any;
@@ -15,6 +18,7 @@ interface IContactContent {
 
 export const ContactContent = ({ dict, countries }: IContactContent) => {
   const [url, setUrl] = useState(countries[0].mapUrl);
+  const screens = useBreakpoint();
 
   const mapContainerStyle: CSSProperties = {
     width: "100%",
@@ -26,7 +30,7 @@ export const ContactContent = ({ dict, countries }: IContactContent) => {
   const contentStyle: CSSProperties = {
     maxWidth: "1400px",
     margin: "0 auto",
-    padding: "60px 0 100px",
+    padding: "60px 20px 100px",
   };
 
   const titleStyle: CSSProperties = {
@@ -47,6 +51,8 @@ export const ContactContent = ({ dict, countries }: IContactContent) => {
 
   const cardsContainerStyle: CSSProperties = {
     display: "flex",
+    flexDirection: !screens.md ? "column" : "row",
+    flexWrap: "wrap",
     gap: "30px",
     marginBottom: "60px",
   };
@@ -59,6 +65,7 @@ export const ContactContent = ({ dict, countries }: IContactContent) => {
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
     cursor: "pointer",
     flex: 1,
+    minWidth: !screens.sm ? "100%" : 350,
   };
 
   const countryTitleStyle: CSSProperties = {
