@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { ProductHero } from "@/components/ProductHero";
 import { Features } from "@/components/Features";
 import { Gallery } from "@/components/Gallery";
