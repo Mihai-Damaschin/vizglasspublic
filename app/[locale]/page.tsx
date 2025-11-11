@@ -88,7 +88,7 @@ const HomePage = async ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "5rem 3.75rem",
+          padding: "5rem 1.50rem",
           color: "#fff",
           backgroundImage: "url('/paralax-bg.jpg')",
           backgroundAttachment: "fixed",

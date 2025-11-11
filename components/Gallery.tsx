@@ -38,6 +38,13 @@ export const Gallery = ({
       gridTemplateColumns: "repeat(auto-fill, minmax(20rem, 1fr))", // 320px → 20rem
       gap: "1.5625rem", // 25px
       marginBottom: "5rem", // 80px
+
+      "@media (max-width: 991px)": {
+        gridTemplateColumns: "repeat(2, minmax(20rem, 1fr))",
+      },
+      "@media (max-width: 767px)": {
+        gridTemplateColumns: "repeat(1, minmax(18.75rem, 1fr))",
+      },
     },
     ".gallery-item": {
       borderRadius: "1rem", // 16px
@@ -45,8 +52,9 @@ export const Gallery = ({
       cursor: "pointer",
       boxShadow: "0 0.375rem 1.5625rem rgba(0,0,0,0.12)", // 0 6px 25px
       transition: "all 0.3s ease",
-      height: "20rem",
+      // height: "20rem",
       position: "relative",
+      aspectRatio: "1 / 1",
     },
     ".video-mask": {
       position: "absolute",
@@ -79,11 +87,9 @@ export const Gallery = ({
       ".gallery-title": {
         fontSize: "2rem",
       },
-      ".gallery-box": {
-        gridTemplateColumns: "repeat(auto-fill, minmax(18.75rem, 1fr))", // 300px
-      },
       ".gallery-item": {
-        height: "18rem",
+        // height: "18rem",
+        aspectRatio: "1 / 1.1",
       },
     },
   }));

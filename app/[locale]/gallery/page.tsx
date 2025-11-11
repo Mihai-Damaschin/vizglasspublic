@@ -3,6 +3,7 @@ import { TLocales } from "@/lib/constants";
 import { Gallery } from "@/components/Gallery";
 import { CSSProperties } from "react";
 import { colors } from "@/lib/colors";
+import { getDictionary } from "@/app/[locale]/dictionaries";
 
 const GalleryPage = async ({
   params,
@@ -15,10 +16,8 @@ const GalleryPage = async ({
     populate: "*",
     locale,
   });
-
+  const dict = await getDictionary(locale);
   const media = galleryData?.data[0];
-
-  console.log(media, "media");
 
   const containerStyle: CSSProperties = {
     minHeight: "100vh",
@@ -29,13 +28,13 @@ const GalleryPage = async ({
   const contentStyle: CSSProperties = {
     maxWidth: "1400px",
     margin: "0 auto",
-    padding: "60px 0 100px",
+    padding: "60px 20px 100px",
   };
 
   return (
     <div style={containerStyle}>
       <div style={contentStyle}>
-        <Gallery media={media.media} />
+        <Gallery media={media.media} dict={dict} />
       </div>
     </div>
   );
