@@ -1,5 +1,10 @@
-import { CSSProperties } from "react";
+"use client";
+
+import { useStyleRegister } from "@ant-design/cssinjs";
+import { theme } from "antd";
 import { colors } from "@/lib/colors";
+
+const { useToken } = theme;
 
 interface IFeatures {
   features: any[];
@@ -7,75 +12,75 @@ interface IFeatures {
 }
 
 export const Features = ({ features = [], dict }: IFeatures) => {
-  const sectionTitleStyle: CSSProperties = {
-    fontSize: "40px",
-    fontWeight: 700,
-    color: colors.text.dark,
-    marginBottom: "20px",
-    textAlign: "center",
-  };
+  const { token, theme } = useToken();
 
-  const featuresGridStyle: CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
-    gap: "30px",
-    marginBottom: "80px",
-  };
+  const wrapSSR = useStyleRegister(
+    { theme, token, path: ["Features"] },
+    () => ({
+      ".features-title": {
+        fontSize: "2.5rem", // 40px
+        fontWeight: 700,
+        color: colors.text.dark,
+        marginBottom: "1.25rem", // 20px
+        textAlign: "center",
+      },
+      ".features-grid": {
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(21.875rem, 1fr))", // 350px
+        gap: "1.875rem", // 30px
+        marginBottom: "5rem", // 80px
+      },
+      ".feature-card": {
+        background: colors.light,
+        padding: "2.5rem", // 40px
+        borderRadius: "1rem", // 16px
+        boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.08)", // 0 4px 20px
+        transition: "all 0.3s ease",
+        cursor: "default",
+      },
+      ".feature-icon": {
+        fontSize: "2.5rem", // 40px
+        color: colors.primary,
+        marginBottom: "1.25rem", // 20px
+      },
+      ".feature-title": {
+        fontSize: "1.375rem", // 22px
+        fontWeight: 600,
+        color: colors.text.dark,
+        marginBottom: "0.75rem", // 12px
+      },
+      ".feature-description": {
+        fontSize: "1rem", // 16px
+        color: colors.text.dark,
+        opacity: 0.7,
+        lineHeight: 1.6,
+      },
+      "@media (max-width: 767px)": {
+        ".features-grid": {
+          gridTemplateColumns: "repeat(auto-fill, minmax(18.75, 1fr))", // 300px
+        },
+        ".features-title": {
+          fontSize: "2rem",
+        },
+        ".feature-card": {
+          padding: "1.25rem",
+        },
+      },
+    }),
+  );
 
-  const featureCardStyle: CSSProperties = {
-    background: colors.light,
-    padding: "40px",
-    borderRadius: "16px",
-    boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-    transition: "all 0.3s ease",
-    cursor: "default",
-  };
-
-  const featureIconStyle: CSSProperties = {
-    fontSize: "40px",
-    color: colors.primary,
-    marginBottom: "20px",
-  };
-
-  const featureTitleStyle: CSSProperties = {
-    fontSize: "22px",
-    fontWeight: 600,
-    color: colors.text.dark,
-    marginBottom: "12px",
-  };
-
-  const featureDescStyle: CSSProperties = {
-    fontSize: "16px",
-    color: colors.text.dark,
-    opacity: 0.7,
-    lineHeight: "1.6",
-  };
-
-  return (
+  return wrapSSR(
     <div>
-      <h2 style={sectionTitleStyle}>{dict.keyFeatures}</h2>
-      <div style={featuresGridStyle}>
-        {features?.map((feature: any, index: number) => (
-          <div
-            key={index}
-            style={featureCardStyle}
-            // onMouseEnter={(e) => {
-            //   e.currentTarget.style.transform = "translateY(-8px)";
-            //   e.currentTarget.style.boxShadow =
-            //     "0 12px 35px rgba(0,0,0,0.15)";
-            // }}
-            // onMouseLeave={(e) => {
-            //   e.currentTarget.style.transform = "translateY(0)";
-            //   e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
-            // }}
-          >
-            {/* No icon in new format; keep the slot if you expect icons sometimes */}
-            <div style={featureIconStyle}>{feature.icon ?? null}</div>
-            <h3 style={featureTitleStyle}>{feature.title}</h3>
-            <p style={featureDescStyle}>{feature.description}</p>
+      <h2 className="features-title">{dict.keyFeatures}</h2>
+      <div className="features-grid">
+        {features.map((feature: any, index: number) => (
+          <div key={index} className="feature-card">
+            <div className="feature-icon">{feature.icon ?? null}</div>
+            <h3 className="feature-title">{feature.title}</h3>
+            <p className="feature-description">{feature.description}</p>
           </div>
         ))}
       </div>
-    </div>
+    </div>,
   );
 };
