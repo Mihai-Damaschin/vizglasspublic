@@ -1,21 +1,24 @@
 "use client";
 
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
-import { CSSProperties, useRef } from "react";
-import { colors } from "@/lib/colors";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getStrapiImageLink } from "@/lib/links";
 import { useParams } from "next/navigation";
-import { Grid } from "antd";
+import { useStyleRegister } from "@ant-design/cssinjs";
+import { theme } from "antd";
+import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { colors } from "@/lib/colors";
+import { getStrapiImageLink } from "@/lib/links";
 
-const { useBreakpoint } = Grid;
+const { useToken } = theme;
 
 interface Product {
   id: string;
   name: string;
   description: string;
   image: string;
+  slug: string;
+  cover_image?: { url: string };
 }
 
 interface ProductCarouselProps {
@@ -25,12 +28,9 @@ interface ProductCarouselProps {
 
 const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
   const { locale } = useParams<{ locale: string }>();
-  const screens = useBreakpoint();
-  const isMobile = !screens.md;
+  const { token, theme } = useToken();
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  if (!products?.length) return null;
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -46,63 +46,97 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
     }
   };
 
-  const containerStyle: CSSProperties = {
-    padding: "5rem 0", // 80px 60px
-  };
+  const wrapSSR = useStyleRegister(
+    { theme, token, path: ["ProductCarousel"] },
+    () => ({
+      ".carousel-wrapper": {
+        padding: "5rem 0", // 80px 60px
+      },
+      ".carousel-title": {
+        fontSize: "2.625rem", // 42px
+        fontWeight: 700,
+        color: colors.text.dark,
+        marginBottom: "3.125rem", // 50px
+        textAlign: "center",
+      },
+      ".carousel-container": {
+        position: "relative",
+        maxWidth: "87.5rem", // 1400px
+        margin: "0 auto",
+      },
+      ".carousel-scroll": {
+        display: "flex",
+        gap: "1.25rem", // 20px
+        overflowX: "auto",
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+        padding: "0.625rem 1rem 1.875rem 1rem", // 10px 0 30px 0
+        transform: "translate(-1rem)",
+        width: "calc(100% + 1rem)",
+      },
+      ".carousel-item": {
+        background: colors.light,
+        borderRadius: "0.75rem", // 12px
+        overflow: "hidden",
+        boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        cursor: "pointer",
+        flexShrink: 0,
+        position: "relative",
+        width: "22rem",
+        height: "22rem",
+      },
+      ".carousel-item-name": {
+        padding: "0.5rem",
+        position: "absolute",
+        top: "0.5rem",
+        right: "0.5rem",
+        backgroundColor: colors.primary,
+        borderRadius: "0.75rem",
+        color: colors.light,
+        fontWeight: "bold",
+      },
 
-  const titleStyle: CSSProperties = {
-    fontSize: "2.625rem", // 42px
-    fontWeight: 700,
-    color: colors.text.dark,
-    marginBottom: "3.125rem", // 50px
-    textAlign: "center",
-  };
+      ".carousel-button": {
+        zIndex: 10,
+        background: colors.primary,
+        border: "none",
+        borderRadius: "50%",
+        width: "3.125rem",
+        height: "3.125rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        color: colors.light,
+        fontSize: "1.25rem",
+        boxShadow: "0 0.125rem 0.625rem rgba(0,0,0,0.2)",
+        position: "absolute",
+        top: "50%",
+        transform: "translateY(-50%)",
+        "@media (max-width: 767px)": {
+          bottom: "0.75rem",
+        },
+      },
+      ".carousel-button-left": {
+        left: "-3.8rem",
+        "@media (max-width: 767px)": { left: "0.75rem" },
+      },
+      ".carousel-button-right": {
+        right: "-3.8rem",
+        "@media (max-width: 767px)": { right: "0.75rem" },
+      },
+    }),
+  );
 
-  const carouselContainerStyle: CSSProperties = {
-    position: "relative",
-    maxWidth: "87.5rem", // 1400px
-    margin: "0 auto",
-  };
+  if (!products?.length) return null;
 
-  const scrollContainerStyle: CSSProperties = {
-    display: "flex",
-    gap: "1.25rem", // 20px
-    overflowX: "auto",
-    scrollbarWidth: "none",
-    msOverflowStyle: "none",
-    padding: "0.625rem 1rem 1.875rem 1rem", // 10px 0 30px 0
-    transform: "translate(-1rem)",
-    width: "calc(100% + 1rem)",
-  };
-
-  const buttonStyle: CSSProperties = {
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    zIndex: 10,
-    background: colors.primary,
-    border: "none",
-    borderRadius: "50%",
-    width: "3.125rem", // 50px
-    height: "3.125rem", // 50px
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    color: colors.light,
-    fontSize: "1.25rem", // 20px
-    boxShadow: "0 0.125rem 0.625rem rgba(0,0,0,0.2)", // 0 2px 10px
-    ...(isMobile
-      ? { bottom: "0.75rem" }
-      : { top: "50%", transform: "translateY(-50%)" }),
-  };
-
-  return (
-    <div style={containerStyle}>
-      <h2 style={titleStyle}>{title}</h2>
-      <div style={carouselContainerStyle}>
+  return wrapSSR(
+    <div className="carousel-wrapper">
+      <h2 className="carousel-title">{title}</h2>
+      <div className="carousel-container">
         <button
-          style={{ ...buttonStyle, left: isMobile ? "0.75rem" : "-3.8rem" }}
+          className="carousel-button carousel-button-left"
           onClick={() => scroll("left")}
         >
           <ArrowLeftOutlined />
@@ -110,65 +144,32 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
 
         <div
           ref={scrollContainerRef}
-          style={scrollContainerStyle}
-          className="hide-scrollbar"
+          className="carousel-scroll hide-scrollbar"
         >
           {products.map((product) => (
             <Link href={`/${locale}/product/${product.slug}`} key={product.id}>
-              <div
-                style={{
-                  background: colors.light,
-                  borderRadius: "0.75rem", // 12px
-                  overflow: "hidden",
-                  boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  cursor: "pointer",
-                  flexShrink: 0,
-                  position: "relative",
-                  width: "22rem",
-                  height: "22rem",
-                }}
-                className="vcard"
-              >
+              <div className="carousel-item">
                 <Image
-                  src={getStrapiImageLink(product.cover_image?.url)}
+                  src={getStrapiImageLink(product?.cover_image?.url)}
                   alt={product.name}
-                  style={{
-                    width: "100%",
-                    height: "100%", // 300px
-                    objectFit: "cover",
-                  }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   width={350}
                   height={300}
                 />
-
-                <div
-                  style={{
-                    padding: "0.5rem", // 30px
-                    position: "absolute",
-                    top: "0.5rem",
-                    right: "0.5rem",
-                    backgroundColor: colors.primary,
-                    borderRadius: "0.75rem",
-                    color: colors.light,
-                    fontWeight: "bold",
-                  }}
-                >
-                  {product.name}
-                </div>
+                <div className="carousel-item-name">{product.name}</div>
               </div>
             </Link>
           ))}
         </div>
 
         <button
-          style={{ ...buttonStyle, right: isMobile ? "0.75rem" : "-3.8rem" }}
+          className="carousel-button carousel-button-right"
           onClick={() => scroll("right")}
         >
           <ArrowRightOutlined />
         </button>
       </div>
-    </div>
+    </div>,
   );
 };
 

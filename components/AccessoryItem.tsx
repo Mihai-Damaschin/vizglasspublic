@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
-import { Grid } from "antd";
+import { theme } from "antd";
+import { useStyleRegister } from "@ant-design/cssinjs";
 
-const { useBreakpoint } = Grid;
+const { useToken } = theme;
 
 interface AccessoryItemProps {
   name: string;
@@ -14,75 +14,93 @@ interface AccessoryItemProps {
   showDivider?: boolean;
 }
 
-const AccessoryItem: React.FC<AccessoryItemProps> = ({
+const AccessoryItem = ({
   name,
   description,
   imageUrl,
   index,
   showDivider = false,
-}) => {
-  const screens = useBreakpoint();
-
+}: AccessoryItemProps) => {
   const isEven = index % 2 === 0;
+  const { token, theme } = useToken();
 
-  return (
+  const wrapSSR = useStyleRegister(
+    { theme, token, path: ["AccessoryItem"] },
+    () => ({
+      ".accessory-item-container": {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "5rem",
+        flexDirection: isEven ? "row" : "row-reverse",
+        "@media (max-width: 767px)": {
+          flexDirection: "column",
+          gap: "2rem",
+        },
+      },
+
+      ".accessory-item-text": {
+        width: 500,
+        "@media (max-width: 991px)": {
+          width: 300,
+        },
+        "@media (max-width: 767px)": {
+          width: "100%",
+          padding: "0 20px",
+        },
+      },
+
+      ".accessory-item-title": {
+        fontSize: "18px",
+        marginBottom: "0.5rem",
+      },
+
+      ".accessory-item-description": {
+        fontSize: "14px",
+        textAlign: "justify",
+        opacity: 0.6,
+        whiteSpace: "pre-line",
+      },
+
+      ".accessory-item-divider": {
+        height: 1,
+        backgroundColor: "gray",
+        opacity: 0.2,
+        margin: "5rem",
+      },
+
+      ".accessory-item-image": {
+        borderRadius: "1rem",
+        objectFit: "cover",
+        width: "auto",
+        height: "auto",
+        "@media (max-width: 576px)": {
+          width: "300px !important",
+          height: "400px !important",
+        },
+      },
+    }),
+  );
+
+  return wrapSSR(
     <div>
-      <div key={name}>
-        <div
-          key={name}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "5rem",
-            flexDirection: !screens.md
-              ? "column"
-              : isEven
-                ? "row"
-                : "row-reverse",
-          }}
-        >
-          <div
-            style={{
-              width: !screens.md ? "100%" : !screens.lg ? 300 : 500,
-              padding: `0 ${!screens.md ? "20px" : "0"}`,
-            }}
-          >
-            <h3 style={{ fontSize: "18p", marginBottom: "0.5rem" }}>{name}</h3>
-            <p
-              style={{
-                fontSize: "14px",
-                textAlign: "justify",
-                opacity: 0.6,
-                whiteSpace: "pre-line",
-              }}
-            >
-              {description}
-            </p>
-          </div>
-          <div>
-            <Image
-              src={imageUrl}
-              alt=""
-              width={!screens.sm ? 300 : 400}
-              height={!screens.sm ? 400 : 600}
-              style={{ borderRadius: "1rem", objectFit: "cover" }}
-            />
-          </div>
+      <div className="accessory-item-container">
+        <div className="accessory-item-text">
+          <h3 className="accessory-item-title">{name}</h3>
+          <p className="accessory-item-description">{description}</p>
         </div>
 
-        {showDivider && (
-          <div
-            style={{
-              height: 1,
-              backgroundColor: "gray",
-              opacity: 0.2,
-              margin: "5rem",
-            }}
-          />
-        )}
+        <Image
+          src={imageUrl}
+          alt={name}
+          width={400}
+          height={600}
+          className="accessory-item-image"
+        />
       </div>
-    </div>
+
+      {showDivider && <div className="accessory-item-divider" />}
+    </div>,
   );
 };
 

@@ -13,22 +13,27 @@ function getLocaleFromHeader(request: NextRequest) {
     const matched = locales.find((loc) => loc.startsWith(lang));
     if (matched) return matched;
   }
-
   return "ro";
 }
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
+  const pathLocale = locales.find(
+    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );
 
-  if (pathnameHasLocale) return null;
+  if (pathLocale) {
+    const res = NextResponse.next();
+    if (request.cookies.get("locale")?.value !== pathLocale) {
+      res.cookies.set("locale", pathLocale, { path: "/" });
+    }
+    return res;
+  }
 
   const cookieLocale = request.cookies.get("locale")?.value;
   const locale = locales.includes(cookieLocale || "")
-    ? cookieLocale
+    ? (cookieLocale as string)
     : getLocaleFromHeader(request);
 
   const redirectUrl = new URL(`/${locale}${pathname}`, request.url);
