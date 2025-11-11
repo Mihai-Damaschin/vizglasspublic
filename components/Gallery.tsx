@@ -48,12 +48,6 @@ export const Gallery = ({
       height: "20rem",
       position: "relative",
     },
-    ".gallery-image": {
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      display: "block",
-    },
     ".video-mask": {
       position: "absolute",
       inset: 0,
@@ -86,7 +80,7 @@ export const Gallery = ({
         fontSize: "2rem",
       },
       ".gallery-box": {
-        gridTemplateColumns: "repeat(auto-fill, minmax(18.75, 1fr))", // 300px
+        gridTemplateColumns: "repeat(auto-fill, minmax(18.75rem, 1fr))", // 300px
       },
       ".gallery-item": {
         height: "18rem",
@@ -131,7 +125,12 @@ export const Gallery = ({
                 />
               ) : (
                 <Image
-                  className="gallery-image"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
                   src={getStrapiImageLink(image.url)}
                   alt={image.name}
                   preview={{ mask: "Click to View" }}

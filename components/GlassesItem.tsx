@@ -6,7 +6,7 @@ import { useStyleRegister } from "@ant-design/cssinjs";
 
 const { useToken } = theme;
 
-interface AccessoryItemProps {
+interface GlassesItemProps {
   name: string;
   description: string;
   imageUrl: string;
@@ -14,17 +14,17 @@ interface AccessoryItemProps {
   showDivider?: boolean;
 }
 
-const AccessoryItem = ({
+const GlassesItem = ({
   name,
   description,
   imageUrl,
   isEven = false,
   showDivider = false,
-}: AccessoryItemProps) => {
+}: GlassesItemProps) => {
   const { token, theme } = useToken();
 
   const wrapSSR = useStyleRegister(
-    { theme, token, path: ["AccessoryItem"] },
+    { theme, token, path: ["GlassesItem"] },
     () => ({
       ".accessory-item-container": {
         display: "flex",
@@ -83,10 +83,13 @@ const AccessoryItem = ({
 
       ".accessory-item-image": {
         borderRadius: "1rem",
+        objectFit: "cover",
+        width: "auto",
+        height: "auto",
 
         "@media (max-width: 576px)": {
           width: "300px !important",
-          height: "300px !important",
+          height: "400px !important",
         },
       },
     }),
@@ -108,7 +111,7 @@ const AccessoryItem = ({
           src={imageUrl}
           alt={name}
           width={400}
-          height={400}
+          height={600}
           className="accessory-item-image"
         />
       </div>
@@ -118,4 +121,4 @@ const AccessoryItem = ({
   );
 };
 
-export default AccessoryItem;
+export default GlassesItem;

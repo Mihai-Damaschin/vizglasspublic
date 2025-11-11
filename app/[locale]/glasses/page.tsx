@@ -2,7 +2,7 @@ import { strapiFetch } from "@/lib/requests";
 import { CSSProperties } from "react";
 import { colors } from "@/lib/colors";
 import { getStrapiImageLink } from "@/lib/links";
-import AccessoryItem from "@/components/AccessoryItem";
+import GlassesItem from "@/components/GlassesItem";
 
 const GlassesPage = async () => {
   const doorProductsData = await strapiFetch("accessories", {
@@ -21,7 +21,7 @@ const GlassesPage = async () => {
   const contentStyle: CSSProperties = {
     maxWidth: "1400px",
     margin: "0 auto",
-    padding: "60px 0 100px",
+    padding: "60px 20px 100px",
   };
 
   const sectionTitleStyle: CSSProperties = {
@@ -55,16 +55,13 @@ const GlassesPage = async () => {
         </div>
 
         {doorProductsData?.data.map(
-          (
-            accessory: Record<string, any>,
-            index: number,
-          ) => (
-            <AccessoryItem
+          (accessory: Record<string, any>, index: number) => (
+            <GlassesItem
               key={accessory.name}
               name={accessory.name}
               description={accessory.description}
               imageUrl={getStrapiImageLink(accessory.cover_photo.url)}
-              index={index}
+              isEven={index % 2 === 0}
               showDivider={index !== doorProductsData?.data?.length - 1}
             />
           ),
