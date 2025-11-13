@@ -1,42 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
-    font-size: 16px;
+  scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
     sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .gallery .ant-image {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .vcard {
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
-    transform: translateY(0);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(0);
 }
 
 .vcard:hover {
-    transform: translateY(-0.625rem);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.625rem);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
 .header-section {
@@ -59,20 +71,45 @@ a {
   }
 }
 
+.feature-card {
+  width: calc(33.3% - 1rem);
+  @media (max-width: 991px) {
+    width: calc(50% - 1rem);
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.testimonials-card {
+  flex-direction: row;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.cta-section {
+  padding: 80px 60px;
+
+  @media (max-width: 767px) {
+    padding: 80px 20px;
+  }
+}
+
 @media screen and (max-width: 1600px) {
-    html {
-        font-size: 1vw;
-    }
+  html {
+    font-size: 1vw;
+  }
 }
 
 @media screen and (max-width: 767px) {
-    html {
-        font-size: 2.6vw;
-    }
+  html {
+    font-size: 2.6vw;
+  }
 }
 
 @media screen and (max-width: 420px) {
-    html {
-        font-size: 3.6vw;
-    }
+  html {
+    font-size: 3.6vw;
+  }
 }
