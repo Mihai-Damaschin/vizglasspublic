@@ -1,15 +1,11 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/app/[locale]/dictionaries";
 import { TLocales } from "@/lib/constants";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+
 
 export const metadata: Metadata = {
   title: "ViZ GLASS",
@@ -28,14 +24,10 @@ export default async function RootLayout({
   const dict = await getDictionary(locale); // en
 
   return (
-    <html lang={locale}>
-      <body className={`${inter.variable} antialiased`}>
-        <Header dict={dict} />
-
-        {children}
-
-        <Footer />
-      </body>
-    </html>
+    <>
+      <Header dict={dict} />
+      {children}
+      <Footer />
+    </>
   );
 }

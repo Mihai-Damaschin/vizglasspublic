@@ -1,8 +1,8 @@
 import { strapiFetch } from "@/lib/requests";
 import { CSSProperties } from "react";
 import { colors } from "@/lib/colors";
-import Image from "next/image";
 import { getStrapiImageLink } from "@/lib/links";
+import AccessoryItem from "@/components/AccessoryItem";
 
 const AccessoriesPage = async () => {
   const doorProductsData = await strapiFetch("accessories", {
@@ -21,7 +21,7 @@ const AccessoriesPage = async () => {
   const contentStyle: CSSProperties = {
     maxWidth: "1400px",
     margin: "0 auto",
-    padding: "60px 0 100px",
+    padding: "60px 20px 100px",
   };
 
   const sectionTitleStyle: CSSProperties = {
@@ -54,55 +54,18 @@ const AccessoriesPage = async () => {
           </p>
         </div>
 
-        {doorProductsData?.data.map((accessory, index) => (
-          <div key={accessory.name}>
-            <div
+        {doorProductsData?.data.map(
+          (accessory: Record<string, any>, index: number) => (
+            <AccessoryItem
               key={accessory.name}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "5rem",
-                flexDirection: index % 2 === 0 ? "row" : "row-reverse",
-              }}
-            >
-              <div style={{ width: 500 }}>
-                <h3 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>
-                  {accessory.name}
-                </h3>
-                <p
-                  style={{
-                    textAlign: "justify",
-                    opacity: 0.6,
-                    whiteSpace: "pre-line",
-                  }}
-                >
-                  {accessory.description}
-                </p>
-              </div>
-              <div>
-                <Image
-                  src={getStrapiImageLink(accessory.cover_photo.url)}
-                  alt=""
-                  width={400}
-                  height={400}
-                  style={{ borderRadius: "1rem" }}
-                />
-              </div>
-            </div>
-
-            {index !== doorProductsData?.data?.length - 1 && (
-              <div
-                style={{
-                  height: 1,
-                  backgroundColor: "gray",
-                  opacity: 0.2,
-                  margin: "5rem",
-                }}
-              />
-            )}
-          </div>
-        ))}
+              name={accessory.name}
+              description={accessory.description}
+              imageUrl={getStrapiImageLink(accessory.cover_photo.url)}
+              isEven={index % 2 === 0}
+              showDivider={index !== doorProductsData?.data?.length - 1}
+            />
+          ),
+        )}
       </div>
     </div>
   );

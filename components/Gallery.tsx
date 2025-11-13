@@ -1,77 +1,115 @@
 "use client";
 
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
 import { Image } from "antd";
 import { getStrapiImageLink } from "@/lib/links";
 import { colors } from "@/lib/colors";
-import { Property } from "csstype";
+import { useStyleRegister } from "@ant-design/cssinjs";
+import { theme } from "antd";
 import { PlayCircleOutlined } from "@ant-design/icons";
-
-import TextAlign = Property.TextAlign;
 import { TMedia } from "@/services/strapi.types";
+
+const { useToken } = theme;
 
 interface IGallery {
   media: TMedia[];
-  titleTextAlign?: TextAlign;
+  titleTextAlign?: "left" | "center" | "right";
   dict: any;
 }
 
 export const Gallery = ({
   media = [],
   titleTextAlign = "center",
-  dict
+  dict,
 }: IGallery) => {
   const [currentVisible, setCurrentVisible] = useState<number>();
+  const { token, theme } = useToken();
 
-  if (!media) return null;
+  const wrapSSR = useStyleRegister({ theme, token, path: ["Gallery"] }, () => ({
+    ".gallery-title": {
+      fontSize: "2.5rem", // 40px
+      fontWeight: 700,
+      color: colors.text.dark,
+      marginBottom: "1.25rem", // 20px
+      textAlign: titleTextAlign,
+    },
+    ".gallery-box": {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fill, minmax(20rem, 1fr))", // 320px → 20rem
+      gap: "1.5625rem", // 25px
+      marginBottom: "5rem", // 80px
 
-  const galleryStyle: CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-    gap: "25px",
-    marginBottom: "80px",
-  };
+      "@media (max-width: 991px)": {
+        gridTemplateColumns: "repeat(2, minmax(20rem, 1fr))",
+      },
+      "@media (max-width: 767px)": {
+        gridTemplateColumns: "repeat(1, minmax(18.75rem, 1fr))",
+      },
+    },
+    ".gallery-item": {
+      borderRadius: "1rem", // 16px
+      overflow: "hidden",
+      cursor: "pointer",
+      boxShadow: "0 0.375rem 1.5625rem rgba(0,0,0,0.12)", // 0 6px 25px
+      transition: "all 0.3s ease",
+      // height: "20rem",
+      position: "relative",
+      aspectRatio: "1 / 1",
+    },
+    ".video-mask": {
+      position: "absolute",
+      inset: 0,
+      zIndex: 2,
+      color: colors.light,
+      fontSize: "0.875rem", // 14px
+      borderRadius: "1rem",
+      transition: "opacity 0.3s",
+      cursor: "pointer",
+    },
+    ".video-play-icon": {
+      fontSize: "3.125rem", // 50px
+      color: colors.light,
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      zIndex: 1,
+      textShadow: "0 0 6px rgba(0,0,0,0.5)",
+    },
+    ".video-element": {
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      boxShadow: "0 0.375rem 1.5625rem rgba(0,0,0,0.12)",
+      borderRadius: "1rem",
+    },
+    "@media (max-width: 767px)": {
+      ".gallery-title": {
+        fontSize: "2rem",
+      },
+      ".gallery-item": {
+        // height: "18rem",
+        aspectRatio: "1 / 1.1",
+      },
+    },
+  }));
 
-  const imageWrapperStyle: CSSProperties = {
-    borderRadius: "16px",
-    overflow: "hidden",
-    cursor: "pointer",
-    boxShadow: "0 6px 25px rgba(0,0,0,0.12)",
-    transition: "all 0.3s ease",
-    height: "20rem",
-  };
+  if (!media?.length) return null;
 
-  const imageStyle: CSSProperties = {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  };
-
-  const sectionTitleStyle: CSSProperties = {
-    fontSize: "40px",
-    fontWeight: 700,
-    color: colors.text.dark,
-    marginBottom: "20px",
-    textAlign: titleTextAlign,
-  };
-
-  return (
+  return wrapSSR(
     <div>
-      <h2 style={sectionTitleStyle}>{dict.gallery}</h2>
+      <h2 className="gallery-title">{dict?.gallery}</h2>
 
       <Image.PreviewGroup
         preview={{
           imageRender: (originalNode, info) => {
             const url = info.image?.url;
-
             if (url?.endsWith(".mp4")) {
               const videoUrl = url.startsWith("/")
                 ? `${process.env.REACT_APP_S3_URL}/${url}`
                 : url;
-
               return <video src={videoUrl} controls />;
             }
-
             return originalNode;
           },
           onChange: (current) => setCurrentVisible(current),
@@ -82,9 +120,9 @@ export const Gallery = ({
           visible: currentVisible !== undefined,
         }}
       >
-        <div style={galleryStyle} className="gallery">
+        <div className="gallery gallery-box">
           {media.map((image, index) => (
-            <div key={index}>
+            <div key={index} className="gallery-item">
               {image.url.endsWith("mp4") ? (
                 <VideoCell
                   index={index}
@@ -92,23 +130,24 @@ export const Gallery = ({
                   setCurrentVisible={setCurrentVisible}
                 />
               ) : (
-                <div key={index} style={imageWrapperStyle}>
-                  <Image
-                    src={getStrapiImageLink(image.url)}
-                    alt={image.name}
-                    style={imageStyle}
-                    preview={{
-                      mask: "Click to View",
-                    }}
-                    onClick={() => setCurrentVisible(index)}
-                  />
-                </div>
+                <Image
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                  src={getStrapiImageLink(image.url)}
+                  alt={image.name}
+                  preview={{ mask: "Click to View" }}
+                  onClick={() => setCurrentVisible(index)}
+                />
               )}
             </div>
           ))}
         </div>
       </Image.PreviewGroup>
-    </div>
+    </div>,
   );
 };
 
@@ -120,49 +159,20 @@ interface IVideoCell {
 
 const VideoCell = ({ index, image, setCurrentVisible }: IVideoCell) => {
   return (
-    <div className="ant-image" style={{ position: "relative" }} key={index}>
+    <div className="ant-image gallery-item" key={index}>
       <div
-        className="ant-image-mask"
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 2,
-          color: "white",
-          fontSize: "14px",
-          borderRadius: "1rem",
-          transition: "opacity 0.3s",
-        }}
+        className="ant-image-mask video-mask"
         onClick={() => setCurrentVisible(index)}
       >
         Click to View
       </div>
-
-      <PlayCircleOutlined
-        style={{
-          fontSize: 50,
-          color: "white",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 1,
-          textShadow: "0 0 6px rgba(0, 0, 0, 0.5)",
-        }}
-      />
-
+      <PlayCircleOutlined className="video-play-icon" />
       <video
+        className="video-element"
         src={getStrapiImageLink(image.url)}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          boxShadow: "rgba(0, 0, 0, 0.12) 0px 6px 25px",
-          borderRadius: "1rem",
-        }}
         muted
         playsInline
       />
-
       <Image src={getStrapiImageLink(image.url)} width={0} height={0} alt="" />
     </div>
   );

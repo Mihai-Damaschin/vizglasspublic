@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { strapiFetch } from "@/lib/requests";
 import { Gallery } from "@/components/Gallery";
@@ -8,6 +7,7 @@ import { CTASection } from "@/components/CTASection";
 import { ProductHero } from "@/components/ProductHero";
 import { Colors } from "@/components/Colors";
 import { AccessoriesCarousel } from "@/components/AccessoriesCarousel";
+import { ProductDetailsLayout } from "@/components/ProductDetailsLayout";
 import { getDictionary } from "@/app/[locale]/dictionaries";
 import { TLocales } from "@/lib/constants";
 
@@ -43,19 +43,11 @@ const ProductPage = async ({
     notFound();
   }
 
-  const contentStyle: CSSProperties = {
-    maxWidth: "1400px",
-    margin: "0 auto",
-    padding: "80px 60px",
-  };
-
-  console.log(product, "product");
-
   return (
     <>
       <ProductHero product={product} />
 
-      <div style={contentStyle} id="product-details">
+      <ProductDetailsLayout>
         <Features features={product.features} dict={dict} />
 
         <Gallery media={product.media} dict={dict} />
@@ -70,7 +62,7 @@ const ProductPage = async ({
         />
 
         <CTASection product={product} dict={dict} />
-      </div>
+      </ProductDetailsLayout>
     </>
   );
 };

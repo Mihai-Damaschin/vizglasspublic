@@ -2,12 +2,14 @@ import { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { colors } from "@/lib/colors";
 import { strapiFetch } from "@/lib/requests";
-import { Gallery } from "@/components/Gallery";
+import { CaseStudiesItem } from "@/components/CaseStudiesItem";
+import { getDictionary } from "@/app/[locale]/dictionaries";
+import { TLocales } from "@/lib/constants";
 
 const CaseStudyPage = async ({
   params,
 }: {
-  params: Promise<{ slug: string; locale: string }>;
+  params: Promise<{ slug: string; locale: TLocales }>;
 }) => {
   const { slug, locale } = await params;
 
@@ -20,9 +22,7 @@ const CaseStudyPage = async ({
     },
     locale,
   });
-
-  console.log(caseStudyData, "product");
-
+  const dict = await getDictionary(locale);
   const caseStudy = caseStudyData?.data?.[0];
 
   if (!caseStudy) {
@@ -35,85 +35,10 @@ const CaseStudyPage = async ({
     backgroundColor: colors.background.light,
   };
 
-  const contentStyle: CSSProperties = {
-    maxWidth: "1400px",
-    margin: "0 auto",
-    padding: "60px 0 100px",
-  };
-
-  const titleStyle: CSSProperties = {
-    fontSize: "48px",
-    fontWeight: 700,
-    color: colors.text.dark,
-    marginBottom: "40px",
-  };
-
-  const infoGridStyle: CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "30px",
-    marginBottom: "50px",
-    padding: "30px",
-    background: "white",
-    borderRadius: "12px",
-  };
-
-  const infoItemStyle: CSSProperties = {
-    display: "flex",
-    flexDirection: "column",
-  };
-
-  const infoLabelStyle: CSSProperties = {
-    fontSize: "14px",
-    color: colors.text.dark,
-    opacity: 0.6,
-    marginBottom: "8px",
-    fontWeight: 600,
-    textTransform: "uppercase",
-    letterSpacing: "1px",
-  };
-
-  const infoValueStyle: CSSProperties = {
-    fontSize: "18px",
-    color: colors.text.dark,
-    fontWeight: 500,
-  };
-
-  const descriptionStyle: CSSProperties = {
-    fontSize: "20px",
-    color: colors.text.dark,
-    opacity: 0.8,
-    lineHeight: "1.8",
-    marginBottom: "60px",
-  };
-
   return (
-    <>
-      <div style={containerStyle}>
-        <div style={contentStyle}>
-          <h1 style={titleStyle}>{caseStudy.title}</h1>
-
-          <div style={infoGridStyle}>
-            <div style={infoItemStyle}>
-              <span style={infoLabelStyle}>Client</span>
-              <span style={infoValueStyle}>{caseStudy.client}</span>
-            </div>
-            <div style={infoItemStyle}>
-              <span style={infoLabelStyle}>Location</span>
-              <span style={infoValueStyle}>{caseStudy.location}</span>
-            </div>
-            <div style={infoItemStyle}>
-              <span style={infoLabelStyle}>Duration</span>
-              <span style={infoValueStyle}>{caseStudy.duration}</span>
-            </div>
-          </div>
-
-          <p style={descriptionStyle}>{caseStudy.description}</p>
-
-          <Gallery media={caseStudy.media} titleTextAlign="left" />
-        </div>
-      </div>
-    </>
+    <div style={containerStyle}>
+      <CaseStudiesItem caseStudy={caseStudy} dict={dict} />
+    </div>
   );
 };
 

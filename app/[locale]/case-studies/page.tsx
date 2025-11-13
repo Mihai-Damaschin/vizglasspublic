@@ -22,13 +22,21 @@ const CaseStudiesListPage = async ({
 
   const containerStyle: CSSProperties = {
     minHeight: "100vh",
-    padding: "9rem 0 4rem",
+    padding: "11rem 1.50rem 4rem",
     background: colors.background.light,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   return (
-    <>
-      <div style={containerStyle}>
+    <div style={containerStyle}>
+      <div
+        style={{
+          width: "100%",
+          textAlign: "center",
+        }}
+      >
         <CaseStudies
           caseStudies={caseStudiesData?.data}
           title={dict.caseStudies}
@@ -36,7 +44,7 @@ const CaseStudiesListPage = async ({
           titleColor={"black"}
         />
       </div>
-    </>
+    </div>
   );
 };
 

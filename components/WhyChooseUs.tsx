@@ -9,10 +9,92 @@ import {
   ThunderboltOutlined,
   ToolOutlined,
 } from "@ant-design/icons";
-import { Card } from "antd";
+import { Card, theme } from "antd";
+import { useStyleRegister } from "@ant-design/cssinjs";
+
+const { useToken } = theme;
 
 export const WhyChooseUs = ({ dict }) => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { token, theme } = useToken();
+
+  const wrapSSR = useStyleRegister(
+    { theme, token, path: ["WhyChooseUs"] },
+    () => ({
+      section: {
+        padding: "4rem 0 6rem",
+        backgroundColor: "#f9fafb",
+      },
+      ".container": {
+        maxWidth: "1400px",
+        margin: "0 auto",
+        padding: "0 1rem",
+      },
+      ".header": {
+        textAlign: "center",
+        marginBottom: "3rem",
+      },
+      ".title": {
+        fontSize: "2.625rem",
+        fontWeight: 700,
+        color: "#111827",
+        marginBottom: "1rem",
+      },
+      ".subtitle": {
+        fontSize: "1.125rem",
+        color: "#6b7280",
+        maxWidth: "600px",
+        margin: "0 auto",
+      },
+      ".features": {
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "1.5rem",
+      },
+      ".feature-card": {
+        border: "none",
+        backgroundColor: "#fff",
+        padding: "1.5rem",
+        transition: "all 0.3s ease",
+        width: "calc(33.3% - 1rem)",
+        "@media (max-width: 991px)": {
+          width: "calc(50% - 1rem)",
+        },
+        "@media (max-width: 767px)": {
+          width: "100%",
+        },
+        cursor: "pointer",
+        ".icon-wrapper": {
+          width: "48px",
+          height: "48px",
+          borderRadius: "8px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "1rem",
+          fontSize: "1.5rem",
+        },
+        ".feature-title": {
+          fontSize: "1.25rem",
+          fontWeight: 600,
+          color: "#111827",
+          marginBottom: "0.5rem",
+        },
+        ".feature-desc": {
+          fontSize: "1rem",
+          color: "#6b7280",
+        },
+      },
+      ".feature-card-hovered": {
+        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+        transform: "translateY(-4px)",
+      },
+      ".feature-card-normal": {
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+        transform: "translateY(0)",
+      },
+    }),
+  );
 
   const features = [
     {
@@ -59,44 +141,15 @@ export const WhyChooseUs = ({ dict }) => {
     },
   ];
 
-  return (
-    <section
-      style={{
-        padding: "4rem 0 6rem",
-        backgroundColor: "#f9fafb",
-      }}
-    >
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}>
-        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "2.625rem", // 42px
-              fontWeight: "700",
-              color: "#111827",
-              marginBottom: "1rem",
-            }}
-          >
-            {dict.whyChooseUs.title}
-          </h2>
-          <p
-            style={{
-              fontSize: "1.125rem",
-              color: "#6b7280",
-              maxWidth: "600px",
-              margin: "0 auto",
-            }}
-          >
-            {dict.whyChooseUs.subtitle}
-          </p>
+  return wrapSSR(
+    <section>
+      <div className="container">
+        <div className="header">
+          <h2 className="title">{dict.whyChooseUs.title}</h2>
+          <p className="subtitle">{dict.whyChooseUs.subtitle}</p>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "1.5rem",
-          }}
-        >
+        <div className="features">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const isHovered = hoveredIndex === index;
@@ -104,56 +157,25 @@ export const WhyChooseUs = ({ dict }) => {
             return (
               <Card
                 key={index}
-                style={{
-                  border: "none",
-                  boxShadow: isHovered
-                    ? "0 8px 24px rgba(0, 0, 0, 0.1)"
-                    : "0 4px 12px rgba(0, 0, 0, 0.05)",
-                  transform: isHovered ? "translateY(-4px)" : "translateY(0)",
-                  transition: "all 0.3s ease",
-                  backgroundColor: "#fff",
-                  padding: "1.5rem",
-                  width: "calc(33.3% - 1rem)",
-                }}
+                className={`feature-card ${
+                  isHovered ? "feature-card-hovered" : "feature-card-normal"
+                }`}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div style={{ textAlign: "left" }}>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "8px",
-                      backgroundColor: feature.bg,
-                      color: feature.color,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: "1rem",
-                      fontSize: "1.5rem",
-                    }}
-                  >
-                    <Icon />
-                  </div>
-                  <h3
-                    style={{
-                      fontSize: "1.25rem",
-                      fontWeight: "600",
-                      color: "#111827",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    {feature.title}
-                  </h3>
-                  <p style={{ color: "#6b7280", fontSize: "1rem" }}>
-                    {feature.description}
-                  </p>
+                <div
+                  className="icon-wrapper"
+                  style={{ backgroundColor: feature.bg, color: feature.color }}
+                >
+                  <Icon />
                 </div>
+                <h3 className="feature-title">{feature.title}</h3>
+                <p className="feature-desc">{feature.description}</p>
               </Card>
             );
           })}
         </div>
       </div>
-    </section>
+    </section>,
   );
 };

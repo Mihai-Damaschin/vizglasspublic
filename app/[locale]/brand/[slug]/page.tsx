@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { ProductHero } from "@/components/ProductHero";
 import { Features } from "@/components/Features";
 import { Gallery } from "@/components/Gallery";
@@ -8,6 +7,7 @@ import { notFound } from "next/navigation";
 import ProductCarousel from "@/components/ProductCarousel";
 import { TLocales } from "@/lib/constants";
 import { getDictionary } from "@/app/[locale]/dictionaries";
+import { ProductDetailsLayout } from "@/components/ProductDetailsLayout";
 
 const BrandPage = async ({
   params,
@@ -21,21 +21,21 @@ const BrandPage = async ({
   const brandData = await strapiFetch("brands", {
     populate: {
       products: {
-        populate: ["cover_image"]
+        populate: ["cover_image"],
       },
       key_features: {
-        populate: "*"
+        populate: "*",
       },
       media: {
-        populate: "*"
-      }
+        populate: "*",
+      },
     },
     filters: {
       slug: {
         $eq: slug,
       },
     },
-    locale
+    locale,
   });
 
   const brand = brandData?.data?.[0];
@@ -44,27 +44,21 @@ const BrandPage = async ({
     notFound();
   }
 
-  const contentStyle: CSSProperties = {
-    maxWidth: "1400px",
-    margin: "0 auto",
-    padding: "80px 60px",
-  };
-
   console.log(brand, "product");
 
   return (
     <>
       <ProductHero product={brand} />
 
-      <div style={contentStyle} id="product-details">
-        <Features features={brand.key_features} />
+      <ProductDetailsLayout>
+        <Features features={brand.key_features} dict={dict} />
 
-        <Gallery media={brand.media} />
+        <Gallery media={brand.media} dict={dict} />
 
         <ProductCarousel products={brand.products} title="Products" />
 
         <CTASection product={brand} dict={dict} />
-      </div>
+      </ProductDetailsLayout>
     </>
   );
 };
