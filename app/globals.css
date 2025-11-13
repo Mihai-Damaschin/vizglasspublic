@@ -39,6 +39,26 @@ a {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
+.header-section {
+  padding: 20px 60px;
+
+  @media screen and (max-width: 767px) {
+    padding: 20px;
+  }
+}
+
+.hidden-desktop {
+  @media screen and (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+.hidden-mobile {
+  @media screen and (max-width: 767px) {
+    display: none !important;
+  }
+}
+
 @media screen and (max-width: 1600px) {
     html {
         font-size: 1vw;

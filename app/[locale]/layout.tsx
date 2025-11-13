@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import { getDictionary } from "@/app/[locale]/dictionaries";
 import { TLocales } from "@/lib/constants";
 
-
-
 export const metadata: Metadata = {
   title: "ViZ GLASS",
   description: "Ferestre / Uși / Porți Secționate / Rolete",
