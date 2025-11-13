@@ -3,14 +3,22 @@ import { CSSProperties } from "react";
 import { colors } from "@/lib/colors";
 import Image from "next/image";
 import { getStrapiImageLink } from "@/lib/links";
+import { TLocales } from "@/lib/constants";
 
-const AccessoriesPage = async () => {
+const AccessoriesPage = async ({
+  params,
+}: {
+  params: Promise<{ locale: TLocales }>;
+}) => {
+  const { locale } = await params;
+
   const doorProductsData = await strapiFetch("accessories", {
     populate: "*",
     sort: "createdAt:asc",
     filters: {
       type: ["net", "sill"],
     },
+    locale: locale,
   });
 
   const containerStyle: CSSProperties = {

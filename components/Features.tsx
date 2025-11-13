@@ -7,6 +7,8 @@ interface IFeatures {
 }
 
 export const Features = ({ features = [], dict }: IFeatures) => {
+  if (!features.length) return null;
+
   const sectionTitleStyle: CSSProperties = {
     fontSize: "40px",
     fontWeight: 700,
@@ -56,20 +58,7 @@ export const Features = ({ features = [], dict }: IFeatures) => {
       <h2 style={sectionTitleStyle}>{dict.keyFeatures}</h2>
       <div style={featuresGridStyle}>
         {features?.map((feature: any, index: number) => (
-          <div
-            key={index}
-            style={featureCardStyle}
-            // onMouseEnter={(e) => {
-            //   e.currentTarget.style.transform = "translateY(-8px)";
-            //   e.currentTarget.style.boxShadow =
-            //     "0 12px 35px rgba(0,0,0,0.15)";
-            // }}
-            // onMouseLeave={(e) => {
-            //   e.currentTarget.style.transform = "translateY(0)";
-            //   e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
-            // }}
-          >
-            {/* No icon in new format; keep the slot if you expect icons sometimes */}
+          <div key={index} style={featureCardStyle}>
             <div style={featureIconStyle}>{feature.icon ?? null}</div>
             <h3 style={featureTitleStyle}>{feature.title}</h3>
             <p style={featureDescStyle}>{feature.description}</p>

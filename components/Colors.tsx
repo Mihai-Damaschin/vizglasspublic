@@ -8,6 +8,8 @@ interface IColors {
 }
 
 export const Colors = ({ colors, dict }: IColors) => {
+  if (!colors.length) return null;
+
   const titleStyle: CSSProperties = {
     fontSize: "2.625rem", // 42px
     fontWeight: 700,

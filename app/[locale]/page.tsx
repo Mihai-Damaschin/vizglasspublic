@@ -68,6 +68,7 @@ const HomePage = async ({
     filters: {
       type: "window",
     },
+    locale,
   });
 
   const doorProductsData = await strapiFetch("products", {
@@ -76,6 +77,7 @@ const HomePage = async ({
     filters: {
       type: "door",
     },
+    locale,
   });
 
   const caseStudiesData = await strapiFetch("case-studies", {
@@ -84,6 +86,7 @@ const HomePage = async ({
     filters: {
       show_on_home: true,
     },
+    locale,
   });
 
   return (

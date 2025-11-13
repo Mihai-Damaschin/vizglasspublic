@@ -3,11 +3,13 @@ import { notFound } from "next/navigation";
 import { colors } from "@/lib/colors";
 import { strapiFetch } from "@/lib/requests";
 import { Gallery } from "@/components/Gallery";
+import { getDictionary } from "@/app/[locale]/dictionaries";
+import { TLocales } from "@/lib/constants";
 
 const CaseStudyPage = async ({
   params,
 }: {
-  params: Promise<{ slug: string; locale: string }>;
+  params: Promise<{ slug: string; locale: TLocales }>;
 }) => {
   const { slug, locale } = await params;
 
@@ -87,6 +89,8 @@ const CaseStudyPage = async ({
     marginBottom: "60px",
   };
 
+  const dict = getDictionary(locale);
+
   return (
     <>
       <div style={containerStyle}>
@@ -110,7 +114,7 @@ const CaseStudyPage = async ({
 
           <p style={descriptionStyle}>{caseStudy.description}</p>
 
-          <Gallery media={caseStudy.media} titleTextAlign="left" />
+          <Gallery media={caseStudy.media} titleTextAlign="left" dict={dict} />
         </div>
       </div>
     </>

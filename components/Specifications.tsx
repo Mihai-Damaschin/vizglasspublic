@@ -6,7 +6,12 @@ interface ISpecifications {
   dict: any;
 }
 
-export const Specifications = ({ specifications = [], dict }: ISpecifications) => {
+export const Specifications = ({
+  specifications = [],
+  dict,
+}: ISpecifications) => {
+  if (!specifications.length) return null;
+
   const sectionTitleStyle: CSSProperties = {
     fontSize: "40px",
     fontWeight: 700,
