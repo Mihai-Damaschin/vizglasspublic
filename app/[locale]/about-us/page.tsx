@@ -21,7 +21,7 @@ const AboutUsPage = async ({
           position: "relative",
           background:
             "linear-gradient(135deg, rgba(var(--primary),0.05), var(--background), rgba(var(--secondary),0.05))",
-          paddingTop: "8rem",
+          paddingTop: "10rem",
           paddingBottom: "8rem",
         }}
       >

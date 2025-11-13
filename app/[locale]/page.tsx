@@ -1,10 +1,10 @@
 import { CSSProperties } from "react";
 import Image from "next/image";
-import { colors } from "@/lib/colors";
 import ProductCarousel from "@/components/ProductCarousel";
 import { strapiFetch } from "@/lib/requests";
 import { CaseStudies } from "@/components/CaseStudies";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
+import HomeHeroContent from "@/components/HomeHeroContent";
 import { getDictionary } from "@/app/[locale]/dictionaries";
 import { TLocales } from "@/lib/constants";
 
@@ -30,36 +30,6 @@ const HomePage = async ({
     width: "100%",
     height: "100%",
     background: "rgba(26, 26, 26, 0.3)",
-  };
-
-  const heroContentStyle: CSSProperties = {
-    position: "absolute",
-    top: "-22%",
-    left: "50%",
-    transform: "translate(-50%)",
-    zIndex: 1,
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    color: colors.text.primary,
-    textAlign: "center",
-    padding: "0 1.25rem", // 20px
-  };
-
-  const heroTitleStyle: CSSProperties = {
-    fontSize: "4rem", // 64px
-    fontWeight: 700,
-    marginBottom: "1.25rem", // 20px
-    textShadow: "0.125rem 0.125rem 0.25rem rgba(0,0,0,0.5)", // 2px 2px 4px
-  };
-
-  const heroSubtitleStyle: CSSProperties = {
-    fontSize: "1.5rem", // 24px
-    marginBottom: "2.5rem", // 40px
-    opacity: 0.9,
-    maxWidth: "43.75rem", // 700px
   };
 
   const windowProductsData = await strapiFetch("products", {
@@ -100,11 +70,12 @@ const HomePage = async ({
           sizes="(max-width: 768px) 100vw"
         />
 
-        <div style={overlayStyle}></div>
-        <div style={heroContentStyle}>
-          <h1 style={heroTitleStyle}>{dict.hero.title}</h1>
-          <p style={heroSubtitleStyle}>{dict.hero.subtitle}</p>
-        </div>
+        <div style={overlayStyle} />
+
+        <HomeHeroContent
+          title={dict.hero.title}
+          subtitle={dict.hero.subtitle}
+        />
       </section>
 
       <ProductCarousel
@@ -120,7 +91,7 @@ const HomePage = async ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "5rem 3.75rem",
+          padding: "5rem 1.50rem",
           color: "#fff",
           backgroundImage: "url('/paralax-bg.jpg')",
           backgroundAttachment: "fixed",

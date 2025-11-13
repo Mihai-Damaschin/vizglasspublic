@@ -16,9 +16,7 @@ const GalleryPage = async ({
     populate: "*",
     locale,
   });
-
-  const dict = getDictionary(locale)
-
+  const dict = await getDictionary(locale);
   const media = galleryData?.data[0];
 
   const containerStyle: CSSProperties = {
@@ -30,7 +28,7 @@ const GalleryPage = async ({
   const contentStyle: CSSProperties = {
     maxWidth: "1400px",
     margin: "0 auto",
-    padding: "60px 0 100px",
+    padding: "60px 20px 100px",
   };
 
   return (

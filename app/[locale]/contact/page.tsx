@@ -46,7 +46,7 @@ const ContactPage = async ({
 
   const containerStyle: CSSProperties = {
     minHeight: "100vh",
-    paddingTop: "94px",
+    paddingTop: "90px",
     background: colors.background.light,
   };
 
