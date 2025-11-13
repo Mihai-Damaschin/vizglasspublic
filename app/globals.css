@@ -96,6 +96,37 @@ a {
   }
 }
 
+.accessory-box {
+  @media (max-width: 767px) {
+    gap: 2rem !important;
+    flex-direction: column !important;
+  }
+}
+
+.accessory-text-box {
+  width: 500px;
+  @media (max-width: 991px) {
+    width: 300px;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.accessory-image {
+  @media (max-width: 576px) {
+    width: 300px !important;
+    height: 300px !important;
+  }
+}
+
+.glasses-image {
+  @media (max-width: 576px) {
+    width: 300px !important;
+    height: 400px !important;
+  }
+}
+
 @media screen and (max-width: 1600px) {
   html {
     font-size: 1vw;
