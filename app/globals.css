@@ -198,6 +198,27 @@ a {
   }
 }
 
+.case-studies-content {
+  @media (max-width: 767px) {
+    padding: 40px 20px !important;
+  }
+}
+
+.contact-box {
+  flex-direction: row;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.country-box {
+  min-width: 350px;
+
+  @media (max-width: 576px) {
+    min-width: 100%;
+  }
+}
+
 @media screen and (max-width: 1600px) {
   html {
     font-size: 1vw;
