@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Providers } from "@/app/providers";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { cookies } from "next/headers";
 import { Inter } from "next/font/google";
 import { locales } from "@/lib/constants";
@@ -29,9 +28,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${inter.variable} antialiased`}>
-        <AntdRegistry>
-          <Providers>{children}</Providers>
-        </AntdRegistry>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
