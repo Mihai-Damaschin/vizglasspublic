@@ -127,6 +127,77 @@ a {
   }
 }
 
+.product-details {
+  padding: 80px 60px;
+
+  @media (max-width: 767px) {
+    padding: 40px 20px;
+  }
+}
+
+.features-grid {
+  grid-template-columns: repeat(auto-fit, minmax(21.875rem, 1fr)); /* 350px*/
+
+  @media (max-width: 991px) {
+    grid-template-columns: repeat(2, minmax(18.75rem, 1fr));
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr)); /* 300px*/
+  }
+}
+
+.feature-card {
+  padding: 2.5rem; /*40px*/
+
+  @media (max-width: 767px) {
+    padding: 1.25rem;
+  }
+}
+
+.gallery-box {
+  grid-template-columns: repeat(auto-fit, minmax(21.875rem, 1fr)); /* 350px*/
+
+  @media (max-width: 991px) {
+    grid-template-columns: repeat(2, minmax(18.75rem, 1fr));
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr)); /* 300px*/
+  }
+}
+
+.specifications-grid {
+  padding: 3.125rem;
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr)); /* 250px*/
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    padding: 3.125rem 1.25rem;
+  }
+}
+
+.accessories-button-left {
+  left: -3.8rem;
+  @media (max-width: 767px) {
+    left: 0.75rem;
+  }
+}
+
+.accessories-button-right {
+  right: -3.8rem;
+  @media (max-width: 767px) {
+    right: 0.75rem;
+  }
+}
+
+.hero-content {
+  @media (max-width: 767px) {
+    max-width: 100% !important;
+    padding: 0 20px;
+  }
+}
+
 @media screen and (max-width: 1600px) {
   html {
     font-size: 1vw;
