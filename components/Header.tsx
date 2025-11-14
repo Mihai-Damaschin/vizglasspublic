@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { CSSProperties, useState, useEffect } from "react";
 import Image from "next/image";
-import { Dropdown, MenuProps, Drawer, Menu, theme } from "antd";
-import { useStyleRegister } from "@ant-design/cssinjs";
+import { Dropdown, MenuProps, Drawer, Menu } from "antd";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -11,7 +10,6 @@ import { strapiQueries } from "@/services/strapi";
 import { colors } from "@/lib/colors";
 import { locales } from "@/lib/constants";
 
-const { useToken } = theme;
 const HEADER_OFFSET = 90;
 
 interface IHeader {
@@ -21,8 +19,8 @@ interface IHeader {
 const Header = ({ dict }: IHeader) => {
   const pathname = usePathname();
   const { locale = "en" } = useParams();
-  const { token, theme } = useToken();
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
   const handleCloseMobileMenu = () => setIsOpenMobileMenu(false);
 
@@ -57,86 +55,71 @@ const Header = ({ dict }: IHeader) => {
     }),
   );
 
-  const wrapSSR = useStyleRegister({ theme, token, path: ["Header"] }, () => ({
-    header: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 1000,
-      background: colors.background.overlay,
-      backdropFilter: "blur(10px)",
-      boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-      transition: "all 0.3s ease",
-      padding: "20px 60px",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      "@media (max-width: 767px)": {
-        padding: "20px 20px",
-      },
-    },
-    ".logo": {
-      height: "50px",
-      cursor: "pointer",
-      display: "block",
-    },
-    nav: {
-      display: "flex",
-      gap: "40px",
-      alignItems: "center",
-      "@media (max-width: 767px)": {
-        display: "none",
-      },
-    },
-    ".nav-link": {
-      color: colors.text.primary,
-      fontSize: "16px",
-      fontWeight: 500,
-      textDecoration: "none",
-      cursor: "pointer",
-      transition: "color 0.3s ease",
-    },
-    ".nav-link.active": {
-      color: colors.primary,
-    },
-    ".lang-switcher": {
-      display: "flex",
-      gap: "24px",
-      alignItems: "center",
-      cursor: "pointer",
-      "@media (max-width: 767px)": { gap: "16px" },
-    },
-    ".lang-image": {
-      borderRadius: "100%",
-      display: "block",
-    },
-    // Mobile hamburger styles
-    ".hamburger-container": {
-      display: "none",
-      cursor: "pointer",
-      alignItems: "center",
-      justifyContent: "center",
-      "@media (max-width: 767px)": {
-        display: "flex",
-      },
-    },
-    ".hamburger-icon": {
-      position: "relative",
-      height: 18,
-      width: 24,
-      transition: "transform 300ms ease-in-out",
-    },
-    ".hamburger-bar": {
-      position: "absolute",
-      left: 0,
-      height: 1.5,
-      width: "100%",
-      borderRadius: 4,
-      background: "#ffffff",
-      transition: "all 300ms ease-in-out",
-    },
-  }));
+  const headerStyle: CSSProperties = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    background: colors.background.overlay,
+    backdropFilter: "blur(10px)",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+    transition: "all 0.3s ease",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  };
+
+  const logoStyle: CSSProperties = {
+    height: "50px",
+    cursor: "pointer",
+    display: "block",
+  };
+
+  const navStyle: CSSProperties = {
+    display: "flex",
+    gap: "40px",
+    alignItems: "center",
+  };
+
+  const linkStyle: CSSProperties = {
+    color: colors.text.primary,
+    fontSize: "16px",
+    fontWeight: 500,
+    textDecoration: "none",
+    cursor: "pointer",
+    transition: "color 0.3s ease",
+  };
+
+  const activeLinkStyle: CSSProperties = {
+    ...linkStyle,
+    color: colors.primary,
+  };
+
+  // Mobile hamburger styles
+  const hamburgerContainerStyle: CSSProperties = {
+    display: "flex",
+    cursor: "pointer",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const hamburgerIconStyle: CSSProperties = {
+    position: "relative",
+    height: 18,
+    width: 24,
+    transition: "transform 300ms ease-in-out",
+  };
+
+  const hamburgerBarBaseStyle: CSSProperties = {
+    position: "absolute",
+    left: 0,
+    height: 1.25,
+    width: "100%",
+    borderRadius: 4,
+    background: "#ffffff",
+    transition: "all 300ms ease-in-out",
+  };
 
   const getLinkIfExists = (link: string, name: string, slug?: string) =>
     !slug ? name : <Link href={link}>{name}</Link>;
@@ -225,22 +208,27 @@ const Header = ({ dict }: IHeader) => {
     },
   ];
 
-  return wrapSSR(
-    <header>
+  return (
+    <header style={headerStyle} className="header-section">
       <Link href={`/${locale}`} onClick={handleCloseMobileMenu}>
         <Image
           src="/viz-glass-logo.png"
           alt="VIZ GLASS"
-          className="logo"
+          style={logoStyle}
           width={50}
           height={50}
         />
       </Link>
-
-      <nav>
+      <nav style={navStyle} className={"hidden-mobile"}>
         <Link
           href={`/${locale}/about-us`}
-          className={`nav-link ${pathname === "/about-us" ? "active" : ""}`}
+          onMouseEnter={() => setHoveredKey("about")}
+          onMouseLeave={() => setHoveredKey(null)}
+          style={
+            pathname.startsWith(`/${locale}/about-us`) || hoveredKey === "about"
+              ? activeLinkStyle
+              : linkStyle
+          }
         >
           {dict.navigation.aboutUs}
         </Link>
@@ -252,9 +240,14 @@ const Header = ({ dict }: IHeader) => {
           placement="bottomRight"
         >
           <span
-            className={`nav-link ${
-              pathname.includes("/product") ? "active" : ""
-            }`}
+            onMouseEnter={() => setHoveredKey("products")}
+            onMouseLeave={() => setHoveredKey(null)}
+            style={
+              pathname.startsWith(`/${locale}/product`) ||
+              hoveredKey === "products"
+                ? activeLinkStyle
+                : linkStyle
+            }
           >
             {dict.navigation.products}
           </span>
@@ -262,80 +255,105 @@ const Header = ({ dict }: IHeader) => {
 
         <Link
           href={`/${locale}/case-studies`}
-          className={`nav-link ${pathname === "/case-studies" ? "active" : ""}`}
+          onMouseEnter={() => setHoveredKey("case-studies")}
+          onMouseLeave={() => setHoveredKey(null)}
+          style={
+            pathname.startsWith(`/${locale}/case-studies`) ||
+            hoveredKey === "case-studies"
+              ? activeLinkStyle
+              : linkStyle
+          }
         >
           {dict.navigation.caseStudies}
         </Link>
 
         <Link
           href={`/${locale}/gallery`}
-          className={`nav-link ${pathname === "/gallery" ? "active" : ""}`}
+          onMouseEnter={() => setHoveredKey("gallery")}
+          onMouseLeave={() => setHoveredKey(null)}
+          style={
+            pathname.startsWith(`/${locale}/gallery`) ||
+            hoveredKey === "gallery"
+              ? activeLinkStyle
+              : linkStyle
+          }
         >
           {dict.gallery}
         </Link>
 
         <Link
           href={`/${locale}/contact`}
-          className={`nav-link ${pathname === "/contact" ? "active" : ""}`}
+          onMouseEnter={() => setHoveredKey("contact")}
+          onMouseLeave={() => setHoveredKey(null)}
+          style={
+            pathname.startsWith(`/${locale}/contact`) ||
+            hoveredKey === "contact"
+              ? activeLinkStyle
+              : linkStyle
+          }
         >
           {dict.navigation.contact}
         </Link>
       </nav>
 
-      <div className="lang-switcher">
-        <Dropdown
-          menu={{
-            items: locales
-              .filter((i) => i !== locale)
-              .map((i) => ({
-                label: (
-                  <Link href={`/${i}`}>
-                    <Image
-                      src={`https://flagcdn.com/h40/${i === "en" ? "us" : i}.webp`}
-                      alt="flag"
-                      width={30}
-                      height={30}
-                      className="lang-image"
-                    />
-                  </Link>
-                ),
-                key: i,
-              })),
-          }}
-          placement="bottomRight"
-        >
-          <Image
-            src={`https://flagcdn.com/h40/${locale === "en" ? "us" : locale}.webp`}
-            alt="flag"
-            width={30}
-            height={30}
-            className="lang-image"
-          />
-        </Dropdown>
+      <div style={{ display: "flex", gap: "24px" }}>
+        <div style={{ cursor: "pointer" }}>
+          <Dropdown
+            menu={{
+              items: locales
+                .filter((i) => i !== locale)
+                .map((i) => ({
+                  label: (
+                    <Link href={`/${i}`}>
+                      <Image
+                        src={`https://flagcdn.com/h40/${i === "en" ? "us" : i}.webp`}
+                        alt="flag"
+                        width={30}
+                        height={30}
+                        style={{ borderRadius: "100%", display: "block" }}
+                      />
+                    </Link>
+                  ),
+                  key: i,
+                })),
+            }}
+            placement="bottomRight"
+          >
+            <div>
+              <Image
+                src={`https://flagcdn.com/h40/${locale === "en" ? "us" : locale}.webp`}
+                alt="flag"
+                width={30}
+                height={30}
+                style={{ borderRadius: "100%", display: "block" }}
+              />
+            </div>
+          </Dropdown>
+        </div>
 
-        <div className="hamburger-container">
+        <div style={hamburgerContainerStyle} className="hidden-desktop">
           <div
             onClick={() => setIsOpenMobileMenu((prev) => !prev)}
-            className="hamburger-icon"
+            style={hamburgerIconStyle}
           >
             <span
-              className="hamburger-bar"
               style={{
+                ...hamburgerBarBaseStyle,
                 top: isOpenMobileMenu ? 9 : 3,
                 transform: isOpenMobileMenu ? "rotate(135deg)" : "rotate(0)",
               }}
             />
             <span
-              className="hamburger-bar"
               style={{
+                ...hamburgerBarBaseStyle,
                 top: 9,
                 left: isOpenMobileMenu ? -50 : 0,
                 opacity: isOpenMobileMenu ? 0 : 1,
               }}
             />
             <span
-              className="hamburger-bar"
               style={{
+                ...hamburgerBarBaseStyle,
                 top: isOpenMobileMenu ? 9 : 15,
                 transform: isOpenMobileMenu ? "rotate(-135deg)" : "rotate(0)",
               }}
@@ -350,6 +368,7 @@ const Header = ({ dict }: IHeader) => {
         title={null}
         closable={false}
         destroyOnHidden={true}
+        className="hidden-desktop"
         styles={{
           content: {
             marginTop: HEADER_OFFSET,
@@ -373,7 +392,7 @@ const Header = ({ dict }: IHeader) => {
           onClick={handleCloseMobileMenu}
         />
       </Drawer>
-    </header>,
+    </header>
   );
 };
 

@@ -1,13 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { CSSProperties, useRef } from "react";
 import Image from "next/image";
-import { useStyleRegister } from "@ant-design/cssinjs";
-import { theme } from "antd";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { colors } from "@/lib/colors";
-
-const { useToken } = theme;
 
 interface Product {
   id: string;
@@ -27,7 +23,6 @@ export const AccessoriesCarousel = ({
   title,
 }: IAccessoriesCarousel) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const { token, theme } = useToken();
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -42,97 +37,63 @@ export const AccessoriesCarousel = ({
       });
     }
   };
+  const containerStyle: CSSProperties = {
+    padding: "5rem 0", // 80px 60px
+  };
 
-  const wrapSSR = useStyleRegister(
-    { theme, token, path: ["AccessoriesCarousel"] },
-    () => ({
-      ".accessories-wrapper": {
-        padding: "5rem 0", // 80px
-      },
-      ".accessories-title": {
-        fontSize: "2.625rem", // 42px
-        fontWeight: 700,
-        color: colors.text.dark,
-        marginBottom: "3.125rem", // 50px
-        textAlign: "center",
-      },
-      ".accessories-container": {
-        position: "relative",
-        maxWidth: "87.5rem", // 1400px
-        margin: "0 auto",
-      },
-      ".accessories-scroll": {
-        display: "flex",
-        gap: "1.25rem", // 20px
-        overflowX: "auto",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-        padding: "0.625rem 1rem 1.875rem 1rem", // 10px 0 30px 0
-        transform: "translate(-1rem)",
-        width: "calc(100% + 1rem)",
-      },
-      ".accessories-item": {
-        background: colors.light,
-        borderRadius: "0.75rem", // 12px
-        overflow: "hidden",
-        boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
-        transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        cursor: "pointer",
-        flexShrink: 0,
-        position: "relative",
-        width: "20rem",
-        height: "20rem",
-      },
-      ".accessories-item-name": {
-        padding: "0.5rem",
-        position: "absolute",
-        top: "0.5rem",
-        right: "0.5rem",
-        backgroundColor: colors.primary,
-        borderRadius: "0.75rem",
-        color: colors.light,
-        fontWeight: "bold",
-      },
-      ".accessories-button": {
-        zIndex: 10,
-        background: colors.primary,
-        border: "none",
-        borderRadius: "50%",
-        width: "3.125rem", // 50px
-        height: "3.125rem", // 50px
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer",
-        color: colors.light,
-        fontSize: "1.25rem", // 20px
-        boxShadow: "0 0.125rem 0.625rem rgba(0,0,0,0.2)", // 0 2px 10px
-        position: "absolute",
-        top: "50%",
-        transform: "translateY(-50%)",
-        "@media (max-width: 767px)": {
-          bottom: "0.75rem",
-        },
-      },
-      ".accessories-button-left": {
-        left: "-3.8rem",
-        "@media (max-width: 767px)": { left: "0.75rem" },
-      },
-      ".accessories-button-right": {
-        right: "-3.8rem",
-        "@media (max-width: 767px)": { right: "0.75rem" },
-      },
-    }),
-  );
+  const titleStyle: CSSProperties = {
+    fontSize: "2.625rem", // 42px
+    fontWeight: 700,
+    color: colors.text.dark,
+    marginBottom: "3.125rem", // 50px
+    textAlign: "center",
+  };
+
+  const carouselContainerStyle: CSSProperties = {
+    position: "relative",
+    maxWidth: "87.5rem", // 1400px
+    margin: "0 auto",
+  };
+
+  const scrollContainerStyle: CSSProperties = {
+    display: "flex",
+    gap: "1.25rem",
+    overflowX: "auto",
+    scrollbarWidth: "none",
+    msOverflowStyle: "none",
+    padding: "0.625rem 1rem 1.875rem 1rem",
+    transform: "translate(-1rem)",
+    width: "calc(100% + 1rem)",
+  };
+
+  const buttonStyle: CSSProperties = {
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 10,
+    background: colors.primary,
+    border: "none",
+    borderRadius: "50%",
+    width: "3.125rem", // 50px
+    height: "3.125rem", // 50px
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    color: colors.light,
+    fontSize: "1.25rem", // 20px
+    boxShadow: "0 0.125rem 0.625rem rgba(0,0,0,0.2)", // 0 2px 10px
+  };
 
   if (!accessories?.length) return null;
 
-  return wrapSSR(
-    <div className="accessories-wrapper">
-      <h2 className="accessories-title">{title}</h2>
-      <div className="accessories-container">
+  return (
+    <div style={containerStyle}>
+      <h2 style={titleStyle}>{title}</h2>
+      <div style={carouselContainerStyle}>
         <button
-          className="accessories-button accessories-button-left"
+          style={buttonStyle}
+          className="accessories-button-left"
           onClick={() => scroll("left")}
         >
           <ArrowLeftOutlined />
@@ -140,10 +101,26 @@ export const AccessoriesCarousel = ({
 
         <div
           ref={scrollContainerRef}
-          className="accessories-scroll hide-scrollbar"
+          style={scrollContainerStyle}
+          className="hide-scrollbar"
         >
           {accessories.map((accessory) => (
-            <div className="accessories-item" key={accessory.id}>
+            <div
+              style={{
+                background: colors.light,
+                borderRadius: "0.75rem", // 12px
+                overflow: "hidden",
+                boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                cursor: "pointer",
+                flexShrink: 0,
+                position: "relative",
+                width: "20rem",
+                height: "20rem",
+              }}
+              key={accessory.id}
+              className="vcard"
+            >
               <Image
                 src={
                   accessory.cover_photo?.url
@@ -152,23 +129,42 @@ export const AccessoriesCarousel = ({
                     : "/viz-glass-logo.png"
                 }
                 alt={accessory.name}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
                 width={350}
                 height={300}
               />
 
-              <div className="accessories-item-name">{accessory.name}</div>
+              <div
+                style={{
+                  padding: "0.5rem", // 30px
+                  position: "absolute",
+                  top: "0.5rem",
+                  right: "0.5rem",
+                  backgroundColor: colors.primary,
+                  borderRadius: "0.75rem",
+                  color: colors.light,
+                  fontWeight: "bold",
+                }}
+              >
+                {accessory.name}
+              </div>
             </div>
           ))}
         </div>
 
         <button
-          className="accessories-button accessories-button-right"
+          style={buttonStyle}
+          className="accessories-button-right"
           onClick={() => scroll("right")}
         >
           <ArrowRightOutlined />
         </button>
       </div>
-    </div>,
+    </div>
   );
 };
