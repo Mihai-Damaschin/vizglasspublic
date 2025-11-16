@@ -50,7 +50,7 @@ const Header = ({ dict }: IHeader) => {
           },
         },
       },
-      sort: "createdAt:asc",
+      sort: "order:asc",
       locale,
     }),
   );
