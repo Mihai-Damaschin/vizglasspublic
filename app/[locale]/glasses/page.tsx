@@ -1,12 +1,18 @@
 import { strapiFetch } from "@/lib/requests";
-import { CSSProperties } from "react";
 import { colors } from "@/lib/colors";
 import { getStrapiImageLink } from "@/lib/links";
 import { TLocales } from "@/lib/constants";
 import GlassesItem from "@/components/GlassesItem";
+import { getDictionary } from "@/app/[locale]/dictionaries";
 
-const GlassesPage = async ({ params }: { params: Promise<{ locale: TLocales }> }) => {
+const GlassesPage = async ({
+  params,
+}: {
+  params: Promise<{ locale: TLocales }>;
+}) => {
   const { locale } = await params;
+
+  const dict = await getDictionary(locale);
 
   const doorProductsData = await strapiFetch("accessories", {
     populate: "*",
@@ -14,47 +20,29 @@ const GlassesPage = async ({ params }: { params: Promise<{ locale: TLocales }> }
     filters: {
       type: "glass",
     },
-    locale
+    locale,
   });
 
-  const containerStyle: CSSProperties = {
-    minHeight: "100vh",
-    paddingTop: "100px",
-  };
-
-  const contentStyle: CSSProperties = {
-    maxWidth: "1400px",
-    margin: "0 auto",
-    padding: "60px 20px 100px",
-  };
-
-  const sectionTitleStyle: CSSProperties = {
-    fontSize: "2.625rem",
-    fontWeight: 700,
-    // color: titleColor,
-    marginBottom: "3.125rem",
-    textAlign: "center",
-  };
-
-  const subtitleStyle: CSSProperties = {
-    fontSize: "20px",
-    color: colors.text.dark,
-    opacity: 0.7,
-    margin: "0 auto 60px",
-    textAlign: "center",
-    width: "70%",
-  };
-
   return (
-    <div style={containerStyle}>
-      <div style={contentStyle}>
+    <div className="min-h-screen pt-[100px]">
+      <div className="max-w-[88.5rem] mx-auto px-[20px] pt-[60px] pb-[100px]">
         <div>
-          <h2 style={sectionTitleStyle}>Glasses</h2>
+          <h2 className="text-[2.625rem] font-bold mb-[3.125rem] text-center">
+            {dict.glasses}
+          </h2>
 
-          <p style={subtitleStyle}>
-            This page demonstrates dynamically rendered content from a CMS,
-            featuring alternating layouts for each section to create visual
-            interest and improve readability.
+          <p
+            className={`
+            text-lg md:text-[20px]
+            text-[${colors.text.dark}]
+            opacity-70
+            mx-auto
+            mb-30 md:mb-[60px]
+            text-center
+            w-full md:w-[70%]
+          `}
+          >
+            {dict.dynamicPageDescription}
           </p>
         </div>
 

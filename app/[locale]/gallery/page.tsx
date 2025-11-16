@@ -26,7 +26,7 @@ const GalleryPage = async ({
   };
 
   const contentStyle: CSSProperties = {
-    maxWidth: "1400px",
+    maxWidth: '88.5rem',
     margin: "0 auto",
     padding: "60px 20px 100px",
   };

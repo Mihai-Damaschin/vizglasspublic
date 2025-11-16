@@ -11,7 +11,11 @@ type Props = {
 export const CaseStudiesItem = ({ caseStudy, dict }: Props) => {
   return (
     <div
-      style={{ maxWidth: 1400, margin: "0 auto", padding: "60px 60px 100px" }}
+      style={{
+        maxWidth: "88.5rem",
+        margin: "0 auto",
+        padding: "60px 60px 100px",
+      }}
       className="case-studies-content"
     >
       <h1

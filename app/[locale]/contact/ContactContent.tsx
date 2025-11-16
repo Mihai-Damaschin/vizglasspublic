@@ -20,13 +20,12 @@ export const ContactContent = ({ dict, countries }: IContactContent) => {
     width: "100%",
     height: "500px",
     position: "relative",
-    marginBottom: "60px",
   };
 
   const contentStyle: CSSProperties = {
-    maxWidth: "1400px",
+    maxWidth: "88.5rem",
     margin: "0 auto",
-    padding: "60px 20px 100px",
+    padding: "60px 0 100px",
   };
 
   const titleStyle: CSSProperties = {
@@ -49,7 +48,6 @@ export const ContactContent = ({ dict, countries }: IContactContent) => {
     display: "flex",
     flexWrap: "wrap",
     gap: "30px",
-    marginBottom: "60px",
   };
 
   const countryCardStyle: CSSProperties = {
@@ -90,62 +88,86 @@ export const ContactContent = ({ dict, countries }: IContactContent) => {
 
   return (
     <>
-      <div style={mapContainerStyle}>
+      {/* MAP CONTAINER */}
+      <div className="w-full h-[500px] relative">
         <iframe
           src={url}
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
+          className="w-full h-full border-0"
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
 
-      <div style={contentStyle}>
-        <h1 style={titleStyle}>{dict.contact.title}</h1>
-        <p style={subtitleStyle}>{dict.contact.subtitle}</p>
+      {/* CONTENT WRAPPER */}
+      <div className="max-w-[88.5rem] mx-auto py-[60px] pb-[100px]">
+        {/* TITLE */}
+        <h1 className="text-[48px] font-bold text-[var(--text-dark)] mb-5 text-center">
+          {dict.contact.title}
+        </h1>
 
-        {/* Country Cards */}
-        <div style={cardsContainerStyle} className={"contact-box"}>
+        {/* SUBTITLE */}
+        <p className="text-[20px] text-[var(--text-dark)] opacity-70 mb-[60px] text-center">
+          {dict.contact.subtitle}
+        </p>
+
+        {/* CARDS CONTAINER */}
+        <div className="flex flex-col lg:flex-row flex-wrap gap-[30px]">
           {countries.map((country) => (
             <div
               key={country.lat}
-              style={countryCardStyle}
-              className={"country-card"}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-5px)";
-                e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.15)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
-              }}
+              className="
+              bg-[var(--light)]
+              p-10
+              rounded-[12px]
+              shadow-[0_4px_20px_rgba(0,0,0,0.1)]
+              transition-all duration-300
+              cursor-pointer flex-1
+              hover:-translate-y-[5px]
+              hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)]
+            "
               onClick={() => setUrl(country.mapUrl)}
             >
-              <h3 style={countryTitleStyle}>
-                <EnvironmentOutlined /> {country.name}
+              {/* COUNTRY TITLE */}
+              <h3 className="text-[28px] font-bold text-[var(--color-primary)] mb-[25px] flex items-center gap-[10px]">
+                <EnvironmentOutlined />
+                {country.name}
               </h3>
-              <div style={infoRowStyle}>
-                <EnvironmentOutlined style={iconStyle} />
+
+              {/* ADDRESS */}
+              <div className="flex items-start gap-3 mb-[18px] text-[16px]  leading-[1.6]">
+                <EnvironmentOutlined
+                  className="text-[20px] mt-[2px]"
+                  style={{ color: "var(--color-primary)" }}
+                />
                 <span>{country.address}</span>
               </div>
+
+              {/* PHONES */}
               {country.phone.map((phone: string) => (
-                <div style={infoRowStyle} key={phone}>
-                  <PhoneOutlined style={iconStyle} />
+                <div
+                  key={phone}
+                  className="flex items-start gap-3 mb-[18px] text-[16px] leading-[1.6]"
+                >
+                  <PhoneOutlined
+                    className="text-[20px] mt-[2px]"
+                    style={{ color: "var(--color-primary)" }}
+                  />
                   <a
                     href={`tel:${phone}`}
-                    style={{
-                      color: colors.text.dark,
-                      textDecoration: "none",
-                    }}
+                    className="text-[var(--text-dark)] no-underline"
                   >
                     {phone}
                   </a>
                 </div>
               ))}
-              <div style={infoRowStyle}>
-                <ClockCircleOutlined style={iconStyle} />
+
+              {/* HOURS */}
+              <div className="flex items-start gap-3 mb-[18px] text-[16px]  leading-[1.6]">
+                <ClockCircleOutlined
+                  className="text-[20px] mt-[2px]"
+                  style={{ color: "var(--color-primary)" }}
+                />
                 <span>{country.hours}</span>
               </div>
             </div>

@@ -110,5 +110,9 @@
   "contact": {
     "title": "Contattaci",
     "subtitle": "Siamo qui per aiutarti in diverse sedi"
-  }
+  },
+  "relatedProducts": "Prodotti correlati",
+  "clickToView": "Clicca per visualizzare",
+  "dynamicPageDescription": "Questa pagina mostra contenuti generati dinamicamente da un CMS, con layout alternati per ogni sezione per creare interesse visivo e migliorare la leggibilità.",
+  "glasses": "Vetri"
 }

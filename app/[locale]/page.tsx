@@ -61,16 +61,17 @@ const HomePage = async ({
 
   return (
     <>
-      <section style={heroStyle}>
+      <section className="relative h-screen overflow-hidden pt-[90px]">
         <Image
           src="/viz-glass-hero.jpg"
           width={1920}
           height={1000}
           alt={dict.hero.alt}
           sizes="(max-width: 768px) 100vw"
+          className="w-full h-full object-cover"
         />
 
-        <div style={overlayStyle} />
+        <div className="absolute inset-0 bg-[rgba(26,26,26,0.3)]" />
 
         <HomeHeroContent
           title={dict.hero.title}
@@ -85,38 +86,10 @@ const HomePage = async ({
 
       <WhyChooseUs dict={dict} />
 
-      <section
-        style={{
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "5rem 1.50rem",
-          color: "#fff",
-          backgroundImage: "url('/paralax-bg.jpg')",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.55)",
-            zIndex: 0,
-          }}
-        />
+      <section className="relative flex items-center justify-center py-20 px-6 text-white bg-[url('/paralax-bg.jpg')] bg-fixed bg-center bg-no-repeat bg-cover">
+        <div className="absolute inset-0 bg-black/55 z-0" />
 
-        <div
-          style={{
-            position: "relative",
-            zIndex: 1,
-            width: "100%",
-            textAlign: "center",
-          }}
-        >
+        <div className="relative z-10 w-full text-center">
           <CaseStudies
             caseStudies={caseStudiesData?.data}
             title={dict.caseStudies}

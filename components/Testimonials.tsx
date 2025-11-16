@@ -10,74 +10,45 @@ interface ITestimonials {
 
 export const Testimonials = ({ dict }: ITestimonials) => {
   return (
-    <section
-      style={{
-        paddingTop: "4rem",
-        paddingBottom: "6rem",
-        background: "var(--background)",
-      }}
-    >
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}>
-        <div style={{ margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <h2
-              style={{
-                fontSize: "2rem",
-                fontWeight: 700,
-                color: "var(--foreground)",
-                marginBottom: "1rem",
-              }}
-            >
+    <section className="pt-16 pb-24 bg-[var(--background)]">
+      <div className="max-w-[88.5rem] mx-auto px-4">
+        <div className="mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-[2.625rem] font-bold text-[var(--foreground)] mb-4">
               {dict.testimonials.title}
             </h2>
             <p
-              style={{
-                fontSize: "1.125rem",
-                color: colors.primary,
-                opacity: 0.8,
-              }}
+              className="text-lg"
+              style={{ color: colors.primary, opacity: 0.8 }}
             >
               {dict.testimonials.subtitle}
             </p>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              gap: "1.5rem",
-            }}
-            className="testimonials-card"
-          >
+          <div className="flex flex-col md:flex-row gap-6">
             {dict.testimonials.items.map((testimonial: any, index: number) => (
               <Card
                 key={index}
-                style={{
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-                  borderRadius: "12px",
-                  background: "var(--card)",
-                  position: "relative",
-                  transition: "box-shadow 0.3s, transform 0.3s",
-                  fontSize: "1rem",
-                  flex: 1,
-                }}
+                className="
+              relative flex-1 rounded-xl bg-[var(--card)]
+              shadow-md transition-all duration-300
+              text-base
+            "
               >
+                {/* Quote Icon */}
                 <svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="
+                w-10 h-10 absolute top-4 right-4
+              "
                   style={{
-                    width: "2.5rem",
-                    height: "2.5rem",
                     color: "rgba(var(--primary),0.2)",
-                    position: "absolute",
-                    top: "1rem",
-                    right: "1rem",
-                    // fill: colors.secondary,
                     stroke: colors.primary,
                   }}
                 >
@@ -85,45 +56,28 @@ export const Testimonials = ({ dict }: ITestimonials) => {
                   <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path>
                 </svg>
 
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "0.75rem",
-                    marginBottom: "1rem",
-                  }}
-                >
+                {/* Rating */}
+                <div className="flex gap-3 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <StarFilled
                       key={i}
-                      style={{ fontSize: "1.25rem", color: colors.secondary }}
+                      className="text-xl"
+                      style={{ color: colors.secondary }}
                     />
                   ))}
                 </div>
 
-                <p
-                  style={{
-                    color: "var(--muted-foreground)",
-                    marginBottom: "1.5rem",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  &#34;{testimonial.text}&#34;
+                {/* Review Text */}
+                <p className="text-[var(--muted-foreground)] mb-6 leading-relaxed">
+                  “{testimonial.text}”
                 </p>
-                <div
-                  style={{
-                    borderTop: "1px solid rgba(255,255,255,0.1)",
-                    paddingTop: "1rem",
-                  }}
-                >
-                  <p style={{ fontWeight: 600, color: "var(--foreground)" }}>
+
+                {/* Name + Location */}
+                <div className="border-t border-white/10 pt-4">
+                  <p className="font-semibold text-[var(--foreground)]">
                     {testimonial.name}
                   </p>
-                  <p
-                    style={{
-                      fontSize: "0.875rem",
-                      color: "var(--muted-foreground)",
-                    }}
-                  >
+                  <p className="text-sm text-[var(--muted-foreground)]">
                     {testimonial.location}
                   </p>
                 </div>

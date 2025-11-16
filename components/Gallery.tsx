@@ -57,25 +57,24 @@ export const Gallery = ({
         }}
       >
         <div
-          className="gallery gallery-box"
+          className="gallery flex flex-wrap gap-8"
           style={{
-            display: "grid",
-            gap: "1.5625rem", // 25px
             marginBottom: "5rem", // 80px
           }}
         >
           {media.map((image, index) => (
             <div
               key={index}
-              style={{
-                borderRadius: "1rem", // 16px
-                overflow: "hidden",
-                cursor: "pointer",
-                boxShadow: "0 0.375rem 1.5625rem rgba(0,0,0,0.12)", // 0 6px 25px
-                transition: "all 0.3s ease",
-                height: "20rem",
-                position: "relative",
-              }}
+              className="
+    rounded-2xl
+    overflow-hidden
+    cursor-pointer
+    shadow-[0_6px_25px_rgba(0,0,0,0.12)]
+    transition-all duration-300 ease-in-out
+    h-[16rem] md:h-80
+    relative
+    w-full sm:w-[calc(50%-1.125rem)] md:w-[calc(33%-1.125rem)]
+  "
             >
               {image.url.endsWith("mp4") ? (
                 <VideoCell
@@ -85,15 +84,10 @@ export const Gallery = ({
                 />
               ) : (
                 <Image
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
+                  className="w-full !h-full object-cover block"
                   src={getStrapiImageLink(image.url)}
                   alt={image.name}
-                  preview={{ mask: "Click to View" }}
+                  preview={{ mask: dict.clickToView }}
                   onClick={() => setCurrentVisible(index)}
                 />
               )}
@@ -109,9 +103,10 @@ interface IVideoCell {
   index: number;
   image: TMedia;
   setCurrentVisible: (index: number) => void;
+  dict: any;
 }
 
-const VideoCell = ({ index, image, setCurrentVisible }: IVideoCell) => {
+const VideoCell = ({ index, image, setCurrentVisible, dict }: IVideoCell) => {
   return (
     <div className="ant-image" style={{ position: "relative" }} key={index}>
       <div
@@ -127,8 +122,9 @@ const VideoCell = ({ index, image, setCurrentVisible }: IVideoCell) => {
         className="ant-image-mask video-mask"
         onClick={() => setCurrentVisible(index)}
       >
-        Click to View
+        {dict.clickToView}
       </div>
+
       <PlayCircleOutlined
         style={{
           fontSize: "3.125rem", // 50px
@@ -141,6 +137,7 @@ const VideoCell = ({ index, image, setCurrentVisible }: IVideoCell) => {
           textShadow: "0 0 6px rgba(0, 0, 0, 0.5)",
         }}
       />
+
       <video
         style={{
           width: "100%",

@@ -19,25 +19,14 @@ const GlassesItem = ({
 }: GlassesItemProps) => (
   <div>
     <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "5rem",
-        flexDirection: isEven ? "row" : "row-reverse",
-      }}
-      className={`accessory-box `}
+      className={`
+      flex items-center justify-center gap-[5rem]
+        ${isEven ? "flex-col-reverse md:flex-row" : "flex-col-reverse md:flex-row-reverse"}`}
     >
-      <div className="accessory-text-box">
-        <h3 style={{ fontSize: "18px", marginBottom: "0.5rem" }}>{name}</h3>
-        <p
-          style={{
-            fontSize: "14px",
-            textAlign: "justify",
-            opacity: 0.6,
-            whiteSpace: "pre-line",
-          }}
-        >
+      <div className="w-[90%] md:w-[30rem]">
+        <h3 className="text-2xl md:text-[18px] mb-2">{name}</h3>
+
+        <p className="text-base md:text-[14px] text-justify opacity-60 whitespace-pre-line">
           {description}
         </p>
       </div>
@@ -47,21 +36,11 @@ const GlassesItem = ({
         alt={name}
         width={400}
         height={600}
-        style={{ borderRadius: "1rem", objectFit: "cover" }}
-        className="glasses-image"
+        className="rounded-2xl object-cover glasses-image"
       />
     </div>
 
-    {showDivider && (
-      <div
-        style={{
-          height: 1,
-          backgroundColor: "gray",
-          opacity: 0.2,
-          margin: "5rem",
-        }}
-      />
-    )}
+    {showDivider && <div className="h-px bg-gray-500 opacity-20 my-[5rem]" />}
   </div>
 );
 

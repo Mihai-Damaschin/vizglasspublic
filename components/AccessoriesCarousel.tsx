@@ -51,7 +51,7 @@ export const AccessoriesCarousel = ({
 
   const carouselContainerStyle: CSSProperties = {
     position: "relative",
-    maxWidth: "87.5rem", // 1400px
+    maxWidth: "88.5rem", // 1400px
     margin: "0 auto",
   };
 
@@ -93,7 +93,9 @@ export const AccessoriesCarousel = ({
       <div style={carouselContainerStyle}>
         <button
           style={buttonStyle}
-          className="accessories-button-left"
+          className="absolute top-1/2 z-10
+            rounded-full w-[3.125rem] h-[3.125rem]
+            shadow-[0_2px_10px_rgba(0,0,0,0.2)] left-1 md:-left-[3.8rem]"
           onClick={() => scroll("left")}
         >
           <ArrowLeftOutlined />
@@ -115,11 +117,10 @@ export const AccessoriesCarousel = ({
                 cursor: "pointer",
                 flexShrink: 0,
                 position: "relative",
-                width: "20rem",
-                height: "20rem",
+                width: "22rem",
+                height: "22rem",
               }}
               key={accessory.id}
-              className="vcard"
             >
               <Image
                 src={
@@ -159,7 +160,10 @@ export const AccessoriesCarousel = ({
 
         <button
           style={buttonStyle}
-          className="accessories-button-right"
+          className="absolute top-1/2 z-10
+            rounded-full w-[3.125rem] h-[3.125rem]
+            flex items-center justify-center
+            shadow-[0_2px_10px_rgba(0,0,0,0.2)] right-1 md:-right-[3.8rem]"
           onClick={() => scroll("right")}
         >
           <ArrowRightOutlined />

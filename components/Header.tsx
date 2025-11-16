@@ -77,7 +77,6 @@ const Header = ({ dict }: IHeader) => {
   };
 
   const navStyle: CSSProperties = {
-    display: "flex",
     gap: "40px",
     alignItems: "center",
   };
@@ -96,9 +95,7 @@ const Header = ({ dict }: IHeader) => {
     color: colors.primary,
   };
 
-  // Mobile hamburger styles
   const hamburgerContainerStyle: CSSProperties = {
-    display: "flex",
     cursor: "pointer",
     alignItems: "center",
     justifyContent: "center",
@@ -141,19 +138,20 @@ const Header = ({ dict }: IHeader) => {
               product_category.slug,
             ),
             children: product_category.header_brands.length
-              ? product_category.header_brands.map((brand) => ({
-                  key: "" + productType.id + product_category.id + brand.id,
+              ? product_category.header_brands.map((header_brand) => ({
+                  key:
+                    "" + productType.id + product_category.id + header_brand.id,
                   label: getLinkIfExists(
-                    `/${locale}/brand/${brand?.slug}`,
-                    brand.name,
-                    brand.slug,
+                    `/${locale}/brand/${header_brand.brand?.slug}`,
+                    header_brand.name,
+                    header_brand.brand?.slug,
                   ),
-                  children: brand.products.map((product) => ({
+                  children: header_brand.products.map((product) => ({
                     key:
                       "" +
                       productType.id +
                       product_category.id +
-                      brand.id +
+                      header_brand.id +
                       product.id,
                     label: getLinkIfExists(
                       `/${locale}/product/${product?.slug}`,
@@ -209,7 +207,10 @@ const Header = ({ dict }: IHeader) => {
   ];
 
   return (
-    <header style={headerStyle} className="header-section">
+    <header
+      style={headerStyle}
+      className="px-[20px] py-[20px] md:py-[20px] md:px-[60px]"
+    >
       <Link href={`/${locale}`} onClick={handleCloseMobileMenu}>
         <Image
           src="/viz-glass-logo.png"
@@ -219,7 +220,8 @@ const Header = ({ dict }: IHeader) => {
           height={50}
         />
       </Link>
-      <nav style={navStyle} className={"hidden-mobile"}>
+
+      <nav style={navStyle} className="hidden md:flex">
         <Link
           href={`/${locale}/about-us`}
           onMouseEnter={() => setHoveredKey("about")}
@@ -308,9 +310,10 @@ const Header = ({ dict }: IHeader) => {
                       <Image
                         src={`https://flagcdn.com/h40/${i === "en" ? "us" : i}.webp`}
                         alt="flag"
-                        width={30}
-                        height={30}
+                        width={32}
+                        height={32}
                         style={{ borderRadius: "100%", display: "block" }}
+                        className="w-[32px] h-[32px] my-1"
                       />
                     </Link>
                   ),
@@ -323,15 +326,16 @@ const Header = ({ dict }: IHeader) => {
               <Image
                 src={`https://flagcdn.com/h40/${locale === "en" ? "us" : locale}.webp`}
                 alt="flag"
-                width={30}
-                height={30}
+                width={32}
+                height={32}
                 style={{ borderRadius: "100%", display: "block" }}
+                className="w-[32px] h-[32px]"
               />
             </div>
           </Dropdown>
         </div>
 
-        <div style={hamburgerContainerStyle} className="hidden-desktop">
+        <div style={hamburgerContainerStyle} className="flex md:hidden">
           <div
             onClick={() => setIsOpenMobileMenu((prev) => !prev)}
             style={hamburgerIconStyle}
@@ -361,6 +365,7 @@ const Header = ({ dict }: IHeader) => {
           </div>
         </div>
       </div>
+
       <Drawer
         open={isOpenMobileMenu}
         onClose={handleCloseMobileMenu}
@@ -368,7 +373,6 @@ const Header = ({ dict }: IHeader) => {
         title={null}
         closable={false}
         destroyOnHidden={true}
-        className="hidden-desktop"
         styles={{
           content: {
             marginTop: HEADER_OFFSET,

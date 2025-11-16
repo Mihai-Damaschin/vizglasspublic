@@ -14,40 +14,39 @@ export const Colors = ({ colors, dict }: IColors) => {
   return (
     <div>
       <h2
-        style={{
-          fontSize: "2.625rem", // 42px
-          fontWeight: 700,
-          color: $colors.text.dark,
-          marginBottom: "3.125rem", // 50px
-          textAlign: "center",
-        }}
+        className="
+      text-[2.625rem]        /* 42px */
+      font-bold
+      text-[var(--text-dark)]
+      mb-[3.125rem]          /* 50px */
+      text-center
+    "
       >
         {dict.colors}
       </h2>
 
       <div
-        style={{
-          display: "flex",
-          gap: "1rem",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
+        className="
+      flex
+      flex-wrap
+      justify-center
+      gap-8             /* 2rem */
+    "
       >
         {colors.map((color) => (
           <div
-            style={{
-              background: $colors.light,
-              borderRadius: "0.75rem", // 12px
-              overflow: "hidden",
-              boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              cursor: "pointer",
-              flexShrink: 0,
-              position: "relative",
-              width: "12rem",
-              height: "12rem",
-            }}
             key={color.id}
+            className="
+          bg-[var(--color-light)]
+          rounded-xl               /* 12px */
+          overflow-hidden
+          shadow-[0_4px_20px_rgba(0,0,0,0.1)]
+          transition-all duration-300 ease-in-out
+          cursor-pointer
+          relative
+          w-[calc(50%-1rem)] sm:w-48 h-48                /* 12rem */
+          shrink-0
+        "
           >
             <Image
               src={
@@ -56,26 +55,28 @@ export const Colors = ({ colors, dict }: IColors) => {
                   : "/viz-glass-logo.png"
               }
               alt={color.name}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
               width={350}
               height={300}
+              className="
+            w-full
+            h-full
+            object-cover
+            block
+          "
             />
+
             <div
-              style={{
-                padding: "0.5rem",
-                position: "absolute",
-                top: "0.5rem",
-                right: "0.5rem",
-                backgroundColor: $colors.primary,
-                borderRadius: "0.75rem",
-                color: $colors.light,
-                fontWeight: "bold",
-              }}
+              className="
+            absolute
+            top-2
+            right-2
+            px-2
+            py-1
+            rounded-xl
+            bg-[var(--color-primary)]
+            text-[var(--color-light)]
+            font-bold
+          "
             >
               {color.name}
             </div>

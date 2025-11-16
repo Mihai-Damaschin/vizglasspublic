@@ -110,5 +110,9 @@
   "contact": {
     "title": "Contactează-ne",
     "subtitle": "Suntem aici pentru a te ajuta în mai multe locații"
-  }
+  },
+  "relatedProducts": "Produse similare",
+  "clickToView": "Click pentru vizualizare",
+  "dynamicPageDescription": "Această pagină demonstrează conținut redat dinamic dintr-un CMS, cu layout-uri alternative pentru fiecare secțiune pentru a crea interes vizual și a îmbunătăți lizibilitatea.",
+  "glasses": "Sticlă"
 }

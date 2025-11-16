@@ -60,43 +60,19 @@ export const WhyChooseUs = ({ dict }) => {
   ];
 
   return (
-    <section
-      style={{
-        padding: "4rem 0 6rem",
-        backgroundColor: "#f9fafb",
-      }}
-    >
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}>
-        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <h2
-            style={{
-              fontSize: "2.625rem", // 42px
-              fontWeight: "700",
-              color: "#111827",
-              marginBottom: "1rem",
-            }}
-          >
+    <section className="py-16 md:py-24 bg-gray-50">
+      <div className="max-w-[88.5rem] mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-[2.625rem] font-bold text-gray-900 mb-4">
             {dict.whyChooseUs.title}
           </h2>
-          <p
-            style={{
-              fontSize: "1.125rem",
-              color: "#6b7280",
-              maxWidth: "600px",
-              margin: "0 auto",
-            }}
-          >
+
+          <p className="text-lg text-gray-500 max-w-[600px] mx-auto">
             {dict.whyChooseUs.subtitle}
           </p>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "1.5rem",
-          }}
-        >
+        <div className="flex flex-wrap gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const isHovered = hoveredIndex === index;
@@ -104,48 +80,27 @@ export const WhyChooseUs = ({ dict }) => {
             return (
               <Card
                 key={index}
-                className="feature-card"
-                style={{
-                  border: "none",
-                  boxShadow: isHovered
-                    ? "0 8px 24px rgba(0, 0, 0, 0.1)"
-                    : "0 4px 12px rgba(0, 0, 0, 0.05)",
-                  transform: isHovered ? "translateY(-4px)" : "translateY(0)",
-                  transition: "all 0.3s ease",
-                  backgroundColor: "#fff",
-                  padding: "1.5rem",
-                }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
+                className={`feature-card bg-white p-6 rounded-xl transition-all
+    w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.3%-1rem)] ${isHovered ? "shadow-xl -translate-y-1" : "shadow-md"}`}
               >
-                <div style={{ textAlign: "left" }}>
+                <div className="text-left">
                   <div
+                    className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-2xl"
                     style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "8px",
                       backgroundColor: feature.bg,
                       color: feature.color,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: "1rem",
-                      fontSize: "1.5rem",
                     }}
                   >
                     <Icon />
                   </div>
-                  <h3
-                    style={{
-                      fontSize: "1.25rem",
-                      fontWeight: "600",
-                      color: "#111827",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
+
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {feature.title}
                   </h3>
-                  <p style={{ color: "#6b7280", fontSize: "1rem" }}>
+
+                  <p className="text-gray-500 text-base">
                     {feature.description}
                   </p>
                 </div>

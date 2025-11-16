@@ -34,7 +34,7 @@ export const CaseStudies = ({
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(21.875rem, 1fr))",
     gap: "1.875rem",
-    maxWidth: "87.5rem",
+    maxWidth: "88.5rem",
     margin: "0 auto",
   };
 

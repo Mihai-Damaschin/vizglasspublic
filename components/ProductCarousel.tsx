@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -24,130 +24,79 @@ interface ProductCarouselProps {
 
 const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
   const { locale } = useParams<{ locale: string }>();
-
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
       const scrollAmount = 352;
-      const newScrollPosition =
-        scrollContainerRef.current.scrollLeft +
-        (direction === "left" ? -scrollAmount : scrollAmount);
-
       scrollContainerRef.current.scrollTo({
-        left: newScrollPosition,
+        left:
+          scrollContainerRef.current.scrollLeft +
+          (direction === "left" ? -scrollAmount : scrollAmount),
         behavior: "smooth",
       });
     }
   };
 
-  const containerStyle: CSSProperties = {
-    padding: "5rem 0", // 80px 60px
-  };
-
-  const titleStyle: CSSProperties = {
-    fontSize: "2.625rem", // 42px
-    fontWeight: 700,
-    color: colors.text.dark,
-    marginBottom: "3.125rem", // 50px
-    textAlign: "center",
-  };
-
-  const carouselContainerStyle: CSSProperties = {
-    position: "relative",
-    maxWidth: "87.5rem", // 1400px
-    margin: "0 auto",
-  };
-
-  const scrollContainerStyle: CSSProperties = {
-    display: "flex",
-    gap: "1.25rem",
-    overflowX: "auto",
-    scrollbarWidth: "none",
-    msOverflowStyle: "none",
-    padding: "0.625rem 1rem 1.875rem 1rem",
-    transform: "translate(-1rem)",
-    width: "calc(100% + 1rem)",
-  };
-
-  const buttonStyle: CSSProperties = {
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    zIndex: 10,
-    background: colors.primary,
-    border: "none",
-    borderRadius: "50%",
-    width: "3.125rem", // 50px
-    height: "3.125rem", // 50px
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    color: colors.light,
-    fontSize: "1.25rem", // 20px
-    boxShadow: "0 0.125rem 0.625rem rgba(0,0,0,0.2)", // 0 2px 10px
-  };
-
   if (!products?.length) return null;
 
   return (
-    <div style={containerStyle}>
-      <h2 style={titleStyle}>{title}</h2>
-      <div style={carouselContainerStyle}>
+    <div className="py-20">
+      <h2
+        className="text-[2.625rem] font-bold text-center mb-[50px]"
+        style={{ color: colors.text.dark }}
+      >
+        {title}
+      </h2>
+
+      <div className="relative max-w-[88.5rem] mx-auto">
         <button
-          style={buttonStyle}
-          className="accessories-button-left"
           onClick={() => scroll("left")}
+          className="
+            absolute top-[46%] -translate-y-1/2 z-10
+            rounded-full w-[3.125rem] h-[3.125rem]
+            flex items-center justify-center
+            shadow-[0_2px_10px_rgba(0,0,0,0.2)] left-1 md:-left-[3.8rem]
+          "
+          style={{ background: colors.primary, color: colors.light }}
         >
           <ArrowLeftOutlined />
         </button>
 
         <div
           ref={scrollContainerRef}
-          style={scrollContainerStyle}
-          className="hide-scrollbar"
+          className="
+            flex gap-5 overflow-x-auto hide-scrollbar
+            pt-2 px-4 pb-8 translate-0 md:-translate-x-4 w-full md:w-[calc(100%+1rem)] m-0 md:m-0
+          "
         >
           {products.map((product) => (
             <Link href={`/${locale}/product/${product.slug}`} key={product.id}>
               <div
-                style={{
-                  background: colors.light,
-                  borderRadius: "0.75rem", // 12px
-                  overflow: "hidden",
-                  boxShadow: "0 0.25rem 1.25rem rgba(0,0,0,0.1)", // 0 4px 20px
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  cursor: "pointer",
-                  flexShrink: 0,
-                  position: "relative",
-                  width: "22rem",
-                  height: "22rem",
-                }}
-                className="vcard"
+                className="
+                  bg-white rounded-xl overflow-hidden
+                  shadow-[0_4px_20px_rgba(0,0,0,0.1)]
+                  transition-transform duration-300 ease-in-out
+                  relative cursor-pointer flex-shrink-0
+                  w-[16rem] h-[16rem] md:w-[22rem] md:h-[22rem]
+                  hover:scale-[1.03]
+                "
               >
                 <Image
                   src={getStrapiImageLink(product?.cover_image?.url)}
                   alt={product.name}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
                   width={350}
                   height={300}
+                  className="w-full h-full object-cover"
                 />
+
                 <div
-                  style={{
-                    padding: "0.5rem", // 30px
-                    position: "absolute",
-                    top: "0.5rem",
-                    right: "0.5rem",
-                    backgroundColor: colors.primary,
-                    borderRadius: "0.75rem",
-                    color: colors.light,
-                    fontWeight: "bold",
-                  }}
+                  className="
+                    absolute top-2 right-2
+                    px-2 py-1 font-bold rounded-xl
+                    text-white
+                  "
+                  style={{ background: colors.primary }}
                 >
                   {product.name}
                 </div>
@@ -157,9 +106,15 @@ const ProductCarousel = ({ products, title }: ProductCarouselProps) => {
         </div>
 
         <button
-          style={buttonStyle}
-          className="accessories-button-right"
           onClick={() => scroll("right")}
+          className="
+            accessories-button-right
+            absolute top-[46%] -translate-y-1/2 z-10
+            rounded-full w-[3.125rem] h-[3.125rem]
+            flex items-center justify-center
+            shadow-[0_2px_10px_rgba(0,0,0,0.2)] right-1 md:-right-[3.8rem]
+          "
+          style={{ background: colors.primary, color: colors.light }}
         >
           <ArrowRightOutlined />
         </button>

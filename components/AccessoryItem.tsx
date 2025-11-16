@@ -1,67 +1,44 @@
 "use client";
 
 import Image from "next/image";
+import { getStrapiImageLink } from "@/lib/links";
 
 interface AccessoryItemProps {
-  name: string;
-  description: string;
-  imageUrl: string;
+  accessory: any;
   isEven?: boolean;
   showDivider?: boolean;
 }
 
 const AccessoryItem = ({
-  name,
-  description,
-  imageUrl,
+  accessory,
   isEven = false,
   showDivider = false,
 }: AccessoryItemProps) => (
-  <div>
+  <div id={accessory.type}>
     <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "5rem",
-        flexDirection: isEven ? "row" : "row-reverse",
-      }}
-      className="accessory-box"
+      className={`
+       flex items-center justify-center gap-[5rem]
+      ${isEven ? "flex-col md:flex-row" : "flex-col md:flex-row-reverse"}
+    `}
     >
-      <div className="accessory-text-box">
-        <h3 style={{ fontSize: "18px", marginBottom: "0.5rem" }}>{name}</h3>
-        <p
-          style={{
-            fontSize: "14px",
-            textAlign: "justify",
-            opacity: 0.6,
-            whiteSpace: "pre-line",
-          }}
-        >
-          {description}
+      <div className="w-[90%] md:w-[30rem]">
+        <h3 className="text-2xl md:text-[18px] mb-2">{accessory.name}</h3>
+
+        <p className="text-base md:text-[14px] text-justify opacity-60 whitespace-pre-line ">
+          {accessory.description}
         </p>
       </div>
 
       <Image
-        src={imageUrl}
-        alt={name}
+        src={getStrapiImageLink(accessory.cover_photo.url)}
+        alt={accessory.name}
         width={400}
         height={400}
-        style={{ borderRadius: "1rem" }}
-        className="accessory-image"
+        className="rounded-[1rem]"
       />
     </div>
 
-    {showDivider && (
-      <div
-        style={{
-          height: 1,
-          backgroundColor: "gray",
-          opacity: 0.2,
-          margin: "5rem",
-        }}
-      />
-    )}
+    {showDivider && <div className="h-px bg-gray-500 opacity-20 my-[5rem]" />}
   </div>
 );
 

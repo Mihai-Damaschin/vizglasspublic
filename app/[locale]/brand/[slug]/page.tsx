@@ -55,7 +55,7 @@ const BrandPage = async ({
 
         <Gallery media={brand.media} dict={dict} />
 
-        <ProductCarousel products={brand.products} title="Products" />
+        <ProductCarousel products={brand.products} title={dict.relatedProducts} />
 
         <CTASection product={brand} dict={dict} />
       </ProductDetailsLayout>

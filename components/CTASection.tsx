@@ -15,35 +15,12 @@ export const CTASection = ({ dict, product, styles }: ICTASection) => {
   const { locale } = useParams();
 
   return (
-    <div
-      style={{
-        background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
-        padding: "5rem 3.75rem",
-        borderRadius: styles?.borderRadius || "20px",
-        textAlign: "center",
-        color: colors.light,
-        boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
-      }}
-      className="cta-section"
-    >
-      <h2
-        style={{
-          fontSize: "2.625rem", // 42px
-          fontWeight: 700,
-          marginBottom: "1.25rem", // 20px
-        }}
-      >
+    <div className="cta-section py-10 px-5 md:py-20 md:px-15 rounded-[20px] text-center text-[var(--color-light)] shadow-[0_10px_40px_rgba(0,0,0,0.15)] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)]">
+      <h2 className="text-[2rem] md:text-[2.625rem] font-bold mb-5">
         {dict.cta.title}
       </h2>
-      <p
-        style={{
-          fontSize: "1.25rem", // 20px
-          opacity: 0.95,
-          lineHeight: 1.7,
-          maxWidth: "37.5rem", // 600px
-          margin: "0 auto 2.5rem", // 0 auto 40px
-        }}
-      >
+
+      <p className="text-[1.125rem] md:text-[1.25rem] opacity-95 leading-[1.7] max-w-[600px] mx-auto mb-10">
         {dict.cta.descPrefix}
         {product?.name
           ? `${dict.cta.forYour} ${product.name}${
@@ -52,20 +29,13 @@ export const CTASection = ({ dict, product, styles }: ICTASection) => {
           : ""}
         . {dict.cta.descSuffix}
       </p>
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}
-      >
+
+      <div className="flex gap-5 justify-center flex-wrap">
         <Link href={`/${locale}/contact`}>
           <Button
             size="large"
             style={{
               height: "60px",
-              fontSize: "18px",
               padding: "0 50px",
               background: colors.light,
               color: colors.primary,
@@ -73,10 +43,12 @@ export const CTASection = ({ dict, product, styles }: ICTASection) => {
               fontWeight: 600,
               boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
             }}
+            className="text-[1.125rem]"
           >
             {dict.cta.contactUs}
           </Button>
         </Link>
+
         <Link href={`/${locale}/case-studies`}>
           <Button
             size="large"
@@ -89,6 +61,7 @@ export const CTASection = ({ dict, product, styles }: ICTASection) => {
               border: `2px solid ${colors.light}`,
               fontWeight: 600,
             }}
+            className="text-[1.125rem]"
           >
             {dict.cta.viewCaseStudies}
           </Button>

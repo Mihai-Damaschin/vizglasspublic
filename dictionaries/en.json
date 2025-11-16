@@ -110,5 +110,9 @@
   "contact": {
     "title": "Contact Us",
     "subtitle": "We're here to help across multiple locations"
-  }
+  },
+  "relatedProducts": "Related products",
+  "clickToView": "Click to View",
+  "dynamicPageDescription": "This page demonstrates dynamically rendered content from a CMS, featuring alternating layouts for each section to create visual interest and improve readability.",
+  "glasses": "Glasses"
 }

@@ -1,10 +1,6 @@
 "use client";
 
-import { useStyleRegister } from "@ant-design/cssinjs";
-import { theme } from "antd";
 import { colors } from "@/lib/colors";
-
-const { useToken } = theme;
 
 type HeroContentProps = {
   title: string;
@@ -12,49 +8,33 @@ type HeroContentProps = {
 };
 
 const HomeHeroContent = ({ title, subtitle }: HeroContentProps) => {
-  const { token, theme } = useToken();
+  return (
+    <div
+      className="
+        absolute w-[80vw] left-1/2 -translate-x-1/2
+        top-[-15%] md:top-[-20%]
+        z-[1] h-full
+        flex flex-col justify-center items-center
+        text-center px-5
+      "
+      style={{ color: colors.text.primary }}
+    >
+      <h1
+        className="text-4xl md:text-[4rem] font-bold mb-10 md:mb-5
+          drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)] fade-up"
+        style={{ animationDelay: "0.5s" }}
+      >
+        {title}
+      </h1>
 
-  const wrapSSR = useStyleRegister(
-    { theme, token, path: ["HomeHeroContent"] },
-    () => ({
-      ".hero-content": {
-        position: "absolute",
-        top: "-22%",
-        left: "50%",
-        transform: "translate(-50%)",
-        zIndex: 1,
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        color: colors.text.primary,
-        textAlign: "center",
-        padding: "0 1.25rem",
-        "@media (max-width: 767px)": {
-          top: "4%",
-        },
-      },
-      ".hero-title": {
-        fontSize: "4rem",
-        fontWeight: 700,
-        marginBottom: "1.25rem",
-        textShadow: "0.125rem 0.125rem 0.25rem rgba(0,0,0,0.5)",
-      },
-      ".hero-subtitle": {
-        fontSize: "1.5rem",
-        marginBottom: "2.5rem",
-        opacity: 0.9,
-        maxWidth: "43.75rem",
-      },
-    }),
-  );
-
-  return wrapSSR(
-    <div className="hero-content">
-      <h1 className="hero-title">{title}</h1>
-      <p className="hero-subtitle">{subtitle}</p>
-    </div>,
+      <p
+        className="text-[1rem] md:text-[1.5rem] opacity-90 mb-10
+          max-w-[700px] fade-up"
+        style={{ animationDelay: "1s" }}
+      >
+        {subtitle}
+      </p>
+    </div>
   );
 };
 
