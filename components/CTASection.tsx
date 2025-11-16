@@ -15,7 +15,10 @@ export const CTASection = ({ dict, product, styles }: ICTASection) => {
   const { locale } = useParams();
 
   return (
-    <div className="cta-section py-10 px-5 md:py-20 md:px-15 rounded-[20px] text-center text-[var(--color-light)] shadow-[0_10px_40px_rgba(0,0,0,0.15)] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)]">
+    <div
+      className="cta-section py-10 px-5 md:py-20 md:px-15 rounded-[20px] text-center text-[var(--color-light)] shadow-[0_10px_40px_rgba(0,0,0,0.15)] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-secondary)_100%)]"
+      style={styles}
+    >
       <h2 className="text-[2rem] md:text-[2.625rem] font-bold mb-5">
         {dict.cta.title}
       </h2>
