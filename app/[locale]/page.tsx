@@ -61,7 +61,7 @@ const HomePage = async ({
 
   return (
     <>
-      <section className="relative h-screen overflow-hidden pt-[90px]">
+      <section className="relative h-screen overflow-hidden">
         <Image
           src="/viz-glass-hero.jpg"
           width={1920}

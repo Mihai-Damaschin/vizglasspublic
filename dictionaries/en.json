@@ -42,7 +42,7 @@
   },
   "pvcWindowsProductCarouselTitle": "Windows Collection",
   "pvcDoorsProductCarouselTitle": "Doors Collection",
-  "caseStudies": "Case Studies",
+  "caseStudies": "Finished Works",
   "keyFeatures": "Key Features",
   "specifications": "Technical Specifications",
   "colors": "Colors",
@@ -86,7 +86,7 @@
     "forYourSuffix": "",
     "descSuffix": "Our experts are ready to help you make the best choice.",
     "contactUs": "Contact Us",
-    "viewCaseStudies": "View Case Studies"
+    "viewCaseStudies": "View Finished Works"
   },
   "locations": {
     "countries": {

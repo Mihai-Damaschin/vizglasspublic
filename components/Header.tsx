@@ -209,7 +209,7 @@ const Header = ({ dict }: IHeader) => {
   return (
     <header
       style={headerStyle}
-      className="px-[20px] py-[20px] md:py-[20px] md:px-[60px]"
+      className="px-[20px] py-[20px] md:py-[20px] md:px-[60px] fade-down"
     >
       <Link href={`/${locale}`} onClick={handleCloseMobileMenu}>
         <Image

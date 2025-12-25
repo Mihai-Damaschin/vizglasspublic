@@ -23,8 +23,6 @@ const AccessoriesPage = async ({
     locale: locale,
   });
 
-  console.log(doorProductsData, "doorProductsData");
-
   return (
     <div className="min-h-screen pt-[100px]">
       <div className="max-w-[88.5rem] mx-auto px-[20px] pt-[60px] pb-[100px]">

@@ -11,7 +11,7 @@ interface IProductHero {
 export const ProductHero = ({ product }: IProductHero) => {
   return (
     <div
-      className="relative h-[31.25rem] flex items-center justify-center overflow-hidden mt-[90px]"
+      className="relative h-[31.25rem] flex items-center justify-center overflow-hidden"
       style={{
         background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
       }}

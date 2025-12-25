@@ -22,7 +22,7 @@ const ProductPage = async ({
 
   const productData = await strapiFetch("products", {
     populate: {
-      accessories: { populate: ["cover_photo"] },
+      hardware: { populate: ["cover_photo"] },
       colors: { populate: ["cover_photo"] },
       specifications: { populate: "*" },
       media: { populate: "*" },
@@ -57,7 +57,7 @@ const ProductPage = async ({
         <Colors colors={product.colors} dict={dict} />
 
         <AccessoriesCarousel
-          accessories={product.accessories}
+          accessories={product.hardware}
           title={dict.accessories}
         />
 
