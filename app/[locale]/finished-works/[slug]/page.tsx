@@ -7,7 +7,7 @@ import { getDictionary } from "@/app/[locale]/dictionaries";
 import { TLocales, locales } from "@/lib/constants";
 
 // ISR: Revalidate every 1800 seconds (30 minutes)
-export const revalidate = 1800;
+export const revalidate = 3600;
 
 // Generate static params for all finished works across all locales
 export async function generateStaticParams() {

@@ -14,7 +14,10 @@ const AccessoryItem = ({
   isEven = false,
   showDivider = false,
 }: AccessoryItemProps) => (
-  <div id={accessory.type}>
+  <div
+    id={accessory.type}
+    className={accessory.type === "sill" ? "scroll-mt-40" : ""}
+  >
     <div
       className={`
        flex items-center justify-center gap-[5rem]

@@ -1,8 +1,8 @@
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 // Secret token to protect the revalidation endpoint
-const REVALIDATE_TOKEN = process.env.REVALIDATE_TOKEN || "your-secret-token";
+const REVALIDATE_TOKEN = process.env.REVALIDATE_TOKEN;
 
 export async function POST(request: NextRequest) {
   try {
