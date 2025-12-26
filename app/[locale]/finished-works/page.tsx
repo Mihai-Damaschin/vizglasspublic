@@ -2,8 +2,18 @@ import { colors } from "@/lib/colors";
 import { CSSProperties } from "react";
 import { CaseStudies } from "@/components/CaseStudies";
 import { strapiFetch } from "@/lib/requests";
-import { TLocales } from "@/lib/constants";
+import { TLocales, locales } from "@/lib/constants";
 import { getDictionary } from "@/app/[locale]/dictionaries";
+
+// ISR: Revalidate every 1800 seconds (30 minutes)
+export const revalidate = 3600;
+
+// Generate static params for all locales
+export async function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }));
+}
 
 const CaseStudiesListPage = async ({
   params,

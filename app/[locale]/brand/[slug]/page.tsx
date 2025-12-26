@@ -5,9 +5,33 @@ import { CTASection } from "@/components/CTASection";
 import { strapiFetch } from "@/lib/requests";
 import { notFound } from "next/navigation";
 import ProductCarousel from "@/components/ProductCarousel";
-import { TLocales } from "@/lib/constants";
+import { TLocales, locales } from "@/lib/constants";
 import { getDictionary } from "@/app/[locale]/dictionaries";
 import { ProductDetailsLayout } from "@/components/ProductDetailsLayout";
+
+// ISR: Revalidate every 3600 seconds (1 hour)
+export const revalidate = 3600;
+
+// Generate static params for all brands across all locales
+export async function generateStaticParams() {
+  const params = [];
+
+  for (const locale of locales) {
+    const brandsData = await strapiFetch("brands", {
+      fields: ["slug"],
+      locale,
+    });
+
+    const slugs = brandsData?.data?.map((item: any) => ({
+      locale,
+      slug: item.slug,
+    })) || [];
+
+    params.push(...slugs);
+  }
+
+  return params;
+}
 
 const BrandPage = async ({
   params,

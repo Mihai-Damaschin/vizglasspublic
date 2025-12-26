@@ -1,6 +1,5 @@
 import { strapiFetch } from "@/lib/requests";
 import { colors } from "@/lib/colors";
-import { getStrapiImageLink } from "@/lib/links";
 import AccessoryItem from "@/components/AccessoryItem";
 import { TLocales } from "@/lib/constants";
 import { getDictionary } from "@/app/[locale]/dictionaries";
