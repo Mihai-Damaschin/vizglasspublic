@@ -26,12 +26,21 @@ This project includes a dynamic revalidation API route that supports on-demand r
 
 ### Setup
 
-1. Add the `REVALIDATION_SECRET` environment variable to your `.env.local` file:
+1. Generate a secure revalidation token:
    ```bash
-   REVALIDATION_SECRET=your-secret-token-here
+   npm run generate:token
+   ```
+   This will generate several secure token options. Choose one and copy it.
+
+2. Add the `REVALIDATION_SECRET` environment variable to your `.env.local` file:
+   ```bash
+   REVALIDATION_SECRET=your-generated-token-here
    ```
 
-2. Use a strong, randomly generated secret for production environments.
+   Alternatively, generate a token directly:
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
+   ```
 
 ### Usage
 
