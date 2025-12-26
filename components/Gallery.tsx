@@ -6,11 +6,12 @@ import { getStrapiImageLink } from "@/lib/links";
 import { colors } from "@/lib/colors";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import { TMedia } from "@/services/strapi.types";
+import { Dictionary } from "@/lib/types";
 
 interface IGallery {
   media: TMedia[];
   titleTextAlign?: "left" | "center" | "right";
-  dict: any;
+  dict: Dictionary;
 }
 
 export const Gallery = ({
@@ -103,7 +104,7 @@ interface IVideoCell {
   index: number;
   image: TMedia;
   setCurrentVisible: (index: number) => void;
-  dict: any;
+  dict: Dictionary;
 }
 
 const VideoCell = ({ index, image, setCurrentVisible, dict }: IVideoCell) => {

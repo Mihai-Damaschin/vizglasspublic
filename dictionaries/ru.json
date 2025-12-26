@@ -42,7 +42,7 @@
   },
   "pvcWindowsProductCarouselTitle": "Коллекция окон",
   "pvcDoorsProductCarouselTitle": "Коллекция дверей",
-  "caseStudies": "Избранные кейсы",
+  "caseStudies": "Готовые работы",
   "keyFeatures": "Ключевые особенности",
   "specifications": "Технические характеристики",
   "colors": "Цвета",
@@ -86,7 +86,7 @@
     "forYourSuffix": "",
     "descSuffix": "Наши специалисты готовы помочь вам сделать лучший выбор.",
     "contactUs": "Свяжитесь с нами",
-    "viewCaseStudies": "Посмотреть кейсы"
+    "viewCaseStudies": "Посмотреть готовые работы"
   },
   "locations": {
     "countries": {

@@ -3,9 +3,10 @@
 import { Card } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { colors } from "@/lib/colors";
+import { Dictionary } from "@/lib/types";
 
 interface ITestimonials {
-  dict: any;
+  dict: Dictionary;
 }
 
 export const Testimonials = ({ dict }: ITestimonials) => {
@@ -26,7 +27,7 @@ export const Testimonials = ({ dict }: ITestimonials) => {
           </div>
 
           <div className="flex flex-col md:flex-row gap-6">
-            {dict.testimonials.items.map((testimonial: any, index: number) => (
+            {dict.testimonials.items.map((testimonial, index) => (
               <Card
                 key={index}
                 className="

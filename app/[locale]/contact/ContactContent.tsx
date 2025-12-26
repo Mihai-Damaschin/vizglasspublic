@@ -7,9 +7,10 @@ import {
   PhoneOutlined,
 } from "@ant-design/icons";
 import { colors } from "@/lib/colors";
+import { Dictionary } from "@/lib/types";
 
 interface IContactContent {
-  dict: any;
+  dict: Dictionary;
   countries: any;
 }
 

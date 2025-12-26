@@ -9,11 +9,12 @@ import { useQuery } from "@tanstack/react-query";
 import { strapiQueries } from "@/services/strapi";
 import { colors } from "@/lib/colors";
 import { locales } from "@/lib/constants";
+import { Dictionary } from "@/lib/types";
 
 const HEADER_OFFSET = 90;
 
 interface IHeader {
-  dict: any;
+  dict: Dictionary;
 }
 
 const Header = ({ dict }: IHeader) => {
@@ -137,6 +138,7 @@ const Header = ({ dict }: IHeader) => {
               product_category.name,
               product_category.slug,
             ),
+            style: { padding: "6px 8px" },
             children: product_category.header_brands.length
               ? product_category.header_brands.map((header_brand) => ({
                   key:
@@ -146,6 +148,7 @@ const Header = ({ dict }: IHeader) => {
                     header_brand.name,
                     header_brand.brand?.slug,
                   ),
+                  style: { padding: "6px 8px" },
                   children: header_brand.products.map((product) => ({
                     key:
                       "" +
@@ -158,6 +161,7 @@ const Header = ({ dict }: IHeader) => {
                       product.name,
                       product.slug,
                     ),
+                    style: { padding: "6px 8px" },
                   })),
                 }))
               : undefined,
@@ -181,9 +185,12 @@ const Header = ({ dict }: IHeader) => {
       children: productsMenu as NonNullable<MenuProps["items"]>,
     },
     {
-      key: "case-studies",
+      key: "finished-works",
       label: (
-        <Link href={`/${locale}/case-studies`} onClick={handleCloseMobileMenu}>
+        <Link
+          href={`/${locale}/finished-works`}
+          onClick={handleCloseMobileMenu}
+        >
           {dict.navigation.caseStudies}
         </Link>
       ),
@@ -236,9 +243,12 @@ const Header = ({ dict }: IHeader) => {
         </Link>
 
         <Dropdown
-          menu={{ items: productsMenu, style: { padding: "12px 6px" } }}
+          menu={{
+            items: productsMenu,
+            style: { padding: "12px 6px" }
+          }}
           trigger={["hover"]}
-          overlayStyle={{ minWidth: "200px" }}
+          overlayStyle={{ minWidth: "220px" }}
           placement="bottomRight"
         >
           <span
@@ -256,12 +266,12 @@ const Header = ({ dict }: IHeader) => {
         </Dropdown>
 
         <Link
-          href={`/${locale}/case-studies`}
-          onMouseEnter={() => setHoveredKey("case-studies")}
+          href={`/${locale}/finished-works`}
+          onMouseEnter={() => setHoveredKey("finished-works")}
           onMouseLeave={() => setHoveredKey(null)}
           style={
-            pathname.startsWith(`/${locale}/case-studies`) ||
-            hoveredKey === "case-studies"
+            pathname.startsWith(`/${locale}/finished-works`) ||
+            hoveredKey === "finished-works"
               ? activeLinkStyle
               : linkStyle
           }
