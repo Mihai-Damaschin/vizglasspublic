@@ -137,6 +137,7 @@ const Header = ({ dict }: IHeader) => {
               product_category.name,
               product_category.slug,
             ),
+            style: { padding: "10px 14px" },
             children: product_category.header_brands.length
               ? product_category.header_brands.map((header_brand) => ({
                   key:
@@ -146,6 +147,7 @@ const Header = ({ dict }: IHeader) => {
                     header_brand.name,
                     header_brand.brand?.slug,
                   ),
+                  style: { padding: "10px 14px" },
                   children: header_brand.products.map((product) => ({
                     key:
                       "" +
@@ -158,6 +160,7 @@ const Header = ({ dict }: IHeader) => {
                       product.name,
                       product.slug,
                     ),
+                    style: { padding: "10px 14px" },
                   })),
                 }))
               : undefined,
@@ -238,12 +241,7 @@ const Header = ({ dict }: IHeader) => {
         <Dropdown
           menu={{
             items: productsMenu,
-            style: { padding: "16px 10px" },
-            itemStyle: {
-              padding: "12px 16px",
-              margin: "4px 0",
-              borderRadius: "6px"
-            }
+            style: { padding: "12px 6px" }
           }}
           trigger={["hover"]}
           overlayStyle={{ minWidth: "220px" }}
