@@ -92,7 +92,7 @@ export const CaseStudies = ({
 
       <div style={caseStudiesGridStyle}>
         {caseStudies?.map((caseStudy) => (
-          <Link href={`/${locale}/case-studies/${caseStudy.slug}`} key={caseStudy.id}>
+          <Link href={`/${locale}/finished-works/${caseStudy.slug}`} key={caseStudy.id}>
             <div style={caseStudyCardStyle} className="vcard">
               <Image
                 src={getStrapiImageLink(caseStudy.cover_image?.url)}

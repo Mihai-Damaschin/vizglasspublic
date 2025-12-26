@@ -181,9 +181,9 @@ const Header = ({ dict }: IHeader) => {
       children: productsMenu as NonNullable<MenuProps["items"]>,
     },
     {
-      key: "case-studies",
+      key: "finished-works",
       label: (
-        <Link href={`/${locale}/case-studies`} onClick={handleCloseMobileMenu}>
+        <Link href={`/${locale}/finished-works`} onClick={handleCloseMobileMenu}>
           {dict.navigation.caseStudies}
         </Link>
       ),
@@ -256,12 +256,12 @@ const Header = ({ dict }: IHeader) => {
         </Dropdown>
 
         <Link
-          href={`/${locale}/case-studies`}
-          onMouseEnter={() => setHoveredKey("case-studies")}
+          href={`/${locale}/finished-works`}
+          onMouseEnter={() => setHoveredKey("finished-works")}
           onMouseLeave={() => setHoveredKey(null)}
           style={
-            pathname.startsWith(`/${locale}/case-studies`) ||
-            hoveredKey === "case-studies"
+            pathname.startsWith(`/${locale}/finished-works`) ||
+            hoveredKey === "finished-works"
               ? activeLinkStyle
               : linkStyle
           }

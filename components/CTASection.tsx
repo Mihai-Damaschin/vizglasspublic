@@ -52,7 +52,7 @@ export const CTASection = ({ dict, product, styles }: ICTASection) => {
           </Button>
         </Link>
 
-        <Link href={`/${locale}/case-studies`}>
+        <Link href={`/${locale}/finished-works`}>
           <Button
             size="large"
             style={{
