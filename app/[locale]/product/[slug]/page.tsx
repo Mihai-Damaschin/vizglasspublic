@@ -9,7 +9,31 @@ import { Colors } from "@/components/Colors";
 import { AccessoriesCarousel } from "@/components/AccessoriesCarousel";
 import { ProductDetailsLayout } from "@/components/ProductDetailsLayout";
 import { getDictionary } from "@/app/[locale]/dictionaries";
-import { TLocales } from "@/lib/constants";
+import { TLocales, locales } from "@/lib/constants";
+
+// ISR: Revalidate every 3600 seconds (1 hour)
+export const revalidate = 3600;
+
+// Generate static params for all products across all locales
+export async function generateStaticParams() {
+  const params = [];
+
+  for (const locale of locales) {
+    const productsData = await strapiFetch("products", {
+      fields: ["slug"],
+      locale,
+    });
+
+    const slugs = productsData?.data?.map((item: any) => ({
+      locale,
+      slug: item.slug,
+    })) || [];
+
+    params.push(...slugs);
+  }
+
+  return params;
+}
 
 const ProductPage = async ({
   params,

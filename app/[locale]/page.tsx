@@ -6,7 +6,17 @@ import { CaseStudies } from "@/components/CaseStudies";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import HomeHeroContent from "@/components/HomeHeroContent";
 import { getDictionary } from "@/app/[locale]/dictionaries";
-import { TLocales } from "@/lib/constants";
+import { TLocales, locales } from "@/lib/constants";
+
+// ISR: Revalidate every 3600 seconds (1 hour)
+export const revalidate = 3600;
+
+// Generate static params for all locales
+export async function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale,
+  }));
+}
 
 const HomePage = async ({
   params,
