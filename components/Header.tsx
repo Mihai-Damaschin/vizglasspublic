@@ -236,9 +236,17 @@ const Header = ({ dict }: IHeader) => {
         </Link>
 
         <Dropdown
-          menu={{ items: productsMenu, style: { padding: "12px 6px" } }}
+          menu={{
+            items: productsMenu,
+            style: { padding: "16px 10px" },
+            itemStyle: {
+              padding: "12px 16px",
+              margin: "4px 0",
+              borderRadius: "6px"
+            }
+          }}
           trigger={["hover"]}
-          overlayStyle={{ minWidth: "200px" }}
+          overlayStyle={{ minWidth: "220px" }}
           placement="bottomRight"
         >
           <span
