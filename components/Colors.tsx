@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { colors as $colors } from "@/lib/colors";
+import { Dictionary } from "@/lib/types";
 
 interface IColors {
   colors: any[];
-  dict: any;
+  dict: Dictionary;
 }
 
 export const Colors = ({ colors, dict }: IColors) => {

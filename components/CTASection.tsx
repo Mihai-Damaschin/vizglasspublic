@@ -4,9 +4,10 @@ import Link from "next/link";
 import { Button } from "antd";
 import { colors } from "@/lib/colors";
 import { useParams } from "next/navigation";
+import { Dictionary } from "@/lib/types";
 
 interface ICTASection {
-  dict: any;
+  dict: Dictionary;
   product?: any;
   styles?: { borderRadius: string };
 }

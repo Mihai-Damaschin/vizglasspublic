@@ -2,10 +2,11 @@
 
 import { colors } from "@/lib/colors";
 import { Gallery } from "@/components/Gallery";
+import { Dictionary } from "@/lib/types";
 
 type Props = {
   caseStudy: Record<string, any>;
-  dict: any;
+  dict: Dictionary;
 };
 
 export const CaseStudiesItem = ({ caseStudy, dict }: Props) => {

@@ -1,10 +1,11 @@
 "use client";
 
 import { colors } from "@/lib/colors";
+import { Dictionary } from "@/lib/types";
 
 interface IFeatures {
   features: any[];
-  dict: any;
+  dict: Dictionary;
 }
 
 export const Features = ({ features = [], dict }: IFeatures) => {

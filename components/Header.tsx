@@ -9,11 +9,12 @@ import { useQuery } from "@tanstack/react-query";
 import { strapiQueries } from "@/services/strapi";
 import { colors } from "@/lib/colors";
 import { locales } from "@/lib/constants";
+import { Dictionary } from "@/lib/types";
 
 const HEADER_OFFSET = 90;
 
 interface IHeader {
-  dict: any;
+  dict: Dictionary;
 }
 
 const Header = ({ dict }: IHeader) => {
