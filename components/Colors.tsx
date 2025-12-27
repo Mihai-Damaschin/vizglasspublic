@@ -58,6 +58,9 @@ export const Colors = ({ colors, dict }: IColors) => {
               alt={color.name}
               width={350}
               height={300}
+              sizes="(max-width: 640px) 50vw, 192px"
+              loading="lazy"
+              
               className="
             w-full
             h-full

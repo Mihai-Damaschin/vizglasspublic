@@ -16,6 +16,8 @@ const Footer = () => {
             alt="VIZ GLASS"
             width={150}
             height={150}
+            loading="lazy"
+            
             className="h-[150px]"
           />
         </div>
@@ -88,6 +90,7 @@ const Footer = () => {
                 alt="facebook"
                 width={20}
                 height={20}
+                loading="lazy"
               />
             </a>
             <a
@@ -99,6 +102,7 @@ const Footer = () => {
                 alt="instagram"
                 width={20}
                 height={20}
+                loading="lazy"
               />
             </a>
           </div>

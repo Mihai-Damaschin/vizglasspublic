@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { colors } from "@/lib/colors";
 import { Testimonials } from "@/components/Testimonials";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
@@ -38,9 +39,13 @@ const AboutUsPage = async ({
               margin: "0 auto",
             }}
           >
-            <img
+            <Image
               src="/images/logo.png"
               alt={dict.about.logoAlt}
+              width={128}
+              height={128}
+              priority
+              quality={90}
               style={{
                 width: "8rem",
                 height: "8rem",

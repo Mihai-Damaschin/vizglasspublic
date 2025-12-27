@@ -36,6 +36,9 @@ const GlassesItem = ({
         alt={name}
         width={400}
         height={600}
+        sizes="(max-width: 768px) 90vw, 400px"
+        loading="lazy"
+        
         className="rounded-2xl object-cover glasses-image"
       />
     </div>

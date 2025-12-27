@@ -22,6 +22,9 @@ export const ProductHero = ({ product }: IProductHero) => {
           alt={product.name}
           width={1920}
           height={900}
+          sizes="100vw"
+          priority
+          
           className="absolute top-0 left-0 opacity-10 w-full h-full object-cover"
         />
       )}

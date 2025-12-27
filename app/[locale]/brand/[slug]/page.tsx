@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 
     const slugs = brandsData?.data?.map((item: any) => ({
       locale,
-      slug: item.slug,
+      slug: item.attributes?.slug || item.slug,
     })) || [];
 
     params.push(...slugs);
