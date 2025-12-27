@@ -315,7 +315,7 @@ const Header = ({ dict }: IHeader) => {
                 .filter((i) => i !== locale)
                 .map((i) => ({
                   label: (
-                    <Link href={`/${i}`}>
+                    <Link href={pathname.replace(`/${locale}`, `/${i}`)}>
                       <Image
                         src={`https://flagcdn.com/h40/${i === "en" ? "us" : i}.webp`}
                         alt="flag"
