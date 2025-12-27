@@ -82,6 +82,7 @@ export const Gallery = ({
                   index={index}
                   image={image}
                   setCurrentVisible={setCurrentVisible}
+                  dict={dict}
                 />
               ) : (
                 <Image
@@ -90,6 +91,7 @@ export const Gallery = ({
                   alt={image.name}
                   preview={{ mask: dict.clickToView }}
                   onClick={() => setCurrentVisible(index)}
+                  loading="lazy"
                 />
               )}
             </div>
@@ -151,7 +153,7 @@ const VideoCell = ({ index, image, setCurrentVisible, dict }: IVideoCell) => {
         muted
         playsInline
       />
-      <Image src={getStrapiImageLink(image.url)} width={0} height={0} alt="" />
+      <Image src={getStrapiImageLink(image.url)} width={0} height={0} alt="" loading="lazy" />
     </div>
   );
 };
