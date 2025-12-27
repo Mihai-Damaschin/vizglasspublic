@@ -60,7 +60,7 @@ export const Colors = ({ colors, dict }: IColors) => {
               height={300}
               sizes="(max-width: 640px) 50vw, 192px"
               loading="lazy"
-              quality={85}
+              
               className="
             w-full
             h-full

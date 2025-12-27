@@ -17,7 +17,7 @@ const Footer = () => {
             width={150}
             height={150}
             loading="lazy"
-            quality={90}
+            
             className="h-[150px]"
           />
         </div>

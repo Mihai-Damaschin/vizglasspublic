@@ -79,7 +79,7 @@ const HomePage = async ({
           alt={dict.hero.alt}
           sizes="100vw"
           priority
-          quality={90}
+          
           className="w-full h-full object-cover"
         />
 
