@@ -89,6 +89,8 @@ const Header = ({ dict }: IHeader) => {
     textDecoration: "none",
     cursor: "pointer",
     transition: "color 0.3s ease",
+    padding: "8px 0",
+    display: "inline-block",
   };
 
   const activeLinkStyle: CSSProperties = {
@@ -138,7 +140,6 @@ const Header = ({ dict }: IHeader) => {
               product_category.name,
               product_category.slug,
             ),
-            style: { padding: "6px 8px" },
             children: product_category.header_brands.length
               ? product_category.header_brands.map((header_brand) => ({
                   key:
@@ -148,7 +149,6 @@ const Header = ({ dict }: IHeader) => {
                     header_brand.name,
                     header_brand.brand?.slug,
                   ),
-                  style: { padding: "6px 8px" },
                   children: header_brand.products.map((product) => ({
                     key:
                       "" +
@@ -161,7 +161,6 @@ const Header = ({ dict }: IHeader) => {
                       product.name,
                       product.slug,
                     ),
-                    style: { padding: "6px 8px" },
                   })),
                 }))
               : undefined,
@@ -245,7 +244,7 @@ const Header = ({ dict }: IHeader) => {
         <Dropdown
           menu={{
             items: productsMenu,
-            style: { padding: "12px 6px" }
+            style: { padding: "12px 6px" },
           }}
           trigger={["hover"]}
           overlayStyle={{ minWidth: "220px" }}
@@ -316,7 +315,7 @@ const Header = ({ dict }: IHeader) => {
                 .filter((i) => i !== locale)
                 .map((i) => ({
                   label: (
-                    <Link href={`/${i}`}>
+                    <Link href={pathname.replace(`/${locale}`, `/${i}`)}>
                       <Image
                         src={`https://flagcdn.com/h40/${i === "en" ? "us" : i}.webp`}
                         alt="flag"
