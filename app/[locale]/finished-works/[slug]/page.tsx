@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 
     const slugs = caseStudiesData?.data?.map((item: any) => ({
       locale,
-      slug: item.slug,
+      slug: item.attributes?.slug || item.slug,
     })) || [];
 
     params.push(...slugs);
