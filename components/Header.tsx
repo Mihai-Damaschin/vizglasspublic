@@ -89,6 +89,8 @@ const Header = ({ dict }: IHeader) => {
     textDecoration: "none",
     cursor: "pointer",
     transition: "color 0.3s ease",
+    padding: "8px 0",
+    display: "inline-block",
   };
 
   const activeLinkStyle: CSSProperties = {
