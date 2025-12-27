@@ -86,7 +86,7 @@ export const Gallery = ({
               ) : (
                 <Image
                   className="w-full !h-full object-cover block"
-                  src={getStrapiImageLink(image.url)}
+                  src={getStrapiImageLink(image.formats?.small?.url)}
                   alt={image.name}
                   preview={{ mask: dict.clickToView }}
                   onClick={() => setCurrentVisible(index)}
