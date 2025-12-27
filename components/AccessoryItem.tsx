@@ -37,6 +37,9 @@ const AccessoryItem = ({
         alt={accessory.name}
         width={400}
         height={400}
+        sizes="(max-width: 768px) 90vw, 400px"
+        loading="lazy"
+        quality={85}
         className="rounded-[1rem]"
       />
     </div>

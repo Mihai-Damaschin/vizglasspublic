@@ -138,6 +138,9 @@ export const AccessoriesCarousel = ({
                 }}
                 width={350}
                 height={300}
+                sizes="(max-width: 768px) 100vw, 352px"
+                loading="lazy"
+                quality={85}
               />
 
               <div

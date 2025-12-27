@@ -100,6 +100,9 @@ export const CaseStudies = ({
                 style={caseStudyImageStyle}
                 width={355}
                 height={355}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 355px"
+                loading="lazy"
+                quality={85}
               />
               <div style={caseStudyContentStyle}>
                 <h3 style={caseStudyTitleStyle}>{caseStudy.title}</h3>
